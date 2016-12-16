@@ -1,2 +1,2 @@
-json.extract! child, :id, :unique_num, :classroom_id, :post_number, :address, :l_phone_number, :c_phone_number, :full_name, :full_name_f, :sex_code, :created_at, :updated_at
+json.extract! child, :id, :unique_num, :class_room_id, :post_number, :address, :l_phone_number, :c_phone_number, :full_name, :full_name_f, :sex_code, :created_at, :updated_at
 json.url child_url(child, format: :json)

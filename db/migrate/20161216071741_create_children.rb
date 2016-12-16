@@ -2,7 +2,7 @@ class CreateChildren < ActiveRecord::Migration[5.0]
   def change
     create_table :children do |t|
       t.integer :unique_num,  :null => false
-      t.integer :classroom_id
+      t.integer :class_room_id
       t.string  :post_number, :null => false
       t.string  :address,     :null => false
       t.string  :l_phone_number

@@ -2,7 +2,7 @@
 
 one:
   unique_num: 1
-  classroom_id: 1
+  class_room_id: 1
   post_number: MyString
   address: MyString
   l_phone_number: MyString
@@ -13,7 +13,7 @@ one:
 
 two:
   unique_num: 1
-  classroom_id: 1
+  class_room_id: 1
   post_number: MyString
   address: MyString
   l_phone_number: MyString

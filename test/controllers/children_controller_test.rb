@@ -17,7 +17,7 @@ class ChildrenControllerTest < ActionDispatch::IntegrationTest
 
   test "should create child" do
     assert_difference('Child.count') do
-      post children_url, params: { child: { address: @child.address, c_phone_number: @child.c_phone_number, classroom_id: @child.classroom_id, full_name: @child.full_name, full_name_f: @child.full_name_f, l_phone_number: @child.l_phone_number, post_number: @child.post_number, sex_code: @child.sex_code, unique_num: @child.unique_num } }
+      post children_url, params: { child: { address: @child.address, c_phone_number: @child.c_phone_number, class_room_id: @child.class_room_id, full_name: @child.full_name, full_name_f: @child.full_name_f, l_phone_number: @child.l_phone_number, post_number: @child.post_number, sex_code: @child.sex_code, unique_num: @child.unique_num } }
     end
 
     assert_redirected_to child_url(Child.last)
@@ -34,7 +34,7 @@ class ChildrenControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update child" do
-    patch child_url(@child), params: { child: { address: @child.address, c_phone_number: @child.c_phone_number, classroom_id: @child.classroom_id, full_name: @child.full_name, full_name_f: @child.full_name_f, l_phone_number: @child.l_phone_number, post_number: @child.post_number, sex_code: @child.sex_code, unique_num: @child.unique_num } }
+    patch child_url(@child), params: { child: { address: @child.address, c_phone_number: @child.c_phone_number, class_room_id: @child.class_room_id, full_name: @child.full_name, full_name_f: @child.full_name_f, l_phone_number: @child.l_phone_number, post_number: @child.post_number, sex_code: @child.sex_code, unique_num: @child.unique_num } }
     assert_redirected_to child_url(@child)
   end
 
