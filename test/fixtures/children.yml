@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unique_num: 1
+  classroom_id: 1
+  post_number: MyString
+  address: MyString
+  l_phone_number: MyString
+  c_phone_number: MyString
+  full_name: MyString
+  full_name_f: MyString
+  sex_code: MyString
+
+two:
+  unique_num: 1
+  classroom_id: 1
+  post_number: MyString
+  address: MyString
+  l_phone_number: MyString
+  c_phone_number: MyString
+  full_name: MyString
+  full_name_f: MyString
+  sex_code: MyString

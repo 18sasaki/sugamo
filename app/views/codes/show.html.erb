@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @code.type %>
+</p>
+
+<p>
+  <strong>Key:</strong>
+  <%= @code.key %>
+</p>
+
+<p>
+  <strong>View name:</strong>
+  <%= @code.view_name %>
+</p>
+
+<p>
+  <strong>Short name:</strong>
+  <%= @code.short_name %>
+</p>
+
+<p>
+  <strong>Check string:</strong>
+  <%= @code.check_string %>
+</p>
+
+<%= link_to 'Edit', edit_code_path(@code) %> |
+<%= link_to 'Back', codes_path %>

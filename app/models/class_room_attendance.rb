@@ -1,0 +1,2 @@
+class ClassRoomAttendance < ApplicationRecord
+end

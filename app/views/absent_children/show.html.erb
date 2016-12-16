@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dairy:</strong>
+  <%= @absent_child.dairy_id %>
+</p>
+
+<p>
+  <strong>Class room:</strong>
+  <%= @absent_child.class_room_id %>
+</p>
+
+<p>
+  <strong>Child:</strong>
+  <%= @absent_child.child_id %>
+</p>
+
+<p>
+  <strong>Absent code:</strong>
+  <%= @absent_child.absent_code %>
+</p>
+
+<p>
+  <strong>Reason code:</strong>
+  <%= @absent_child.reason_code %>
+</p>
+
+<p>
+  <strong>Reason text:</strong>
+  <%= @absent_child.reason_text %>
+</p>
+
+<%= link_to 'Edit', edit_absent_child_path(@absent_child) %> |
+<%= link_to 'Back', absent_children_path %>

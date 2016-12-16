@@ -1,0 +1,47 @@
+<%= form_for(absent_child) do |f| %>
+  <% if absent_child.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(absent_child.errors.count, "error") %> prohibited this absent_child from being saved:</h2>
+
+      <ul>
+      <% absent_child.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :dairy_id %>
+    <%= f.number_field :dairy_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :class_room_id %>
+    <%= f.number_field :class_room_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :child_id %>
+    <%= f.number_field :child_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :absent_code %>
+    <%= f.text_field :absent_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reason_code %>
+    <%= f.text_field :reason_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reason_text %>
+    <%= f.text_area :reason_text %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+<%= form_for(class_room) do |f| %>
+  <% if class_room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(class_room.errors.count, "error") %> prohibited this class_room from being saved:</h2>
+
+      <ul>
+      <% class_room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :grade_code %>
+    <%= f.text_field :grade_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :short_name %>
+    <%= f.text_field :short_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :color %>
+    <%= f.text_field :color %>
+  </div>
+
+  <div class="field">
+    <%= f.label :teacher_name %>
+    <%= f.text_field :teacher_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sub_teacher_name %>
+    <%= f.text_field :sub_teacher_name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

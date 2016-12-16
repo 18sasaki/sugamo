@@ -1,0 +1,2 @@
+class AbsentChild < ApplicationRecord
+end

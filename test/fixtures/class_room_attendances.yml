@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dairy_id: 1
+  class_room_id: 1
+  m_count: 1
+  f_count: 1
+  count: 1
+  m_pre_count: 1
+  f_pre_count: 1
+  pre_count: 1
+  m_abs_count: 1
+  f_abs_count: 1
+  abs_count: 1
+  m_sus_count: 1
+  f_sus_count: 1
+  sus_count: 1
+
+two:
+  dairy_id: 1
+  class_room_id: 1
+  m_count: 1
+  f_count: 1
+  count: 1
+  m_pre_count: 1
+  f_pre_count: 1
+  pre_count: 1
+  m_abs_count: 1
+  f_abs_count: 1
+  abs_count: 1
+  m_sus_count: 1
+  f_sus_count: 1
+  sus_count: 1

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-12-16
+  dow: MyString
+  att_syou_flg: 1
+  att_chuu_flg: 1
+  att_chou_flg: 1
+  dairy_code: MyString
+
+two:
+  date: 2016-12-16
+  dow: MyString
+  att_syou_flg: 1
+  att_chuu_flg: 1
+  att_chou_flg: 1
+  dairy_code: MyString

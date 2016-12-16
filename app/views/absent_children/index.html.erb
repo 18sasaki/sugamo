@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Absent Children</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dairy</th>
+      <th>Class room</th>
+      <th>Child</th>
+      <th>Absent code</th>
+      <th>Reason code</th>
+      <th>Reason text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @absent_children.each do |absent_child| %>
+      <tr>
+        <td><%= absent_child.dairy_id %></td>
+        <td><%= absent_child.class_room_id %></td>
+        <td><%= absent_child.child_id %></td>
+        <td><%= absent_child.absent_code %></td>
+        <td><%= absent_child.reason_code %></td>
+        <td><%= absent_child.reason_text %></td>
+        <td><%= link_to 'Show', absent_child %></td>
+        <td><%= link_to 'Edit', edit_absent_child_path(absent_child) %></td>
+        <td><%= link_to 'Destroy', absent_child, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Absent Child', new_absent_child_path %>

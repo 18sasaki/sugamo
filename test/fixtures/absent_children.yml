@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dairy_id: 1
+  class_room_id: 1
+  child_id: 1
+  absent_code: MyString
+  reason_code: MyString
+  reason_text: MyText
+
+two:
+  dairy_id: 1
+  class_room_id: 1
+  child_id: 1
+  absent_code: MyString
+  reason_code: MyString
+  reason_text: MyText

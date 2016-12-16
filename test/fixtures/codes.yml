@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  key: MyString
+  view_name: MyString
+  short_name: MyString
+  check_string: MyString
+
+two:
+  type: 
+  key: MyString
+  view_name: MyString
+  short_name: MyString
+  check_string: MyString

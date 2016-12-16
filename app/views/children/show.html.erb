@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Unique num:</strong>
+  <%= @child.unique_num %>
+</p>
+
+<p>
+  <strong>Classroom:</strong>
+  <%= @child.classroom_id %>
+</p>
+
+<p>
+  <strong>Post number:</strong>
+  <%= @child.post_number %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @child.address %>
+</p>
+
+<p>
+  <strong>L phone number:</strong>
+  <%= @child.l_phone_number %>
+</p>
+
+<p>
+  <strong>C phone number:</strong>
+  <%= @child.c_phone_number %>
+</p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @child.full_name %>
+</p>
+
+<p>
+  <strong>Full name f:</strong>
+  <%= @child.full_name_f %>
+</p>
+
+<p>
+  <strong>Sex code:</strong>
+  <%= @child.sex_code %>
+</p>
+
+<%= link_to 'Edit', edit_child_path(@child) %> |
+<%= link_to 'Back', children_path %>

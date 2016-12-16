@@ -1,0 +1,2 @@
+module AbsentChildrenHelper
+end

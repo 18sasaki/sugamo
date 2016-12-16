@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  change_date: 2016-12-16
+  class_room_id: 1
+  child_id: 1
+  total_m_count: 1
+  total_f_count: 1
+  total_count: 1
+  change_code: MyString
+
+two:
+  change_date: 2016-12-16
+  class_room_id: 1
+  child_id: 1
+  total_m_count: 1
+  total_f_count: 1
+  total_count: 1
+  change_code: MyString

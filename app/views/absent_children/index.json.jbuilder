@@ -1,0 +1,1 @@
+json.array! @absent_children, partial: 'absent_children/absent_child', as: :absent_child
