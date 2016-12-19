@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  type: 
+  code_type: 
   code_key: MyString
   view_name: MyString
   short_name: MyString
   check_string: MyString
 
 two:
-  type: 
+  code_type: 
   code_key: MyString
   view_name: MyString
   short_name: MyString
