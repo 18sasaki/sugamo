@@ -2,14 +2,14 @@
 
 one:
   type: 
-  key: MyString
+  code_key: MyString
   view_name: MyString
   short_name: MyString
   check_string: MyString
 
 two:
   type: 
-  key: MyString
+  code_key: MyString
   view_name: MyString
   short_name: MyString
   check_string: MyString
