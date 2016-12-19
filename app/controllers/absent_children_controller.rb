@@ -4,6 +4,7 @@ class AbsentChildrenController < ApplicationController
   # GET /absent_children
   # GET /absent_children.json
   def index
+    @today = date_view(Date.today)
     @absent_children = AbsentChild.all
   end
 

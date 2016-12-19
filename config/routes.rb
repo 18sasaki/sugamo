@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => 'absent_children#index'
   resources :children
   resources :absent_children
   resources :class_rooms
