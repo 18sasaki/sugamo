@@ -1,29 +1,21 @@
 class AbsentChildrenController < ApplicationController
   before_action :set_absent_child, only: [:show, :edit, :update, :destroy]
 
-  # GET /absent_children
-  # GET /absent_children.json
   def index
     @today = date_view(Date.today)
     @absent_children = AbsentChild.all
   end
 
-  # GET /absent_children/1
-  # GET /absent_children/1.json
   def show
   end
 
-  # GET /absent_children/new
   def new
     @absent_child = AbsentChild.new
   end
 
-  # GET /absent_children/1/edit
   def edit
   end
 
-  # POST /absent_children
-  # POST /absent_children.json
   def create
     @absent_child = AbsentChild.new(absent_child_params)
 
@@ -38,8 +30,6 @@ class AbsentChildrenController < ApplicationController
     end
   end
 
-  # PATCH/PUT /absent_children/1
-  # PATCH/PUT /absent_children/1.json
   def update
     respond_to do |format|
       if @absent_child.update(absent_child_params)
@@ -52,8 +42,6 @@ class AbsentChildrenController < ApplicationController
     end
   end
 
-  # DELETE /absent_children/1
-  # DELETE /absent_children/1.json
   def destroy
     @absent_child.destroy
     respond_to do |format|
@@ -63,12 +51,10 @@ class AbsentChildrenController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_absent_child
       @absent_child = AbsentChild.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def absent_child_params
       params.require(:absent_child).permit(:dairy_id, :class_room_id, :child_id, :absent_code, :reason_code, :reason_text)
     end
