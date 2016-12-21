@@ -14,6 +14,11 @@ class AbsentChildrenController < ApplicationController
   end
 
   def edit
+    # target_date = date_view(@absent_child.dairy.date)
+    # target_name = @absent_child.child.full_name_f
+    # target_class_room = @absent_child.class_room.short_name
+
+    # @title_string = "#{target_date}の#{target_name}（#{target_class_room}）の情報を編集"
   end
 
   def create

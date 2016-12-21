@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :class_room_id %>
-    <%= f.number_field :class_room_id %>
+    <%= f.select :class_room_id, Constants::CR_LIST, :selected => absent_child.class_room_id, :prompt => '選択してください' %>
   </div>
 
   <div class="field">
@@ -28,12 +28,12 @@
 
   <div class="field">
     <%= f.label :absent_code %>
-    <%= f.text_field :absent_code %>
+    <%= f.select :absent_code, absent_list, :selected => "absent" %>
   </div>
 
   <div class="field">
     <%= f.label :reason_code %>
-    <%= f.text_field :reason_code %>
+    <%= f.select :reason_code, reason_list, :include_blank => true %>
   </div>
 
   <div class="field">
