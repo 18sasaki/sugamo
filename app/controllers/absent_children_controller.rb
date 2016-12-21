@@ -2,8 +2,9 @@ class AbsentChildrenController < ApplicationController
   before_action :set_absent_child, only: [:show, :edit, :update, :destroy]
 
   def index
-    @today = date_view(Date.today)
-    @absent_children = AbsentChild.all
+    @target_date = params[:date].try(:to_date) || Date.today
+    @today = date_view(@target_date)
+    @absent_children = AbsentChild.find_by_date(@target_date)
   end
 
   def show

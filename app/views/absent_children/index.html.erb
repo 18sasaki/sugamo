@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @today %>の欠席・早退・遅刻情報</h1>
+<h1>
+  <%= link_to('<<', "?date=#{@target_date - 1}") %>
+  <%= @today %>
+  <%= link_to('>>', "?date=#{@target_date + 1}") %>
+  の欠席・早退・遅刻情報
+</h1>
 
 <table>
   <thead>
@@ -17,7 +22,9 @@
   <tbody>
     <% @absent_children.each do |absent_child| %>
       <tr>
-        <td bgcolor=<%=Constants::CR_HASH[absent_child.class_room_id][:color]%>><%= Constants::CR_HASH[absent_child.class_room_id][:name] %></td>
+        <td bgcolor=<%=Constants::CR_HASH[absent_child.class_room_id][:color]%>>
+          <%= Constants::CR_HASH[absent_child.class_room_id][:name] %>
+        </td>
         <td><%= absent_child.child_id %></td>
         <td><%= absent_view_name(absent_child.absent_code) %></td>
         <td><%= reason_view_name(absent_child.reason_code) %></td>

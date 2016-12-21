@@ -16,6 +16,6 @@ module AbsentChildrenHelper
   end
 
   def reason_view_name(code_key)
-  	Constants::ALL_CODES['reason'][code_key].try([:view_name]) || '理由不明'
+  	Constants::ALL_CODES['reason'][code_key].try(:[], :view_name) || '理由不明'
   end
 end
