@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<h1>Manages#index</h1>
+
+<H2>Dairy作成</H2>
+<%= form_tag('manages/create', method: "post") do %>
+  <%= text_field_tag(:year, "#{Date.today.year}", size: '5') %>年度を
+  <%= submit_tag("作成する") %>
+<% end %>

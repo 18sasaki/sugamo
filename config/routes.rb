@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get  'manages/', to: 'manages#index'
+  post 'manages/create'
+
   root :to => 'absent_children#index'
   resources :children
   resources :absent_children
