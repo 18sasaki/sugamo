@@ -3,8 +3,8 @@ class ManagesController < ApplicationController
   end
 
 	def create
-  	Dairy.create_dairies(params[:year])
+  	notice_string = Dairy.bulk_create(params[:year])
 
-    redirect_to action: "index", notice: "#{params[:year]}年度のDairyを作成しました。"
+    redirect_to action: "index", notice: notice_string
   end
 end
