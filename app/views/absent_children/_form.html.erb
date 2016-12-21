@@ -12,8 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :dairy_id %>
-    <%= f.number_field :dairy_id %>
+    日付<br />
+    <%= date_select :dairy, :date, discard_year: true, use_month_numbers: true, date_separator: '/' %>
+    <%#= f.label :dairy_id %>
+    <%#= f.date_select :dairy_id, class: "form-control", discard_year: true, use_month_numbers: true, date_separator: '/' %>
   </div>
 
   <div class="field">

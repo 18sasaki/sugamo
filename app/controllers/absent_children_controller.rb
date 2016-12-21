@@ -61,6 +61,12 @@ class AbsentChildrenController < ApplicationController
     end
 
     def absent_child_params
+      params[:absent_child][:dairy_id] = change_date_to_dairy_id(params[:dairy])
       params.require(:absent_child).permit(:dairy_id, :class_room_id, :child_id, :absent_code, :reason_code, :reason_text)
+    end
+
+    def change_date_to_dairy_id(date_params)
+      target_date = (date_params['date(1i)'] + date_params['date(2i)'] + date_params['date(3i)']).to_date
+      Dairy.find_by(date: target_date).id
     end
 end
