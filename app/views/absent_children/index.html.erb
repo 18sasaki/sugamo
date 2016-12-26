@@ -25,8 +25,8 @@
         <td bgcolor=<%=Constants::CR_HASH[absent_child.class_room_id][:color]%>>
           <%= Constants::CR_HASH[absent_child.class_room_id][:name] %>
         </td>
-        <td><%= absent_child.child_id %></td>
-        <td><%= absent_view_name(absent_child.absent_code) %></td>
+        <td><%= absent_child.child.full_name_f %></td>
+        <td>　　<%= absent_view_name(absent_child.absent_code) %></td>
         <td><%= reason_view_name(absent_child.reason_code) %></td>
         <td><%= absent_child.reason_text %></td>
         <td><%= link_to 'Edit', edit_absent_child_path(absent_child, date: @target_date) %></td>
@@ -37,4 +37,4 @@
 
 <br>
 
-<%= link_to '欠席者を登録する', new_absent_child_path %>
+<%= link_to '欠席者を登録する', new_absent_child_path(date: @target_date) %>

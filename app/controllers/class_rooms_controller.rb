@@ -9,7 +9,7 @@ class ClassRoomsController < ApplicationController
 
   def update
     respond_to do |format|
-    @class_room = ClassRoom.find(params[:id])
+      @class_room = ClassRoom.find(params[:id])
       if @class_room.update(class_room_params)
         format.html { redirect_to :class_rooms, notice: "#{@class_room.name}組を更新しました。" }
         format.json { render :index, status: :ok }
