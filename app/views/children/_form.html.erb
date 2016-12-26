@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :class_room_id %>
-    <%= f.number_field :class_room_id %>
+    <%= f.select :class_room_id, Constants::CR_LIST, :selected => child.class_room_id, :prompt => '選択してください' %>
   </div>
 
   <div class="field">
@@ -53,7 +53,7 @@
 
   <div class="field">
     <%= f.label :sex_code %>
-    <%= f.text_field :sex_code %>
+    <%= f.select :sex_code, sex_list, :prompt => '選択してください' %>
   </div>
 
   <div class="actions">
