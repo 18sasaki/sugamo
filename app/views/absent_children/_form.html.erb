@@ -19,13 +19,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :class_room_id %>
-    <%= f.select :class_room_id, Constants::CR_LIST, :selected => absent_child.class_room_id, :prompt => '選択してください' %>
-  </div>
-
-  <div class="field">
     <%= f.label :child_id %>
-    <%= f.number_field :child_id %>
+    <%= f.select :child_id, @children_list, :selected => absent_child.child_id, :prompt => '選択してください' %>
   </div>
 
   <div class="field">

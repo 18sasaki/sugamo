@@ -12,9 +12,11 @@ class AbsentChildrenController < ApplicationController
 
   def new
     @absent_child = AbsentChild.new
+    @children_list = Child.get_list
   end
 
   def edit
+    @children_list = Child.get_list
     # target_date = date_view(@absent_child.dairy.date)
     # target_name = @absent_child.child.full_name_f
     # target_class_room = @absent_child.class_room.short_name
@@ -63,11 +65,16 @@ class AbsentChildrenController < ApplicationController
 
     def absent_child_params
       params[:absent_child][:dairy_id] = change_date_to_dairy_id(params[:dairy])
+      params[:absent_child][:class_room_id] = set_class_room_id(params[:absent_child][:child_id])
       params.require(:absent_child).permit(:dairy_id, :class_room_id, :child_id, :absent_code, :reason_code, :reason_text)
     end
 
     def change_date_to_dairy_id(date_params)
       target_date = (date_params['date(1i)'] + date_params['date(2i)'] + date_params['date(3i)']).to_date
       Dairy.find_by(date: target_date).id
+    end
+
+    def set_class_room_id(child_id)
+      Child.find_by(id: child_id).class_room_id
     end
 end
