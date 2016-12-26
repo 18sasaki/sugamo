@@ -1,38 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Children</h1>
+<h1>園児情報</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Unique num</th>
-      <th>Class room</th>
-      <th>Post number</th>
-      <th>Address</th>
-      <th>L phone number</th>
-      <th>C phone number</th>
-      <th>Full name</th>
-      <th>Full name f</th>
-      <th>Sex code</th>
-      <th colspan="3"></th>
+      <th>クラス</th>
+      <th>名前</th>
+      <th>住所</th>
+      <th>電話番号</th>
     </tr>
   </thead>
 
   <tbody>
     <% @children.each do |child| %>
       <tr>
-        <td><%= child.unique_num %></td>
-        <td><%= child.class_room_id %></td>
-        <td><%= child.post_number %></td>
-        <td><%= child.address %></td>
-        <td><%= child.l_phone_number %></td>
-        <td><%= child.c_phone_number %></td>
-        <td><%= child.full_name %></td>
-        <td><%= child.full_name_f %></td>
-        <td><%= child.sex_code %></td>
-        <td><%= link_to 'Show', child %></td>
-        <td><%= link_to 'Edit', edit_child_path(child) %></td>
-        <td><%= link_to 'Destroy', child, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td bgcolor=<%=Constants::CR_HASH[child.class_room_id][:color]%> align='center'>
+          <%= Constants::CR_HASH[child.class_room_id][:name] %>
+        </td>
+        <td>
+          <%= link_to child, style: "text-decoration: none;" do %>
+            <font color=<%= child.sex_code == 'female' ? 'ff0000' : '' %>><%= child.full_name %><br><%= child.full_name_f %></font>
+          <% end %>
+        </td>
+        <td><%= child.l_phone_number %><br><%= child.c_phone_number %></td>
+        <td><%= child.post_number %><br><%= child.address %></td>
       </tr>
     <% end %>
   </tbody>
@@ -40,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Child', new_child_path %>
+<%= link_to '新入園児登録', new_child_path %>

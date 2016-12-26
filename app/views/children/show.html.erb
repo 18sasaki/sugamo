@@ -1,49 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Unique num:</strong>
-  <%= @child.unique_num %>
-</p>
+<h1><font color=<%= @child.sex_code == 'female' ? 'ff0000' : '' %>><%= @child.full_name_f %></font></h1>
 
-<p>
-  <strong>Class room:</strong>
-  <%= @child.class_room_id %>
-</p>
-
-<p>
-  <strong>Post number:</strong>
-  <%= @child.post_number %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @child.address %>
-</p>
-
-<p>
-  <strong>L phone number:</strong>
-  <%= @child.l_phone_number %>
-</p>
-
-<p>
-  <strong>C phone number:</strong>
-  <%= @child.c_phone_number %>
-</p>
-
-<p>
-  <strong>Full name:</strong>
-  <%= @child.full_name %>
-</p>
-
-<p>
-  <strong>Full name f:</strong>
-  <%= @child.full_name_f %>
-</p>
-
-<p>
-  <strong>Sex code:</strong>
-  <%= @child.sex_code %>
-</p>
+<table>
+  <tr>
+    <td>クラス</td>
+    <td bgcolor=<%=Constants::CR_HASH[@child.class_room_id][:color]%> align='center'>
+      <%= Constants::CR_HASH[@child.class_room_id][:name] %>
+    </td>
+  </tr>
+  <tr>
+    <td>漢字氏名</td>
+    <td><%= @child.full_name %></td>
+  </tr>
+  <tr>
+    <td>住所</td>
+    <td>
+      <%= @child.post_number %><br />
+      <%= @child.address %>
+    </td>
+  </tr>
+  <tr>
+    <td>電話番号</td>
+    <td>
+      <%= @child.l_phone_number %><br />
+      <%= @child.c_phone_number %>
+    </td>
+  </tr>
+  <tr>
+    <td>固有番号</td>
+    <td><%= @child.unique_num %></td>
+  </tr>
+</table>
 
 <%= link_to 'Edit', edit_child_path(@child) %> |
 <%= link_to 'Back', children_path %>
