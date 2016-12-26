@@ -29,7 +29,7 @@
         <td><%= absent_view_name(absent_child.absent_code) %></td>
         <td><%= reason_view_name(absent_child.reason_code) %></td>
         <td><%= absent_child.reason_text %></td>
-        <td><%= link_to 'Edit', edit_absent_child_path(absent_child) %></td>
+        <td><%= link_to 'Edit', edit_absent_child_path(absent_child, date: @target_date) %></td>
       </tr>
     <% end %>
   </tbody>

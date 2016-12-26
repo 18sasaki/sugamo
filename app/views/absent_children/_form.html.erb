@@ -13,7 +13,10 @@
 
   <div class="field">
     日付<br />
-    <%= date_select :dairy, :date, discard_year: true, use_month_numbers: true, date_separator: '/' %>
+    <%= date_select :dairy, :date, { discard_year: true, 
+                                     use_month_numbers: true, 
+                                     date_separator: '/',
+                                     default: params[:date].to_date } %>
     <%#= f.label :dairy_id %>
     <%#= f.date_select :dairy_id, class: "form-control", discard_year: true, use_month_numbers: true, date_separator: '/' %>
   </div>
