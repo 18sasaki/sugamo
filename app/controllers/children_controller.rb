@@ -1,28 +1,20 @@
 class ChildrenController < ApplicationController
-  before_action :set_child, only: [:show, :edit, :update, :destroy]
+  before_action :set_child, only: [:show, :edit, :update]
 
-  # GET /children
-  # GET /children.json
   def index
-    @children = Child.all
+    @children = Child.all.order(order_str(params[:sort]))
   end
 
-  # GET /children/1
-  # GET /children/1.json
   def show
   end
 
-  # GET /children/new
   def new
     @child = Child.new
   end
 
-  # GET /children/1/edit
   def edit
   end
 
-  # POST /children
-  # POST /children.json
   def create
     @child = Child.new(child_params)
 
@@ -37,8 +29,6 @@ class ChildrenController < ApplicationController
     end
   end
 
-  # PATCH/PUT /children/1
-  # PATCH/PUT /children/1.json
   def update
     respond_to do |format|
       if @child.update(child_params)
@@ -51,24 +41,24 @@ class ChildrenController < ApplicationController
     end
   end
 
-  # DELETE /children/1
-  # DELETE /children/1.json
-  def destroy
-    @child.destroy
-    respond_to do |format|
-      format.html { redirect_to children_url, notice: 'Child was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_child
       @child = Child.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def child_params
       params.require(:child).permit(:unique_num, :class_room_id, :post_number, :address, :l_phone_number, :c_phone_number, :full_name, :full_name_f, :sex_code)
+    end
+
+    def order_str(sort_params)
+      case sort_params
+        when 'name'         then 'full_name_f'
+        when 'name desc'    then 'full_name_f desc'
+        when 'class'        then 'class_room_id, full_name_f'
+        when 'class desc'   then 'class_room_id desc, full_name_f'
+        when 'address'      then 'address, full_name_f'
+        when 'address desc' then 'address desc, full_name_f'
+        else                   'full_name_f'
+      end# << ', sex_code desc'
     end
 end
