@@ -12,11 +12,15 @@
   <% end %>
 
   <div class="field" style="display:inline-flex">
-    <%= f.label :history_code, '選択してください' %>
+    <%#= f.label :history_code %>
+    <%= date_select :child_history, :change_date, { use_month_numbers: true, 
+                                                    date_separator: '/' } %>　に
     <% @history_code_list.each do |history_code| %>
       <%= f.radio_button :history_code, history_code[0] %>
       <%= f.label "history_code_#{history_code[0]}", history_code[1] %>
     <% end %>
+
+    
   </div>
 
   <div class="field">

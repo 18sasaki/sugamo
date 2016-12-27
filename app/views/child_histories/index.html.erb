@@ -10,7 +10,7 @@
 	</tr>
 	<% @child_histories.each do |child_history| %>
     <tr>
-      <td><%= date_view(child_history.date) %></td>
+      <td><%= date_view(child_history.change_date) %></td>
       <td bgcolor=<%=Constants::CR_HASH[child_history.class_room_id][:color]%> align='center'>
         <%= Constants::CR_HASH[child_history.class_room_id][:name] %>
       </td>
@@ -20,7 +20,7 @@
         <% end %>
       </td>
       <td><%= history_view_name(child_history.change_code) %></td>
-      <td><%= child_history.total_count %>（男：<%= child_history.total_m_count %>　女：<%= child_history.total_f_count %></td>
+      <td><%= child_history.total_count %>（男：<%= child_history.total_m_count %>　女：<%= child_history.total_f_count %>）</td>
     </tr>
   <% end %>
 </table>

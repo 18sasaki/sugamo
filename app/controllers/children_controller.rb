@@ -23,6 +23,9 @@ class ChildrenController < ApplicationController
 
     respond_to do |format|
       if @child.save
+        # incでchild_history作る
+        ChildHistory.create(@child, 'inc', decrypt_change_date(params[:child_history]))
+
         format.html { redirect_to @child, notice: 'Child was successfully created.' }
         format.json { render :show, status: :created, location: @child }
       else
@@ -34,7 +37,13 @@ class ChildrenController < ApplicationController
 
   def update
     respond_to do |format|
+      # updateの前にchild_history作るかどうかチェック
+      create_child_history_flg = ( @child.history_code != params[:child][:history_code] )
+
       if @child.update(child_params)
+        # child_history作る（作らないかもしれない）
+        create_child_history(@child) if create_child_history_flg
+
         format.html { redirect_to @child, notice: 'Child was successfully updated.' }
         format.json { render :show, status: :ok, location: @child }
       else
@@ -73,5 +82,22 @@ class ChildrenController < ApplicationController
           (@history_code_list ||= []) << [key, value[:view_name]]
         end
       end
+    end
+
+    def create_child_history(child)
+      target_check_string = Constants::ALL_CODES['history'][child.history_code][:check_string]
+      if target_check_string.include?('inc')
+        change_type = 'inc'
+      elsif target_check_string.include?('dec')
+        change_type = 'dec'
+      else
+        # 休園などは人数に変動なしなので作らない
+        return
+      end
+      ChildHistory.create(child, change_type, decrypt_change_date(params[:child_history]))
+    end
+
+    def decrypt_change_date(ch_params)
+      (ch_params['change_date(1i)'] + sprintf("%02d", ch_params['change_date(2i)']) + sprintf("%02d", ch_params['change_date(3i)'])).to_date
     end
 end
