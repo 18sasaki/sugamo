@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th><%= link_to 'ステータス', {sort: params[:sort] == 'status' ? 'status desc' : 'status'} %></th>
       <th><%= link_to 'クラス', {sort: params[:sort] == 'class' ? 'class desc' : 'class'} %></th>
       <th><%= link_to '名前', {sort: params[:sort] == 'name' ? 'name desc' : 'name'} %></th>
       <th>電話番号</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @children.each do |child| %>
       <tr>
+        <td align='right'><%= status_str(child.history_code) %></td>
         <td bgcolor=<%=Constants::CR_HASH[child.class_room_id][:color]%> align='center'>
           <%= Constants::CR_HASH[child.class_room_id][:name] %>
         </td>

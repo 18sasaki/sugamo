@@ -10,7 +10,7 @@ module Constants
 
   ALL_CODES = {}
   Code.all.each do |code|
-  	(ALL_CODES[code.code_type] ||= {})[code.code_key] = { view_name: code.view_name, short_name: code.short_name }
+  	(ALL_CODES[code.code_type] ||= {})[code.code_key] = { view_name: code.view_name, short_name: code.short_name, check_string: code.check_string }
   end
 
   DOW = ["日","月","火","水","木","金","土"]

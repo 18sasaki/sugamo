@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1><font color=<%= @child.sex_code == 'female' ? 'ff0000' : '' %>><%= @child.full_name_f %></font></h1>
+<h1><font color=<%= @child.sex_code == 'female' ? 'ff0000' : '' %>><%= @child.full_name_f %></font><%= status_str(@child.history_code) %></h1>
+
 
 <table>
   <tr>
