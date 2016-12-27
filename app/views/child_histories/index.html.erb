@@ -1,2 +1,26 @@
 <h1>ChildHistories#index</h1>
-<p>Find me in app/views/child_histories/index.html.erb</p>
+
+<table>
+	<tr>
+		<th>日付</th>
+		<th>クラス</th>
+		<th>名前</th>
+		<th>内容</th>
+		<th>数</th>
+	</tr>
+	<% @child_histories.each do |child_history| %>
+    <tr>
+      <td><%= date_view(child_history.date) %></td>
+      <td bgcolor=<%=Constants::CR_HASH[child_history.class_room_id][:color]%> align='center'>
+        <%= Constants::CR_HASH[child_history.class_room_id][:name] %>
+      </td>
+      <td>
+        <%= link_to child_history.child, style: "text-decoration: none;" do %>
+          <font color=<%= child_history.child.sex_code == 'female' ? 'ff0000' : '' %>><%= child_history.child.full_name %><br><%= child_history.child.full_name_f %></font>
+        <% end %>
+      </td>
+      <td><%= history_view_name(child_history.change_code) %></td>
+      <td><%= child_history.total_count %>（男：<%= child_history.total_m_count %>　女：<%= child_history.total_f_count %></td>
+    </tr>
+  <% end %>
+</table>

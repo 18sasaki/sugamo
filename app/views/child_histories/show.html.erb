@@ -1,2 +1,21 @@
-<h1>ChildHistories#show</h1>
-<p>Find me in app/views/child_histories/show.html.erb</p>
+<h1><%= date_view(params[:date].to_date) %>時点の人数</h1>
+
+<table>
+	<tr>
+		<th>クラス</th>
+		<th>男子</th>
+		<th>女子</th>
+		<th>合計</th>
+	</tr>
+	<% @child_history_list.each do |child_history| %>
+    <tr>
+      <td bgcolor=<%=Constants::CR_HASH[child_history.class_room_id][:color]%> align='center'>
+        <%= Constants::CR_HASH[child_history.class_room_id][:name] %>
+      </td>
+      <td><%= child_history.total_m_count %></td>
+      <td><%= child_history.total_f_count %></td>
+      <td><%= child_history.total_count %></td>
+    </tr>
+  <% end %>
+</table>
+

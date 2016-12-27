@@ -1,8 +1,26 @@
 <p id="notice"><%= notice %></p>
-<h1>Manages#index</h1>
+<h1>管理画面</h1>
 
-<H2>Dairy作成</H2>
-<%= form_tag('manages/create', method: "post") do %>
-  <%= text_field_tag(:year, "#{Date.today.year}", size: '5') %>年度を
-  <%= submit_tag("作成する") %>
-<% end %>
+<table>
+	<tr>
+		<td align='right'>
+			<H2>Dairy作成</H2>
+		</td>
+		<td>
+			<%= form_tag('manages/dairy_create', method: "post") do %>
+			  <%= text_field_tag(:year, "#{Date.today.year}", size: '5') %>年度を
+			  <%= submit_tag("作成する") %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td align='right'>
+			<H2>ChildrenHistory</H2>
+		</td>
+		<td>
+			<%= link_to '4/1時点を見る', "child_histories/show?date=#{Date.today.year}0401" %><br />
+			<%= link_to '5/1時点を見る', "child_histories/show?date=#{Date.today.year}0501" %><br />
+			<%= link_to '今までの一覧', 'child_histories/index' %>
+		</td>
+	</tr>
+</table>
