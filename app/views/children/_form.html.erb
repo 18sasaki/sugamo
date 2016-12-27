@@ -12,48 +12,36 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :unique_num %>
-    <%= f.number_field :unique_num %>
+    <%= f.label :unique_num, '固有番号（入園年度＋〇年保育＋願書番号３ケタ）' %>
+    <%= f.number_field :unique_num, disabled: edit_flg %>
   </div>
 
   <div class="field">
-    <%= f.label :class_room_id %>
-    <%= f.select :class_room_id, Constants::CR_LIST, :selected => child.class_room_id, :prompt => '選択してください' %>
+    <%= f.label :full_name, '名前' %>
+    漢字<%= f.text_field :full_name,   disabled: edit_flg %><br />
+    かな<%= f.text_field :full_name_f, disabled: edit_flg %>
   </div>
 
   <div class="field">
-    <%= f.label :post_number %>
-    <%= f.text_field :post_number %>
+    <%= f.label :sex_code, '性別' %>
+    <%= f.select :sex_code, sex_list, {prompt: '選択してください'}, disabled: edit_flg %>
   </div>
 
   <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.label :class_room_id, 'クラス' %>
+    <%= f.select :class_room_id, Constants::CR_LIST, {selected: child.class_room_id, prompt: '選択してください'}, disabled: edit_flg %>
   </div>
 
   <div class="field">
-    <%= f.label :l_phone_number %>
-    <%= f.text_field :l_phone_number %>
+    <%= f.label :post_number, '住所' %>
+    〒<%= f.text_field :post_number, size: 10 %><br />
+    <%= f.text_field :address, size: 50 %>
   </div>
 
   <div class="field">
-    <%= f.label :c_phone_number %>
-    <%= f.text_field :c_phone_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :full_name %>
-    <%= f.text_field :full_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :full_name_f %>
-    <%= f.text_field :full_name_f %>
-  </div>
-
-  <div class="field">
-    <%= f.label :sex_code %>
-    <%= f.select :sex_code, sex_list, :prompt => '選択してください' %>
+    <%= f.label :l_phone_number, '電話番号' %>
+    固定：<%= f.text_field :l_phone_number, size: 10 %><br />
+    携帯：<%= f.text_field :c_phone_number, size: 10 %>
   </div>
 
   <div class="actions">
