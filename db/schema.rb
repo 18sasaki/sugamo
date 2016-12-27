@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227004110) do
+ActiveRecord::Schema.define(version: 20161227045100) do
 
   create_table "absent_children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "dairy_id",                    null: false
@@ -36,17 +36,18 @@ ActiveRecord::Schema.define(version: 20161227004110) do
   end
 
   create_table "children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "unique_num",     null: false
+    t.integer  "unique_num",                     null: false
     t.integer  "class_room_id"
-    t.string   "post_number",    null: false
-    t.string   "address",        null: false
+    t.string   "post_number",                    null: false
+    t.string   "address",                        null: false
     t.string   "l_phone_number"
     t.string   "c_phone_number"
-    t.string   "full_name",      null: false
-    t.string   "full_name_f",    null: false
-    t.string   "sex_code",       null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "full_name",                      null: false
+    t.string   "full_name_f",                    null: false
+    t.string   "sex_code",                       null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "history_code",   default: "inc", null: false
   end
 
   create_table "class_room_attendances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
