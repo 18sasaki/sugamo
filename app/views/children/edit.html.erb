@@ -1,4 +1,4 @@
-<h1>Editing Child</h1>
+<h1><%= @child.full_name_f %><%= status_str(@child.status_code) %>の編集</h1>
 
 <%= render 'form', child: @child, edit_flg: true %>
 

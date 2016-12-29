@@ -10,7 +10,7 @@ class ChildHistory < ApplicationRecord
 			ch_params[key[0]] ||= { change_date:   date,
 						                  class_room_id: key[0],
 						                  total_count:   0,
-						                  change_code:   'regular' }
+						                  history_code:  'regular' }
 			case key[1]
 			when 'female'
 				ch_params[key[0]][:total_f_count] = value
@@ -25,7 +25,7 @@ class ChildHistory < ApplicationRecord
 		end
 	end
 
-	def self.create(child, change_type, change_date)
+	def self.create(child, history_code, change_date, change_type)
 		# 該当classroomで該当日の直前のデータに変更を加えてcreateする。
 		# just_before_child_history
 		jb_ch = get_jb_ch(child.class_room_id, change_date)
@@ -38,7 +38,7 @@ class ChildHistory < ApplicationRecord
 			                total_m_count: count_hash[:total_m_count],
 			                total_f_count: count_hash[:total_f_count],
 			                total_count:   count_hash[:total_count],
-			                change_code:   child.history_code ).save
+			                history_code:  history_code ).save
 
 		# 該当classroomで該当日の後のデータはすべて変更を加えてupdateする。
 		aft_chs = ChildHistory.where(class_room_id: child.class_room_id).where('change_date > ?', change_date)

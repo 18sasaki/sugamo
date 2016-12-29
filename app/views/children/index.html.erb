@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>園児情報</h1>
+<%= link_to '新入園児登録', new_child_path %>
 
 <table>
   <thead>
@@ -16,7 +17,7 @@
   <tbody>
     <% @children.each do |child| %>
       <tr>
-        <td align='right'><%= status_str(child.history_code) %></td>
+        <td align='right'><%= status_str(child.status_code) %></td>
         <td bgcolor=<%=Constants::CR_HASH[child.class_room_id][:color]%> align='center'>
           <%= Constants::CR_HASH[child.class_room_id][:name] %>
         </td>

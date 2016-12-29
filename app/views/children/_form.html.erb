@@ -11,16 +11,19 @@
     </div>
   <% end %>
 
+  <label>ステータス</label>
   <div class="field" style="display:inline-flex">
-    <%#= f.label :history_code %>
+    <% if controller.action_name == 'edit' %>
+      <%= radio_button :child_history, :history_code, 'keep', checked: true %>
+      <%= label "child_history_history_code", 'keep', '変更なし' %>
+      　／　
+    <% end %>
     <%= date_select :child_history, :change_date, { use_month_numbers: true, 
                                                     date_separator: '/' } %>　に
     <% @history_code_list.each do |history_code| %>
-      <%= f.radio_button :history_code, history_code[0] %>
-      <%= f.label "history_code_#{history_code[0]}", history_code[1] %>
+      <%= radio_button :child_history, :history_code, history_code[0] %>
+      <%= label "child_history_history_code", history_code[0], history_code[1] %>
     <% end %>
-
-    
   </div>
 
   <div class="field">

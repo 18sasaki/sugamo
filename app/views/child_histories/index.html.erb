@@ -19,7 +19,7 @@
           <font color=<%= child_history.child.sex_code == 'female' ? 'ff0000' : '' %>><%= child_history.child.full_name %><br><%= child_history.child.full_name_f %></font>
         <% end %>
       </td>
-      <td><%= history_view_name(child_history.change_code) %></td>
+      <td><%= history_view_name(child_history.history_code) %></td>
       <td><%= child_history.total_count %>（男：<%= child_history.total_m_count %>　女：<%= child_history.total_f_count %>）</td>
     </tr>
   <% end %>

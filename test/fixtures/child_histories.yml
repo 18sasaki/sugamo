@@ -7,7 +7,7 @@ one:
   total_m_count: 1
   total_f_count: 1
   total_count: 1
-  change_code: MyString
+  history_code: MyString
 
 two:
   change_date: 2016-12-16
@@ -16,4 +16,4 @@ two:
   total_m_count: 1
   total_f_count: 1
   total_count: 1
-  change_code: MyString
+  history_code: MyString

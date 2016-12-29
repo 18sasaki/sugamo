@@ -6,10 +6,10 @@ module ChildrenHelper
   end
 
   def status_str(code)
-  	if code == 'inc'
+  	if code == 'enrollment'
       ''
     else
-      "（#{Constants::ALL_CODES['history'][code][:view_name]}）"
+      "（#{Constants::ALL_CODES['child_status'][code][:view_name]}）"
     end
   end
 end
