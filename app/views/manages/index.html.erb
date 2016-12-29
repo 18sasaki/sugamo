@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
-<h1>管理画面</h1>
+<h2>管理画面</h2>
 
-<table>
+<table class='table-bordered table-condensed table-hover'>
 	<tr>
-		<td align='right'>
-			<H2>Dairy作成</H2>
+		<td align='right' rowspan=2>
+			<strong>Dairy</strong>
 		</td>
 		<td>
 			<%= form_tag('manages/dairy_create', method: "post") do %>
@@ -14,13 +14,32 @@
 		</td>
 	</tr>
 	<tr>
-		<td align='right'>
-			<H2>ChildrenHistory</H2>
+		<td>
+			詳細設定（予定）
+		</td>
+	</tr>
+
+	<tr>
+		<td align='right' rowspan=2>
+			<strong>ChildrenHistory</strong>
 		</td>
 		<td>
-			<%= link_to '4/1時点を見る', "child_histories/show?date=#{Date.today.year}0401" %><br />
-			<%= link_to '5/1時点を見る', "child_histories/show?date=#{Date.today.year}0501" %><br />
-			<%= link_to '今までの一覧', 'child_histories/index' %>
+			人数確認（　<%= link_to '4/1', "child_histories/show?date=#{Date.today.year}0401" %>　
+			<%= link_to '5/1', "child_histories/show?date=#{Date.today.year}0501" %>　）
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= link_to '今までの一覧', '/child_histories' %>
+		</td>
+	</tr>
+
+	<tr>
+		<td align='right'>
+			<strong>Code</strong>
+		</td>
+		<td>
+			<%= link_to '一覧', '/codes' %>
 		</td>
 	</tr>
 </table>

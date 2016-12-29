@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'child_histories/index'
+  get 'child_histories/', to: 'child_histories#index'
   get 'child_histories/show'
 
   get 'class_room_histories/index'

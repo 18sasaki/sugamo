@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
+<h2>
   <%= link_to('<<', "?date=#{@target_date - 1}") %>
   <%= @today %>
   <%= link_to('>>', "?date=#{@target_date + 1}") %>
   の欠席・早退・遅刻情報
-</h1>
+</h2>
 
 <table>
   <thead>
@@ -37,4 +37,4 @@
 
 <br>
 
-<%= link_to '欠席者を登録する', new_absent_child_path(date: @target_date) %>
+<%= link_to '欠席者を登録する', new_absent_child_path(date: @target_date), {type: "button", class: "btn btn-primary"} %>
