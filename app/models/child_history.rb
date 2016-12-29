@@ -28,27 +28,7 @@ class ChildHistory < ApplicationRecord
 	def self.create(child, change_type, change_date)
 		# 該当classroomで該当日の直前のデータに変更を加えてcreateする。
 		# just_before_child_history
-		jb_ch = ChildHistory.where(class_room_id: child.class_room_id).where('change_date <= ?', change_date).last
-
-    # # countの計算
-    # new_total_count   = jb_ch.total_count
-    # new_total_f_count = jb_ch.total_f_count
-    # new_total_m_count = jb_ch.total_m_count
-    # if change_type == 'inc'
-    # 	new_total_count += 1
-	   #  if child.sex_code == 'female'
-	   #  	new_total_f_count += 1
-    # 	else
-    # 		new_total_m_count += 1
-    # 	end
-    # else
-    # 	new_total_count -= 1
-	   #  if child.sex_code == 'female'
-	   #  	new_total_f_count -= 1
-    # 	else
-    # 		new_total_m_count -= 1
-    # 	end
-    # end
+		jb_ch = get_jb_ch(child.class_room_id, change_date)
 
     count_hash = change_count_hash(jb_ch, change_type, child.sex_code)
     	
@@ -65,6 +45,14 @@ class ChildHistory < ApplicationRecord
 		aft_chs.each do |aft_ch|
 			aft_ch.update(change_count_hash(aft_ch, change_type, child.sex_code))
 		end
+	end
+
+	def self.get_jb_ch(class_room_id, target_date)
+		ChildHistory.where(class_room_id: class_room_id).where('change_date <= ?', target_date).last
+	end
+
+	def self.get_count_hash(class_room_id, target_date)
+		get_jb_ch(class_room_id, target_date)
 	end
 
 	private
@@ -88,23 +76,5 @@ class ChildHistory < ApplicationRecord
     	end
   	else                 { total_m_count: m_count,      total_f_count: f_count,      total_count: t_count      } # ないはず
     end
-
-    # if change_type == 'inc'
-    # 	t_count += 1
-	   #  if sex_code == 'female'
-	   #  	f_count += 1
-    # 	else # 'male'
-    # 		m_count += 1
-    # 	end
-    # else # 'dec'
-    # 	t_count -= 1
-	   #  if sex_code == 'female'
-	   #  	f_count -= 1
-    # 	else # 'male'
-    # 		m_count -= 1
-    # 	end
-    # end
-
-    # { m_count: m_count, f_count: f_count, t_count: t_count }
 	end
 end

@@ -3,6 +3,13 @@ class ClassRoomsController < ApplicationController
     @class_rooms = ClassRoom.all
   end
 
+  def show
+    @class_room = ClassRoom.find(params[:id])
+    @children = Child.where(class_room_id: params[:id]).order(sex_code: 'desc', full_name_f: 'asc')
+    jb_ch = ChildHistory.get_jb_ch(params[:id], Date.today)
+    @count_str = "#{jb_ch.total_count}人（ 男：#{jb_ch.total_m_count}人 女：#{jb_ch.total_f_count}人）"
+  end
+
   def edit
     @class_room = ClassRoom.find(params[:id])
   end

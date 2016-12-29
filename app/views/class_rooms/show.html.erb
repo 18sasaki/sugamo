@@ -1,34 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Grade code:</strong>
-  <%= @class_room.grade_code %>
-</p>
+<h1><%= @class_room.name %>組</h1>
+<h3><%= @count_str %></h3>
 
-<p>
-  <strong>Name:</strong>
-  <%= @class_room.name %>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th>名前</th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Short name:</strong>
-  <%= @class_room.short_name %>
-</p>
-
-<p>
-  <strong>Color:</strong>
-  <%= @class_room.color %>
-</p>
-
-<p>
-  <strong>Teacher name:</strong>
-  <%= @class_room.teacher_name %>
-</p>
-
-<p>
-  <strong>Sub teacher name:</strong>
-  <%= @class_room.sub_teacher_name %>
-</p>
-
-<%= link_to 'Edit', edit_class_room_path(@class_room) %> |
-<%= link_to 'Back', class_rooms_path %>
+  <tbody>
+    <% @children.each do |child| %>
+      <tr>
+        <td>
+          <%= link_to child, style: "text-decoration: none;" do %>
+            <font color=<%= child.sex_code == 'female' ? 'ff0000' : '' %>><%= child.full_name_f %></font>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

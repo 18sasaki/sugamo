@@ -2,7 +2,7 @@
 
 <h1>クラス</h1>
 
-<table border=1>
+<table class='table-bordered table-condensed table-hover'>
   <thead>
     <tr>
       <th>組</th>
@@ -16,7 +16,7 @@
   <tbody>
     <% @class_rooms.each do |class_room| %>
       <tr bgcolor=<%= class_room.color %>>
-        <td><%= class_room.name %></td>
+        <td><%= link_to class_room.name, class_room %></td>
         <td><%= class_room.short_name %></td>
         <td><%= class_room.teacher_name %></td>
         <td><%= class_room.sub_teacher_name.presence || '-' %></td>
