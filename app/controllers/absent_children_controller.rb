@@ -32,6 +32,7 @@ class AbsentChildrenController < ApplicationController
         format.html { redirect_to absent_children_path(date: @target_date), notice: '登録に成功しました' }
         format.json { render :index, status: :ok }
       else
+        @children_list = Child.get_list
         format.html { render :new }
         format.json { render json: @absent_child.errors, status: :unprocessable_entity }
       end
@@ -76,6 +77,6 @@ class AbsentChildrenController < ApplicationController
     end
 
     def set_class_room_id(child_id)
-      Child.find_by(id: child_id).class_room_id
+      Child.find_by(id: child_id).try(:class_room_id)
     end
 end
