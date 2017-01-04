@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1><%= @class_room.name %>組</h1>
+<h1><span style=background:#<%=Constants::CR_HASH[@class_room.id][:color]%>;><%= @class_room.name %>組</span></h1>
 <h3><%= @count_str %></h3>
 
 <table>

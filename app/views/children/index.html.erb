@@ -17,7 +17,9 @@
       <tr>
         <td align='right'><%= status_str(child.status_code) %></td>
         <td bgcolor=<%=Constants::CR_HASH[child.class_room_id][:color]%> align='center'>
-          <%= Constants::CR_HASH[child.class_room_id][:name] %>
+          <%= link_to 'class_rooms', id: child.class_room_id, style: "text-decoration: none;" do %>
+            <%= Constants::CR_HASH[child.class_room_id][:name] %>
+          <% end %>
         </td>
         <td>
           <%= link_to child, style: "text-decoration: none;" do %>
