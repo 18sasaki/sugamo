@@ -1,6 +1,8 @@
 class ChildHistory < ApplicationRecord
 	belongs_to :child
 
+  validates :change_date, :class_room_id, :total_m_count, :total_f_count, :total_count, :history_code, presence: true
+
 	def self.set(date)
 		# 4/1と5/1にやる前提で、その時点のchildrenで作っちゃう作戦。
 		# TODO: 起こりうる齟齬洗い出して対策とる
