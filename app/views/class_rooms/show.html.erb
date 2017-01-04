@@ -1,4 +1,45 @@
-<h3><%= @count_str %></h3>
+
+
+<script type="text/javascript">
+jQuery(function($){
+  // 最初に隠す
+  $('#ch_list').hide();
+
+  // toggleメソッド
+  function hide_show(id_name, button_name){
+    if($(id_name).css('display') != 'block'){
+      $(button_name).html("履歴を閉じる");
+    }else{
+      $(button_name).html("履歴見る");
+    }
+  }
+
+  // ボタン押したときの挙動
+  $("#ch_button").on('click', function(){
+    $("#ch_list").toggle("",hide_show("#ch_list", "#ch_button"));
+  });
+});
+</script>
+
+<h3>
+  <%= @count_str %>
+  <button id='ch_button' type="button" class="btn btn-default">履歴見る</button>
+</h3>
+
+<div id='ch_list'>
+  <table>
+    <tbody>
+      <% @child_history_data.each do |child_history| %>
+        <tr>
+          <td><%= date_view(child_history[0]) %></td>
+          <td><font color=<%= sex_color(child_history[2]) %>><%= child_history[1] %></font></td>
+          <td><%= history_view_name(child_history[3]) %></td>
+          <td><%= child_history[4] %>人（男<%= child_history[5] %> 女<%= child_history[6] %>）</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <table>
   <thead>

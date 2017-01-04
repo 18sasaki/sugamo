@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :date_view, :status_str, :sex_color
 
   def date_view(datetime)
-  	datetime.strftime("%m/%d（#{Constants::DOW[datetime.wday]}）")
+  	datetime.strftime("%y/%m/%d（#{Constants::DOW[datetime.wday]}）")
   end
 
   def status_str(status_code)

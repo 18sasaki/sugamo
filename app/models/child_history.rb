@@ -49,8 +49,19 @@ class ChildHistory < ApplicationRecord
 		end
 	end
 
+	def self.get_ch_data(class_room_id)
+		ChildHistory.where(class_room_id: class_room_id)
+		            .where.not(child_id: nil)
+		            .includes(:child)
+		            .order(change_date: 'desc', id: 'desc')
+		            .pluck(:change_date, :full_name_f, :sex_code, :history_code, :total_count, :total_m_count, :total_f_count, :"child_histories.id")
+	end
+
 	def self.get_jb_ch(class_room_id, target_date)
-		ChildHistory.where(class_room_id: class_room_id).where('change_date <= ?', target_date).last
+		ChildHistory.where(class_room_id: class_room_id)
+		            .where('change_date <= ?', target_date)
+		            .order(change_date: 'desc', id: 'desc')
+		            .first
 	end
 
 	def self.get_count_hash(class_room_id, target_date)
