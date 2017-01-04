@@ -1,4 +1,4 @@
-<h1>園児変更履歴</h1>
+<br />
 
 <table>
 	<tr>
@@ -16,7 +16,7 @@
       </td>
       <td>
         <%= link_to child_history.child, style: "text-decoration: none;" do %>
-          <font color=<%= child_history.child.sex_code == 'female' ? 'ff0000' : '' %>><%= child_history.child.full_name %><br><%= child_history.child.full_name_f %></font>
+          <font color=<%= sex_color(child_history.child.sex_code) %>><%= child_history.child.full_name %><br><%= child_history.child.full_name_f %></font>
         <% end %>
       </td>
       <td><%= history_view_name(child_history.history_code) %></td>

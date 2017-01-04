@@ -2,19 +2,24 @@ class ChildrenController < ApplicationController
   before_action :set_child, only: [:show, :edit, :update]
 
   def index
+    @page_title = "園児情報"
     @children = Child.all.order(order_str(params[:sort]))
   end
 
   def show
+    @page_title = "#{@child.full_name_f}#{status_str(@child.status_code)}"
+    @page_title_color = sex_color(@child.sex_code)
     # 新入園以外（途中退園・一時入園・一時入園終了・休園中）はステータスを表記する。
   end
 
   def new
+    @page_title = "園児登録"
     @child = Child.new
     set_history_code_list(['inc', 'temp_inc'])
   end
 
   def edit
+    @page_title = "園児編集（#{@child.full_name_f}）"
     set_history_code_list(change_to_history_code_list(@child.status_code))
   end
 
@@ -35,6 +40,7 @@ class ChildrenController < ApplicationController
         format.html { redirect_to @child, notice: 'Child was successfully created.' }
         format.json { render :show, status: :created, location: @child }
       else
+        @page_title = "園児登録"
         set_history_code_list(['inc', 'temp_inc'])
         format.html { render :new }
         format.json { render json: @child.errors, status: :unprocessable_entity }
@@ -57,6 +63,7 @@ class ChildrenController < ApplicationController
           create_child_history(params[:child_history][:history_code], change_date)
         end
 
+        @page_title = "園児編集（#{@child.full_name_f}）"
         format.html { redirect_to @child, notice: 'Child was successfully updated.' }
         format.json { render :show, status: :ok, location: @child }
       else

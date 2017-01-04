@@ -1,5 +1,6 @@
 class ManagesController < ApplicationController
   def index
+    @page_title = '管理画面'
   	# 初期設定系はいずれ実装する為の備忘用メソッド。
   	# ワンクリックで済ませるかもしれないので、その場合は不要かも。
     # dairy_present_flg = dairy_has_created?

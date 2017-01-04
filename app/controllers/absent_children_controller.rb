@@ -4,6 +4,7 @@ class AbsentChildrenController < ApplicationController
   def index
     @target_date = params[:date].try(:to_date) || Date.today
     @today = date_view(@target_date)
+    @page_title = "#{@today}の欠席情報"
     @absent_children = AbsentChild.get_by_date(@target_date)
   end
 
@@ -11,11 +12,13 @@ class AbsentChildrenController < ApplicationController
   end
 
   def new
+    @page_title = "欠席情報登録"
     @absent_child = AbsentChild.new
     @children_list = Child.get_list
   end
 
   def edit
+    @page_title = "欠席情報編集（#{date_view(@absent_child.dairy.date)}　#{@absent_child.child.full_name_f}）"
     @children_list = Child.get_list
     # target_date = date_view(@absent_child.dairy.date)
     # target_name = @absent_child.child.full_name_f
@@ -32,6 +35,7 @@ class AbsentChildrenController < ApplicationController
         format.html { redirect_to absent_children_path(date: @target_date), notice: '登録に成功しました' }
         format.json { render :index, status: :ok }
       else
+        @page_title = "欠席情報登録"
         @children_list = Child.get_list
         format.html { render :new }
         format.json { render json: @absent_child.errors, status: :unprocessable_entity }
@@ -46,6 +50,8 @@ class AbsentChildrenController < ApplicationController
         format.html { redirect_to absent_children_path(date: @target_date), notice: '編集に成功しました' }
         format.json { render :index, status: :ok }
       else
+        @page_title = "欠席情報編集（#{date_view(@absent_child.dairy.date)}　#{@absent_child.child.full_name_f}）"
+        @children_list = Child.get_list
         format.html { render :edit }
         format.json { render json: @absent_child.errors, status: :unprocessable_entity }
       end

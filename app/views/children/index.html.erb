@@ -1,4 +1,4 @@
-<h1>園児情報</h1>
+<br />
 <%= link_to '新入園児登録', new_child_path %>
 
 <table>
@@ -17,13 +17,13 @@
       <tr>
         <td align='right'><%= status_str(child.status_code) %></td>
         <td bgcolor=<%=Constants::CR_HASH[child.class_room_id][:color]%> align='center'>
-          <%= link_to 'class_rooms', id: child.class_room_id, style: "text-decoration: none;" do %>
+          <%= link_to "class_rooms/#{child.class_room_id}", style: "text-decoration: none;" do %>
             <%= Constants::CR_HASH[child.class_room_id][:name] %>
           <% end %>
         </td>
         <td>
           <%= link_to child, style: "text-decoration: none;" do %>
-            <font color=<%= child.sex_code == 'female' ? 'ff0000' : '' %>><%= child.full_name %><br><%= child.full_name_f %></font>
+            <font color=<%= sex_color(child.sex_code) %>><%= child.full_name %><br><%= child.full_name_f %></font>
           <% end %>
         </td>
         <td><%= child.l_phone_number %><br><%= child.c_phone_number %></td>

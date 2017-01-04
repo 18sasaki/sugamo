@@ -4,21 +4,25 @@ class CodesController < ApplicationController
   # GET /codes
   # GET /codes.json
   def index
+    @page_title = '各種code'
     @codes = Code.all
   end
 
   # GET /codes/1
   # GET /codes/1.json
   def show
+    @page_title = 'code詳細'
   end
 
   # GET /codes/new
   def new
+    @page_title = 'code作成'
     @code = Code.new
   end
 
   # GET /codes/1/edit
   def edit
+    @page_title = 'code編集'
   end
 
   # POST /codes
@@ -31,6 +35,7 @@ class CodesController < ApplicationController
         format.html { redirect_to @code, notice: 'Code was successfully created.' }
         format.json { render :show, status: :created, location: @code }
       else
+        @page_title = 'code作成'
         format.html { render :new }
         format.json { render json: @code.errors, status: :unprocessable_entity }
       end
@@ -45,6 +50,7 @@ class CodesController < ApplicationController
         format.html { redirect_to @code, notice: 'Code was successfully updated.' }
         format.json { render :show, status: :ok, location: @code }
       else
+        @page_title = 'code編集'
         format.html { render :edit }
         format.json { render json: @code.errors, status: :unprocessable_entity }
       end
