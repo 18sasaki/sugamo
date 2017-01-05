@@ -28,25 +28,26 @@ class AbsentChildrenController < ApplicationController
   end
 
   def create
+    absent_child_params = set_absent_child_params
     @absent_child = AbsentChild.new(absent_child_params)
 
     respond_to do |format|
-      if @absent_child.save
+      if not_duplicate?(absent_child_params) && @absent_child.save
         format.html { redirect_to absent_children_path(date: @target_date), notice: '登録に成功しました' }
         format.json { render :index, status: :ok }
       else
         @page_title = "欠席情報登録"
         @children_list = Child.get_list
+        flash[:error] = @error
         format.html { render :new }
         format.json { render json: @absent_child.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   def update
     respond_to do |format|
-      if @absent_child.update(absent_child_params)
+      if @absent_child.update(set_absent_child_params)
         format.html { redirect_to absent_children_path(date: @target_date), notice: '編集に成功しました' }
         format.json { render :index, status: :ok }
       else
@@ -71,7 +72,7 @@ class AbsentChildrenController < ApplicationController
       @absent_child = AbsentChild.find(params[:id])
     end
 
-    def absent_child_params
+    def set_absent_child_params
       params[:absent_child][:dairy_id] = change_date_to_dairy_id(params[:dairy])
       params[:absent_child][:class_room_id] = set_class_room_id(params[:absent_child][:child_id])
       params.require(:absent_child).permit(:dairy_id, :class_room_id, :child_id, :absent_code, :reason_code, :reason_text)
@@ -84,5 +85,14 @@ class AbsentChildrenController < ApplicationController
 
     def set_class_room_id(child_id)
       Child.find_by(id: child_id).try(:class_room_id)
+    end
+
+    def not_duplicate?(absent_child_params)
+      if AbsentChild.where(dairy_id: absent_child_params[:dairy_id], child_id: absent_child_params[:child_id]).exists?
+        @error = '同一日にすでに欠席情報が登録されています。'
+        false
+      else
+        true
+      end
     end
 end
