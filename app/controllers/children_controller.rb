@@ -10,6 +10,11 @@ class ChildrenController < ApplicationController
     @page_title = "#{@child.full_name_f}#{status_str(@child.status_code)}"
     @page_title_color = sex_color(@child.sex_code)
     # 新入園以外（途中退園・一時入園・一時入園終了・休園中）はステータスを表記する。
+
+    @absent_count_hash = AbsentChild.get_count({child_id: params[:id]}, [:absent_code])
+    # {absent_code => count, ...}
+
+    @all_absent_data = AbsentChild.get_by_child(params[:id])
   end
 
   def new

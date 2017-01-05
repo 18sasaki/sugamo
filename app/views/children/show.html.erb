@@ -1,33 +1,89 @@
-<table>
+<script type="text/javascript">
+jQuery(function($){
+  // 最初に隠す
+  $('#personal').hide();
+  $('#absent_data').hide();
+
+  // toggleメソッド
+  function hide_show(id_name, button_name, html_str){
+    if($(id_name).css('display') != 'block'){
+      $(button_name).html(html_str + "を閉じる");
+    }else{
+      $(button_name).html(html_str + "見る");
+    }
+  }
+
+  // ボタン押したときの挙動
+  $("#pe_button").on('click', function(){
+    $("#personal").toggle("",hide_show("#personal", "#pe_button", "個人情報"));
+  });
+  // ボタン押したときの挙動
+  $("#ab_button").on('click', function(){
+    $("#absent_data").toggle("",hide_show("#absent_data", "#ab_button", "欠席一覧"));
+  });
+});
+</script>
+
+<h3>
+  <span style="background-color:<%=Constants::CR_HASH[@child.class_room_id][:color]%>;" align='center'>
+    <%= Constants::CR_HASH[@child.class_room_id][:name] %>
+  </span>
+  <%= @child.full_name %>
+  <button id='pe_button' type="button" class="btn btn-default">個人情報見る</button>
+</h3>
+
+<div id='personal'>
+  <table>
+    <tr>
+      <td>住所</td>
+      <td>
+        <%= @child.post_number %><br />
+        <%= @child.address %>
+      </td>
+    </tr>
+    <tr>
+      <td>電話番号</td>
+      <td>
+        <%= @child.l_phone_number %><br />
+        <%= @child.c_phone_number %>
+      </td>
+    </tr>
+    <tr>
+      <td>固有番号</td>
+      <td><%= @child.unique_num %></td>
+    </tr>
+  </table>
+
+  <%= link_to (button_tag '編集', type: 'button'), edit_child_path(@child) %>
+</div>
+
+<table class='table table-bordered table-condensed' style='width:400px;'>
   <tr>
-    <td>クラス</td>
-    <td bgcolor=<%=Constants::CR_HASH[@child.class_room_id][:color]%> align='center'>
-      <%= Constants::CR_HASH[@child.class_room_id][:name] %>
-    </td>
+    <% Constants::ALL_CODES['absent'].each do |code, data| %>
+      <td width="25%" align='center'><%= data[:view_name] %></td>
+    <% end %>
   </tr>
-  <tr>
-    <td>漢字氏名</td>
-    <td><%= @child.full_name %></td>
-  </tr>
-  <tr>
-    <td>住所</td>
-    <td>
-      <%= @child.post_number %><br />
-      <%= @child.address %>
-    </td>
-  </tr>
-  <tr>
-    <td>電話番号</td>
-    <td>
-      <%= @child.l_phone_number %><br />
-      <%= @child.c_phone_number %>
-    </td>
-  </tr>
-  <tr>
-    <td>固有番号</td>
-    <td><%= @child.unique_num %></td>
+  <tr style='background-color:<%= absent_count_check(@absent_count_hash) %>;'>
+    <% Constants::ALL_CODES['absent'].each do |code, data| %>
+      <td width="25%" align='center'><%= @absent_count_hash[code] || 0 %></td>
+    <% end %>
   </tr>
 </table>
 
-<%= link_to 'Edit', edit_child_path(@child) %> |
-<%= link_to 'Back', children_path %>
+<% if @all_absent_data.present? %>
+  <button id='ab_button' type="button" class="btn btn-default">欠席一覧見る</button>
+  <div id='absent_data'>
+    <table>
+      <tbody>
+        <% @all_absent_data.each do |absent_data| %>
+          <tr>
+            <td><%= date_view(absent_data.dairy.date) %></td>
+            <td><%= Constants::ALL_CODES['absent'][absent_data.absent_code][:view_name] %></td>
+            <td><%= Constants::ALL_CODES['reason'][absent_data.reason_code].try(:[], 'view_name') %></td>
+            <td><%= absent_data.reason_text %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
