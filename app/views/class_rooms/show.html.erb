@@ -41,21 +41,30 @@ jQuery(function($){
   </table>
 </div>
 
-<table>
+<table class='table table-condensed table-headerfixed table-hover'>
   <thead>
     <tr>
-      <th>名前</th>
+      <th width="40%">名前</th>
+      <% Constants::ALL_CODES['absent'].each do |code, data| %>
+        <th width="15%"><%= data[:view_name] %></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @children.each do |child| %>
-      <tr>
-        <td>
+      <% ab_hash = @children_absent_hash[child.id] || {} %>
+      <tr style='background-color:<%= absent_count_check(ab_hash) %>;'>
+        <td width="40%">
           <%= link_to child, style: "text-decoration: none;" do %>
             <font color=<%= sex_color(child.sex_code) %>><%= child.full_name_f %></font>
           <% end %>
         </td>
+        <% Constants::ALL_CODES['absent'].each do |code, data| %>
+          <td width="15%">
+            <%= ab_hash[code] %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

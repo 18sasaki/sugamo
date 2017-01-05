@@ -15,6 +15,8 @@ class ClassRoomsController < ApplicationController
     @count_str = "#{jb_ch.total_count}人（ 男：#{jb_ch.total_m_count}人 女：#{jb_ch.total_f_count}人）"
 
     @child_history_data = ChildHistory.get_ch_data(params[:id])
+
+    @children_absent_hash = AbsentChild.get_hash_by_class_rooms(params[:id])
   end
 
   def edit
