@@ -22,26 +22,29 @@
   </div>
 
   <div class="field">
-    <%= f.label :child_id %>
+    園児<br />
     <%= f.select :child_id, @children_list, :selected => absent_child.child_id, :prompt => '選択してください' %>
   </div>
 
-  <div class="field">
-    <%= f.label :absent_code %>
-    <%= f.select :absent_code, absent_list, :selected => "absent" %>
+  <div class="field" style="display:inline-flex">
+    <% absent_list.each do |absent_code| %>
+      <%= radio_button :absent_child, :absent_code, absent_code[0], checked: absent_code[0] == 'absent' %>
+      <%= label "absent_child_absent_code", absent_code[0], absent_code[1] %>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :reason_code %>
-    <%= f.select :reason_code, reason_list, :prompt => '選択してください' %>
+    理由<%= f.select :reason_code, reason_list, :prompt => '選択してください' %>
   </div>
 
   <div class="field">
-    <%= f.label :reason_text %>
+    その他連絡事項<br />
     <%= f.text_area :reason_text %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <% action_str = (action_name == 'new' ? '登録' : '変更') %>
+    <%= f.submit(action_str, class: 'btn btn-success') %>
+    <%= back_button_ww(action_str) %>
   </div>
 <% end %>

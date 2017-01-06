@@ -45,3 +45,19 @@ table.table-headerfixed thead th {
     float: left;
     table-layout: fixed;
 }
+
+table.w600 {
+    width: 600px;
+}
+
+table tbody.h400 {
+    height: 400px;
+}
+
+table th.center {
+    text-align: center;
+}
+
+table td.middle {
+    vertical-align: middle;
+}

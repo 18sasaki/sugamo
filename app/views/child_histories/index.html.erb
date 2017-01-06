@@ -1,22 +1,27 @@
-<table>
-	<tr>
-		<th>日付</th>
-		<th>クラス</th>
-		<th>名前</th>
-		<th>内容</th>
-		<th>数</th>
-	</tr>
-	<% @child_histories.each do |child_history| %>
-    <tr>
-      <td><%= date_view(child_history.change_date) %></td>
-      <%= class_room_link_td(child_history.class_room_id) %>
-      <td>
-        <%= link_to child_history.child, style: "text-decoration: none;" do %>
-          <font color=<%= sex_color(child_history.child.sex_code) %>><%= child_history.child.full_name %><br><%= child_history.child.full_name_f %></font>
-        <% end %>
-      </td>
-      <td><%= history_view_name(child_history.history_code) %></td>
-      <td><%= child_history.total_count %>（男：<%= child_history.total_m_count %>　女：<%= child_history.total_f_count %>）</td>
-    </tr>
-  <% end %>
+<table class='table table-condensed table-headerfixed table-hover w600'>
+  <thead>
+  	<tr>
+  		<th class='center' width='18%'>日付</th>
+  		<th class='center' width='12%'>クラス</th>
+  		<th class='center' width='27%'>名前</th>
+  		<th class='center' width='18%'>内容</th>
+  		<th class='center' width='25%'>数</th>
+  	</tr>
+  </thead>
+
+  <tbody class='h400'>
+  	<% @child_histories.each do |child_history| %>
+      <tr>
+        <td width='18%'><%= date_view(child_history.change_date) %></td>
+        <%= class_room_link_td(child_history.class_room_id, { width: '12%', align: 'center' }) %>
+        <td width='27%'>
+          <%= link_to child_history.child, style: "text-decoration: none;" do %>
+            <font color=<%= sex_color(child_history.child.sex_code) %>><%= child_history.child.full_name %><br><%= child_history.child.full_name_f %></font>
+          <% end %>
+        </td>
+        <td width='18%'><%= history_view_name(child_history.history_code) %></td>
+        <td width='25%'><%= child_history.total_count %>（男：<%= child_history.total_m_count %>　女：<%= child_history.total_f_count %>）</td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

@@ -1,7 +1,7 @@
 module AbsentChildrenHelper
   def absent_list
   	Constants::ALL_CODES['absent'].each_with_object([]) do |abs_hash, ret_list|
-  		ret_list << [abs_hash[1][:view_name], abs_hash[0]]
+  		ret_list << [abs_hash[0], abs_hash[1][:view_name]]
   	end
   end
 

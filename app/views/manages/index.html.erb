@@ -6,7 +6,7 @@
 		<td>
 			<%= form_tag('manages/dairy_create', method: "post") do %>
 			  <%= text_field_tag(:year, "#{Date.today.year}", size: '5') %>年度を
-			  <%= submit_tag("作成する") %>
+			  <%= submit_tag("作成する", class: 'btn btn-success') %>
 			<% end %>
 		</td>
 	</tr>
@@ -21,13 +21,14 @@
 			<strong>ChildrenHistory</strong>
 		</td>
 		<td>
-			人数確認（　<%= link_to '4/1', "child_histories/show?date=#{Date.today.year}0401" %>　
-			<%= link_to '5/1', "child_histories/show?date=#{Date.today.year}0501" %>　）
+			人数確認：
+			<%= link_info_button('4/1', "child_histories/show?date=#{Date.today.year}0401") %>
+			<%= link_info_button('5/1', "child_histories/show?date=#{Date.today.year}0501") %>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<%= link_to '今までの一覧', '/child_histories' %>
+			<%= link_info_button('今までの一覧', '/child_histories') %>
 		</td>
 	</tr>
 
@@ -36,7 +37,7 @@
 			<strong>Code</strong>
 		</td>
 		<td>
-			<%= link_to '一覧', '/codes' %>
+			<%= link_info_button('一覧', '/codes') %>
 		</td>
 	</tr>
 </table>
