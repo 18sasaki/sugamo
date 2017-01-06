@@ -25,9 +25,7 @@ jQuery(function($){
 </script>
 
 <h3>
-  <span style="background-color:<%=Constants::CR_HASH[@child.class_room_id][:color]%>;" align='center'>
-    <%= Constants::CR_HASH[@child.class_room_id][:name] %>
-  </span>
+  <%= class_room_link_span(@child.class_room_id, {align: 'center'}) %>
   <%= @child.full_name %>
   <button id='pe_button' type="button" class="btn btn-default">個人情報見る</button>
 </h3>

@@ -19,11 +19,7 @@
   <tbody>
     <% @absent_children.each do |absent_child| %>
       <tr>
-        <td bgcolor=<%=Constants::CR_HASH[absent_child.class_room_id][:color]%>>
-          <%= link_to "class_rooms/#{absent_child.class_room_id}", style: "text-decoration: none;" do %>
-            <%= Constants::CR_HASH[absent_child.class_room_id][:name] %>
-          <% end %>
-        </td>
+        <%= class_room_link_td(absent_child.class_room_id) %>
         <td>
           <%= link_to absent_child.child, style: "text-decoration: none;" do %>
             <%= absent_child.child.full_name_f %>

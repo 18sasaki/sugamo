@@ -9,9 +9,7 @@
 	<% @child_histories.each do |child_history| %>
     <tr>
       <td><%= date_view(child_history.change_date) %></td>
-      <td bgcolor=<%=Constants::CR_HASH[child_history.class_room_id][:color]%> align='center'>
-        <%= Constants::CR_HASH[child_history.class_room_id][:name] %>
-      </td>
+      <%= class_room_link_td(child_history.class_room_id) %>
       <td>
         <%= link_to child_history.child, style: "text-decoration: none;" do %>
           <font color=<%= sex_color(child_history.child.sex_code) %>><%= child_history.child.full_name %><br><%= child_history.child.full_name_f %></font>
