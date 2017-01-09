@@ -1,3 +1,9 @@
+<h4>
+  <%= link_to('<<', "?month=#{@last_month}") %>
+  <%= @dairies[0].date.strftime('%Y年%m月') %>
+  <%= link_to('>>', "?month=#{@next_month}") %>
+</h4>
+
 <%= form_tag :action => 'bulk_update' do %>
 	<%= hidden_field_tag 'month', params[:month] %>
 
