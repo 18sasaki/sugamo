@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :date_view, :status_str, :sex_color
+  helper_method :date_view, :status_str, :sex_color, :toyear
 
   def date_view(datetime)
-  	datetime.strftime("%y/%m/%d（#{Constants::DOW[datetime.wday]}）")
+    datetime.strftime("%y/%m/%d（#{Constants::DOW[datetime.wday]}）")
+  end
+
+  def day_view(datetime)
+  	datetime.strftime('%d')
   end
 
   def status_str(status_code)
@@ -12,5 +16,12 @@ class ApplicationController < ActionController::Base
 
   def sex_color(sex_code)
   	sex_code == 'female' ? '#ff0000' : '#000000'
+  end
+
+  def toyear
+    today = Date.today
+    year = today.year
+    # 1/1～3/31の間なら、年度は１年前
+    today.between?('0101'.to_date, '0331'.to_date) ? year - 1 : year
   end
 end

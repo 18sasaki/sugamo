@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get  'dairies/', to: 'dairies#index'
+  post 'dairies/bulk_update'
+
   get 'child_histories/', to: 'child_histories#index'
   get 'child_histories/show'
 

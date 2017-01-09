@@ -1,0 +1,34 @@
+<%= form_tag :action => 'bulk_update' do %>
+	<%= hidden_field_tag 'month', params[:month] %>
+
+	<table>
+	  <thead>
+	    <tr>
+		    <% Constants::DOW.each do |dow| %>
+		      <th><%= dow %></th>
+	      <% end %>
+	    </tr>
+	  </thead>
+	  <tbody>
+		  <tr>
+	      <% @blank_td_count.times do %>
+	        <td></td>
+	      <% end %>
+		    <% for @dairy in @dairies %>
+	        <td bgcolor=<%= wod_bg_color(@dairy.date) %>>
+	          <%= @dairy.date.day %><br />
+	          <%= select 'dairy[]', :dairy_code, Constants::DATE_CODE_LIST, selected: @dairy.dairy_code %>
+	        </td>
+			    <!-- 6の場合、土曜日なので表示した後にtr閉じる -->
+			    <% if @dairy.date.wday == 6 %>
+				    </tr>
+				    <tr>
+			    <% end %>
+		    <% end %>
+	    </tr>
+	  </tbody>
+	</table>
+
+  <%= submit_tag(:bulk_edit, class: 'btn btn-success') %>
+
+<% end %>

@@ -35,4 +35,11 @@ module ApplicationHelper
       button_tag(button_str, button_option)
     end
   end
+
+  def wod_bg_color(date)
+    case date.wday
+    when 0, 6 then '#666666'
+    else           ''
+    end
+  end
 end
