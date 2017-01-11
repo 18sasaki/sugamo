@@ -1,17 +1,18 @@
+<%= form_tag :action => 'bulk_update' do %>
 <h4>
   <%= link_to('<<', "?month=#{@last_month}") %>
   <%= @dairies[0].date.strftime('%Y年%m月') %>
   <%= link_to('>>', "?month=#{@next_month}") %>
+  <%= submit_tag('未定をすべて平常保育に変更', name: 'auto', class: 'btn btn-warning') %>
 </h4>
 
-<%= form_tag :action => 'bulk_update' do %>
 	<%= hidden_field_tag 'month', params[:month] %>
 
 	<table>
 	  <thead>
 	    <tr>
 		    <% Constants::DOW.each do |dow| %>
-		      <th><%= dow %></th>
+		      <th class='center'><%= dow %></th>
 	      <% end %>
 	    </tr>
 	  </thead>
@@ -35,6 +36,6 @@
 	  </tbody>
 	</table>
 
-  <%= submit_tag(:bulk_edit, class: 'btn btn-success') %>
+  <%= submit_tag('上記に更新',         name: 'edit', class: 'btn btn-success') %>
 
 <% end %>

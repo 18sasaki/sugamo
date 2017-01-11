@@ -20,16 +20,19 @@ class DairiesController < ApplicationController
   end
 
   def bulk_update
-    Dairy.bulk_update(params[:dairy])
-
     respond_to do |format|
-      if Dairy.bulk_update(params[:dairy])
+    	begin
+		  	if params[:edit]
+			    Dairy.bulk_update(params[:dairy])
+			  elsif params[:auto]
+			  	Dairy.bulk_update_auto(params[:dairy])
+			  end
 	      format.html { redirect_to "/dairies?month=#{params[:month]}" , notice: '更新しました' }
 	      format.json { render :index }
-      else
-	      format.html { redirect_to "/dairies?month=#{params[:month]}" , notice: '更新できませんでした' }
+	    rescue => e
+	      format.html { redirect_to "/dairies?month=#{params[:month]}" , notice: "更新できませんでした/#{e}" }
 	      format.json { render json: 'errors', status: :unprocessable_entity }
-      end
-    end
+	    end
+	  end
   end
 end

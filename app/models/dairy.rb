@@ -32,4 +32,9 @@ class Dairy < ApplicationRecord
 			target_dairy.save!
 		end
 	end
+
+	def self.bulk_update_auto(params_hash)
+		min, max = params_hash.keys.minmax
+		Dairy.where(id: [min..max]).where(dairy_code: 'undec').update_all(dairy_code: 'full')
+	end
 end
