@@ -16,7 +16,7 @@ class Dairy < ApplicationRecord
 				        att_shou_flg: att_flg ? 1 : 0,
 				        att_chuu_flg: att_flg ? 1 : 0,
 				        att_chou_flg: att_flg ? 1 : 0,
-				        dairy_code:   att_flg ? 'undec' : 'holid').save
+				        dairy_code:   att_flg ? 'undec' : 'holiday').save
 		end
 	end
 

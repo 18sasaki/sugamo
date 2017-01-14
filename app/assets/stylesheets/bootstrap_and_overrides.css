@@ -61,3 +61,27 @@ table th.center {
 table td.middle {
     vertical-align: middle;
 }
+
+table td.saturday {
+    background-color: #666666;
+    color: #0000ff;
+}
+
+table td.sunday {
+    background-color: #666666;
+    color: #ff0000;
+}
+
+table td.holiday {
+    background-color: #666666;
+    color: #ff9999;
+}
+
+table td.open {
+    background-color: #ffffff;
+}
+
+table td.closed {
+    background-color: #cccccc;
+}
+

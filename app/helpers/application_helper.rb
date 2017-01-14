@@ -37,9 +37,17 @@ module ApplicationHelper
   end
 
   def wod_bg_color(date)
-    case date.wday
-    when 0, 6 then '#666666'
-    else           ''
+  end
+
+  def td_class(dairy)
+    case dairy.dairy_code
+    when 'full', 'half', 'free' then 'open'
+    when 'holiday'
+      if    dairy.date.wday == 0 then 'sunday'
+      elsif dairy.date.wday == 6 then 'saturday'
+      else                            'holiday'
+      end
+    when 'closed' then 'closed'
     end
   end
 end

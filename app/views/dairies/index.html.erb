@@ -22,9 +22,9 @@
 	        <td></td>
 	      <% end %>
 		    <% for @dairy in @dairies %>
-	        <td bgcolor=<%= wod_bg_color(@dairy.date) %>>
+	        <td class='<%= td_class(@dairy) %>'>
 	          <%= @dairy.date.day %><br />
-	          <%= select 'dairy[]', :dairy_code, Constants::DATE_CODE_LIST, selected: @dairy.dairy_code %>
+	          <span style='color:#000000;'><%= select 'dairy[]', :dairy_code, Constants::DATE_CODE_LIST, selected: @dairy.dairy_code %></span>
 	        </td>
 			    <!-- 6の場合、土曜日なので表示した後にtr閉じる -->
 			    <% if @dairy.date.wday == 6 %>
@@ -36,6 +36,6 @@
 	  </tbody>
 	</table>
 
-  <%= submit_tag('上記に更新',         name: 'edit', class: 'btn btn-success') %>
+  <%= submit_tag('上記に更新', name: 'edit', class: 'btn btn-success') %>
 
 <% end %>
