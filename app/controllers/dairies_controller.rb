@@ -16,12 +16,13 @@ class DairiesController < ApplicationController
 
   	@dairies = Dairy.get_by_ym(toyear, params[:month])
   	@blank_td_count = @dairies.first.date.wday
+  	@first_id, @last_id = @dairies.pluck(:id).minmax
   	@dairy = Dairy.new
   end
 
   def bulk_update
     respond_to do |format|
-    	if Dairy.bulk_update(params[:dairy], params[:auto])
+    	if Dairy.bulk_update(params[:dairy])
 	      format.html { redirect_to "/dairies?month=#{params[:month]}" , notice: '更新しました' }
 	      format.json { render :index }
 	    else

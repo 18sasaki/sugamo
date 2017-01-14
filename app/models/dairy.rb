@@ -25,37 +25,14 @@ class Dairy < ApplicationRecord
 		Dairy.where(date: "#{year}#{sprintf("%02d",month)}01" .. "#{year}#{sprintf("%02d",month)}31")
 	end
 
-	# def self.bulk_update(params_hash)
-	# 	params_hash.each do |id, params|
-	# 		target_dairy = Dairy.find(id)
-	# 		target_dairy.dairy_code = params[:dairy_code]
-	# 		target_dairy.save!
-	# 	end
-	# end
-
-	def self.bulk_update(params_hash, auto_flg = false)
+	def self.bulk_update(params_hash)
 		params_hash.each do |id, params|
 			target_dairy = Dairy.find(id)
-			target_dairy_code = target_dairy.dairy_code
-			# 変更なしの場合auto対象かチェック
-			if target_dairy_code == params[:dairy_code]
-				# autoモードなら「未定」を「平常保育」にする
-				if auto_flg && target_dairy_code == 'undec'
-					target_dairy.dairy_code = 'full'
-				# 「未定」でなければ無視して次
-				else
-					next
-				end
-			# 変更があればそちら優先
-			else
+			# 変更があった場合のみ更新
+			unless target_dairy.dairy_code == params[:dairy_code]
 				target_dairy.dairy_code = params[:dairy_code]
+				target_dairy.save!
 			end
-			target_dairy.save!
 		end
-	end
-
-	def self.bulk_update_auto(params_hash)
-		min, max = params_hash.keys.minmax
-		Dairy.where(id: [min..max]).where(dairy_code: 'undec').update_all(dairy_code: 'full')
 	end
 end
