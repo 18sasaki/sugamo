@@ -41,14 +41,14 @@ class Dairy < ApplicationRecord
 			if target_dairy_code == params[:dairy_code]
 				# autoモードなら「未定」を「平常保育」にする
 				if auto_flg && target_dairy_code == 'undec'
-					target_dairy_code = 'full'
+					target_dairy.dairy_code = 'full'
 				# 「未定」でなければ無視して次
 				else
 					next
 				end
 			# 変更があればそちら優先
 			else
-				target_dairy_code = params[:dairy_code]
+				target_dairy.dairy_code = params[:dairy_code]
 			end
 			target_dairy.save!
 		end

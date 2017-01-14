@@ -21,6 +21,15 @@ module Constants
     re << [val[:view_name], key]
   end
 
+  # JSで「未定」を「平常保育」に変更するために、平常保育のindexを持っておく。
+  # TODO: 'full'決め打ちが少し気になる。check_string使う？
+  ALL_CODES['dairy'].each_with_index do |(key, val), i|
+    if key == 'full'
+      FULL_INDEX = i
+      break
+    end
+  end
+
   DATE_CODE_SELECTABLE_LIST = ALL_CODES['dairy'].each_with_object([]) do |(key, val), re|
     re << [val[:view_name], key] if val[:check_string] == 'selectable'
   end

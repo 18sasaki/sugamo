@@ -1,12 +1,38 @@
+<script type="text/javascript">
+jQuery(function($){
+  // メソッド
+  function changeUndecToFull(){
+		var id_first = $('#id_first').val();
+		var id_last  = $('#id_last').val();
+		var full_index = <%= Constants::FULL_INDEX %>;
+
+		for( target_id = id_first; id_last >= target_id; target_id++ ) {
+			var targetSelect = $("#dairy_" + target_id + "_dairy_code")
+			if( targetSelect.val() == 'undec' ) {
+				targetSelect[0].selectedIndex = [full_index];
+			}
+		}
+  }
+
+  // ボタン押したときの挙動
+  $("#auto_button").on('click', function(){
+    changeUndecToFull();
+  });
+});
+</script>
+
 <%= form_tag :action => 'bulk_update' do %>
 <h4>
   <%= link_to('<<', "?month=#{@last_month}") %>
   <%= @dairies[0].date.strftime('%Y年%m月') %>
   <%= link_to('>>', "?month=#{@next_month}") %>
   <%= submit_tag('未定をすべて平常保育に変更', name: 'auto', class: 'btn btn-warning') %>
+  <%= button_tag('未定をすべて平常保育に変更２', type: 'button', id: 'auto_button', name: 'auto', class: 'btn btn-warning') %>
 </h4>
 
 	<%= hidden_field_tag 'month', params[:month] %>
+	<%= hidden_field_tag 'id_first', @dairies.first.id %>
+	<%= hidden_field_tag 'id_last', @dairies.last.id %>
 
 	<table>
 	  <thead>
@@ -35,6 +61,7 @@
 	    </tr>
 	  </tbody>
 	</table>
+
 
   <%= submit_tag('上記に更新', name: 'edit', class: 'btn btn-success') %>
 
