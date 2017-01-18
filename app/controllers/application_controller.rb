@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :date_view, :status_str, :sex_color, :toyear
+  helper_method :date_view, :status_str, :sex_color, :toyeard, :date_to_ym
 
   def date_view(datetime)
     datetime.strftime("%y/%m/%d（#{Constants::DOW[datetime.wday]}）")
@@ -18,10 +18,19 @@ class ApplicationController < ActionController::Base
   	sex_code == 'female' ? '#ff0000' : '#000000'
   end
 
-  def toyear
+  # TODO: 毎回計算しててイケてない。year_id導入で直るとうれしい。
+  def toyeard
     today = Date.today
     year = today.year
     # 1/1～3/31の間なら、年度は１年前
     today.between?('0101'.to_date, '0331'.to_date) ? year - 1 : year
+  end
+
+  def ym_to_date(ym)
+    "#{ym}01".to_date
+  end
+
+  def date_to_ym(date)
+    date.strftime('%Y%m')
   end
 end

@@ -5,19 +5,19 @@
 		</td>
 		<td>
 			<%= form_tag('manages/dairy_create', method: "post") do %>
-			  <%= text_field_tag(:year, toyear, size: '5') %>年度を
+			  <%= text_field_tag(:year, toyeard, size: '5') %>年度を
 			  <%= submit_tag("作成する", class: 'btn btn-success') %>
 			<% end %>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<%# [4,5,6,7,8,9,10,11,12,1,2,3].each do |month| %>
+			<%# ['04','05','06','07','08','09','10','11','12','01','02','03'].each do |month| %>
 			<% 4.upto(12) do |month| %>
-				<%= link_info_button("#{month}月", "/dairies?year=#{toyear}&month=#{month}") %>
+				<%= link_info_button("#{month}月", "/dairies?ym=#{toyeard}#{format('%02d', month)}") %>
 			<% end %>
 			<% 1.upto(3) do |month| %>
-				<%= link_info_button("#{month}月", "/dairies?year=#{toyear + 1}&month=#{month}") %>
+				<%= link_info_button("#{month}月", "/dairies?ym=#{toyeard + 1}#{format('%02d', month)}") %>
 			<% end %>
 		</td>
 	</tr>

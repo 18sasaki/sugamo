@@ -36,9 +36,6 @@ module ApplicationHelper
     end
   end
 
-  def wod_bg_color(date)
-  end
-
   def td_class(dairy)
     case dairy.dairy_code
     when 'full', 'half', 'free' then 'open'

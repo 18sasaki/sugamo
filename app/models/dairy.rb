@@ -1,4 +1,6 @@
 class Dairy < ApplicationRecord
+	has_many :absent_children
+
 	def self.bulk_create(year)
 		if Dairy.find_by(date: "#{year}0401".to_date)
 			"#{year}年度のDairyはすでに作成済みです。"
@@ -20,9 +22,8 @@ class Dairy < ApplicationRecord
 		end
 	end
 
-	def self.get_by_ym(yeard, month)
-		year = (month.to_i).between?(1, 3) ? yeard.to_i + 1 : yeard
-		Dairy.where(date: "#{year}#{sprintf("%02d",month)}01" .. "#{year}#{sprintf("%02d",month)}31")
+	def self.get_by_todate(todate)
+		Dairy.where(date: todate ... todate.next_month)
 	end
 
 	def self.bulk_update(params_hash)

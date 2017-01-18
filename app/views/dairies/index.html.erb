@@ -2,8 +2,8 @@
 jQuery(function($){
   // 未定をすべて平常保育に変更
   $("#change_to_full").on('click', function(){
-		for( target_id = <%= @first_id %>; <%= @last_id %> >= target_id; target_id++ ) {
-			var targetSelect = $("#dairy_" + target_id + "_dairy_code")
+		for( target_id = 1; 31 >= target_id; target_id++ ) {
+			var targetSelect = $("#select_" + target_id)
 			if( targetSelect.val() == 'undec' ) {
 				targetSelect[0].selectedIndex = [<%= Constants::FULL_INDEX %>];
 			}
@@ -15,13 +15,13 @@ jQuery(function($){
 
 <%= form_tag :action => 'bulk_update' do %>
 <h4>
-  <%= link_to('<<', "?month=#{@last_month}") %>
-  <%= @dairies[0].date.strftime('%Y年%m月') %>
-  <%= link_to('>>', "?month=#{@next_month}") %>
+  <%= link_to('<<', "?ym=#{date_to_ym(@todate.last_month)}") %>
+  <%= @todate.strftime('%Y年%m月') %>
+  <%= link_to('>>', "?ym=#{date_to_ym(@todate.next_month)}") %>
   <%= button_tag('未定をすべて平常保育に変更', type: 'button', id: 'change_to_full', class: 'btn btn-warning') %>
 </h4>
 
-	<%= hidden_field_tag 'month', params[:month] %>
+	<%= hidden_field_tag 'ym', params[:ym] %>
 
 	<table>
 	  <thead>
@@ -33,13 +33,15 @@ jQuery(function($){
 	  </thead>
 	  <tbody>
 		  <tr>
-	      <% @blank_td_count.times do %>
+	      <% @todate.wday.times do %>
 	        <td></td>
 	      <% end %>
-		    <% for @dairy in @dairies %>
+		    <%# for @dairy in @dairies %>
+		    <% @dairies.each_with_index do |dairy, i| %>
+			    <% @dairy = dairy %>
 	        <td class='<%= td_class(@dairy) %>'>
 	          <%= @dairy.date.day %><br />
-	          <span style='color:#000000;'><%= select 'dairy[]', :dairy_code, Constants::DATE_CODE_LIST, selected: @dairy.dairy_code %></span>
+	          <span style='color:#000000;'><%= select 'dairy[]', :dairy_code, Constants::DATE_CODE_LIST, {selected: @dairy.dairy_code}, {id: "select_#{i+1}"} %></span>
 	        </td>
 			    <!-- 6の場合、土曜日なので表示した後にtr閉じる -->
 			    <% if @dairy.date.wday == 6 %>
