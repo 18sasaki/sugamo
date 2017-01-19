@@ -42,10 +42,13 @@ class ChildHistory < ApplicationRecord
 			                total_count:   count_hash[:total_count],
 			                history_code:  history_code ).save
 
-		# 該当classroomで該当日の後のデータはすべて変更を加えてupdateする。
-		aft_chs = ChildHistory.where(class_room_id: child.class_room_id).where('change_date > ?', change_date)
-		aft_chs.each do |aft_ch|
-			aft_ch.update(change_count_hash(aft_ch, change_type, child.sex_code))
+		# 該当classroomで該当日の後のデータに変更を加えてupdateする。
+		# ただしchange_typeが'ｋｅｅｐ'の場合は変更なし。
+		if change_type != 'keep' # 'inc' or 'dec'
+			aft_chs = ChildHistory.where(class_room_id: child.class_room_id).where('change_date > ?', change_date)
+			aft_chs.each do |aft_ch|
+				aft_ch.update(change_count_hash(aft_ch, change_type, child.sex_code))
+			end
 		end
 	end
 
@@ -87,6 +90,7 @@ class ChildHistory < ApplicationRecord
     	when 'male'   then { total_m_count: m_count -= 1, total_f_count: f_count,      total_count: t_count -= 1 }
     	else               { total_m_count: m_count,      total_f_count: f_count,      total_count: t_count      } # ないはず
     	end
+    when 'keep'     then { total_m_count: m_count,      total_f_count: f_count,      total_count: t_count      }
   	else                 { total_m_count: m_count,      total_f_count: f_count,      total_count: t_count      } # ないはず
     end
 	end

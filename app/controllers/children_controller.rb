@@ -136,13 +136,14 @@ class ChildrenController < ApplicationController
       elsif target_check_string.include?('dec')
         change_type = 'dec'
       else
-        # 休園などは人数に変動なしなので作らない
-        return
+        # 休園などは人数に変動なしなので作らない => 作ることにした。
+        change_type = 'keep'
+        # return
       end
       ChildHistory.create(@child, history_code, change_date, change_type)
     end
 
     def decrypt_change_date(ch_params)
-      (ch_params['change_date(1i)'] + sprintf("%02d", ch_params['change_date(2i)']) + sprintf("%02d", ch_params['change_date(3i)'])).to_date
+      (ch_params['change_date(1i)'] + format("%02d", ch_params['change_date(2i)']) + format("%02d", ch_params['change_date(3i)'])).to_date
     end
 end

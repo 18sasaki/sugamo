@@ -79,7 +79,7 @@ class AbsentChildrenController < ApplicationController
     end
 
     def change_date_to_dairy_id(date_params)
-      @target_date = (date_params['date(1i)'] + sprintf("%02d", date_params['date(2i)']) + sprintf("%02d", date_params['date(3i)'])).to_date
+      @target_date = (date_params['date(1i)'] + format("%02d", date_params['date(2i)']) + format("%02d", date_params['date(3i)'])).to_date
       Dairy.find_by(date: @target_date).id
     end
 
