@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   post 'manages/dairy_create'
   post 'manages/cr_history_create'
 
-  root :to => 'absent_children#index'
+  # root :to => 'absent_children#index'
+  root to: 'dairies#show'
+  get '/:date', to: 'dairies#show'
+
   resources :children
   resources :absent_children
   resources :class_rooms
