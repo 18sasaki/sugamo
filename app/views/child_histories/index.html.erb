@@ -12,7 +12,7 @@
   <tbody class='h400'>
   	<% @child_histories.each do |child_history| %>
       <tr>
-        <td width='18%'><%= date_view(child_history.change_date) %></td>
+        <td width='18%'><%= date_view(child_history.dairy.date) %></td>
         <%= class_room_link_td(child_history.class_room_id, { width: '12%', align: 'center' }) %>
         <td width='27%'>
           <%= link_to child_history.child, style: "text-decoration: none;" do %>

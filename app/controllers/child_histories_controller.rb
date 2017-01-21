@@ -1,7 +1,7 @@
 class ChildHistoriesController < ApplicationController
   def index
     @page_title = "園児変更履歴"
-    @child_histories = ChildHistory.where.not(child_id: nil).includes(:child).order(:change_date)
+    @child_histories = ChildHistory.where.not(child_id: nil).includes(:child).includes(:dairy).order('dairies.date')
   end
 
   def show
@@ -21,6 +21,6 @@ class ChildHistoriesController < ApplicationController
     def set_child_history
     	# TODO: ありえない日が指定されたらredirectかける
       # TODO: grade含めたlistにして、ｖｉｅｗで学年ごとに区切れたら嬉しい。
-      @child_history_list = ChildHistory.where(change_date: params[:date].to_date)
+      @child_history_list = ChildHistory.includes(:dairy).where('dairies.date' => params[:date].to_date)
     end
 end

@@ -1,5 +1,8 @@
 class Dairy < ApplicationRecord
 	has_many :absent_children
+	has_many :child_histories
+
+  # dairyは必ず日付順であること！！！
 
 	def self.bulk_create(year)
 		if Dairy.find_by(date: "#{year}0401".to_date)
@@ -20,6 +23,10 @@ class Dairy < ApplicationRecord
 				        att_chou_flg: att_flg ? 1 : 0,
 				        dairy_code:   att_flg ? 'undec' : 'holiday').save
 		end
+	end
+
+	def self.get_by_date(date)
+		Dairy.where(date: date)
 	end
 
 	def self.get_by_todate(todate)

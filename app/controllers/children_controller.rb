@@ -34,13 +34,12 @@ class ChildrenController < ApplicationController
     # ステータスの設定（createの場合は入園か一時入園）
     # 入力忘れの場合の対応として「入園」にしちゃう
     @child.status_code = change_to_status_code(params[:child_history][:history_code] ||= 'inc')
-    change_date = decrypt_change_date(params[:child_history])
-    @child.status_change_date = change_date
 
     respond_to do |format|
       if @child.save
         # incでchild_history作る
-        ChildHistory.create(@child, params[:child_history][:history_code], change_date, 'inc')
+        dairy_id = Dairy.find(date: decrypt_change_date(params[:child_history])).id
+        ChildHistory.create(@child, params[:child_history][:history_code], dairy_id, 'inc')
 
         format.html { redirect_to @child, notice: 'Child was successfully created.' }
         format.json { render :show, status: :created, location: @child }
@@ -58,14 +57,13 @@ class ChildrenController < ApplicationController
       # updateの前にchild_history作るかどうか（と、ステータス変更するかどうか）のチェック
       if change_flg = params[:child_history][:history_code] != 'keep'
         params[:child][:status_code] = change_to_status_code(params[:child_history][:history_code])
-        change_date = decrypt_change_date(params[:child_history])
-        params[:child][:status_change_date] = change_date
       end
 
       if @child.update(child_params)
         # child_history作る（作らないかもしれない）
         if change_flg
-          create_child_history(params[:child_history][:history_code], change_date)
+          dairy_id = Dairy.find(date: decrypt_change_date(params[:child_history])).id
+          create_child_history(params[:child_history][:history_code], dairy_id)
         end
 
         @page_title = "園児編集（#{@child.full_name_f}）"
@@ -85,7 +83,7 @@ class ChildrenController < ApplicationController
     end
 
     def child_params
-      params.require(:child).permit(:unique_num, :class_room_id, :post_number, :address, :l_phone_number, :c_phone_number, :full_name, :full_name_f, :sex_code, :status_code, :status_change_date)
+      params.require(:child).permit(:unique_num, :class_room_id, :post_number, :address, :l_phone_number, :c_phone_number, :full_name, :full_name_f, :sex_code, :status_code)
     end
 
     def order_str(sort_params)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229123456) do
+ActiveRecord::Schema.define(version: 20170121082103) do
 
   create_table "absent_children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "dairy_id",                    null: false
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20161229123456) do
   end
 
   create_table "child_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "change_date",   null: false
     t.integer  "class_room_id", null: false
     t.integer  "child_id"
     t.integer  "total_m_count", null: false
@@ -33,22 +32,22 @@ ActiveRecord::Schema.define(version: 20161229123456) do
     t.string   "history_code",  null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "dairy_id",      null: false
   end
 
   create_table "children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "unique_num",                                null: false
+    t.integer  "unique_num",                            null: false
     t.integer  "class_room_id"
-    t.string   "post_number",                               null: false
-    t.string   "address",                                   null: false
+    t.string   "post_number",                           null: false
+    t.string   "address",                               null: false
     t.string   "l_phone_number"
     t.string   "c_phone_number"
-    t.string   "full_name",                                 null: false
-    t.string   "full_name_f",                               null: false
-    t.string   "sex_code",                                  null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.string   "status_code",        default: "enrollment", null: false
-    t.date     "status_change_date"
+    t.string   "full_name",                             null: false
+    t.string   "full_name_f",                           null: false
+    t.string   "sex_code",                              null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "status_code",    default: "enrollment", null: false
   end
 
   create_table "class_room_attendances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

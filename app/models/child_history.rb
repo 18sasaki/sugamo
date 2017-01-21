@@ -1,15 +1,18 @@
 class ChildHistory < ApplicationRecord
 	belongs_to :child
+	belongs_to :dairy
 
-  validates :change_date, :class_room_id, :total_m_count, :total_f_count, :total_count, :history_code, presence: true
+  validates :class_room_id, :total_m_count, :total_f_count, :total_count, :history_code, presence: true
 
 	def self.set(date)
 		# 4/1と5/1にやる前提で、その時点のchildrenで作っちゃう作戦。
 		# TODO: 起こりうる齟齬洗い出して対策とる
 		hhh = Child.group(:class_room_id).group(:sex_code).count
+		dairy_id = Dairy.find(date: date).id
+
     ch_params = {}
 		hhh.each do |key, value|
-			ch_params[key[0]] ||= { change_date:   date,
+			ch_params[key[0]] ||= { dairy_id:      dairy_id,
 						                  class_room_id: key[0],
 						                  total_count:   0,
 						                  history_code:  'regular' }
@@ -27,14 +30,14 @@ class ChildHistory < ApplicationRecord
 		end
 	end
 
-	def self.create(child, history_code, change_date, change_type)
+	def self.create(child, history_code, dairy_id, change_type)
 		# 該当classroomで該当日の直前のデータに変更を加えてcreateする。
 		# just_before_child_history
-		jb_ch = get_jb_ch(child.class_room_id, change_date)
+		jb_ch = get_jb_ch(child.class_room_id, dairy_id)
 
     count_hash = change_count_hash(jb_ch, change_type, child.sex_code)
     	
-		ChildHistory.new( change_date:   change_date,
+		ChildHistory.new( dairy_id:      dairy_id,
 			                class_room_id: child.class_room_id,
 			                child_id:      child.id,
 			                total_m_count: count_hash[:total_m_count],
@@ -45,7 +48,7 @@ class ChildHistory < ApplicationRecord
 		# 該当classroomで該当日の後のデータに変更を加えてupdateする。
 		# ただしchange_typeが'ｋｅｅｐ'の場合は変更なし。
 		if change_type != 'keep' # 'inc' or 'dec'
-			aft_chs = ChildHistory.where(class_room_id: child.class_room_id).where('change_date > ?', change_date)
+			aft_chs = ChildHistory.where(class_room_id: child.class_room_id).where('dairy_id > ?', dairy_id)
 			aft_chs.each do |aft_ch|
 				aft_ch.update(change_count_hash(aft_ch, change_type, child.sex_code))
 			end
@@ -56,14 +59,15 @@ class ChildHistory < ApplicationRecord
 		ChildHistory.where(class_room_id: class_room_id)
 		            .where.not(child_id: nil)
 		            .includes(:child)
-		            .order(change_date: 'desc', id: 'desc')
-		            .pluck(:change_date, :full_name_f, :sex_code, :history_code, :total_count, :total_m_count, :total_f_count, :"child_histories.id")
+		            .includes(:dairy)
+		            .order(dairy_id: 'desc', id: 'desc')
+		            .pluck(:'dairy.date', :full_name_f, :sex_code, :history_code, :total_count, :total_m_count, :total_f_count, :"child_histories.id")
 	end
 
-	def self.get_jb_ch(class_room_id, target_date)
+	def self.get_jb_ch(class_room_id, dairy_id)
 		ChildHistory.where(class_room_id: class_room_id)
-		            .where('change_date <= ?', target_date)
-		            .order(change_date: 'desc', id: 'desc')
+		            .where('dairy_id <= ?', dairy_id)
+		            .order(dairy_id: 'desc', id: 'desc')
 		            .first
 	end
 
