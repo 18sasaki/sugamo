@@ -61,7 +61,7 @@ class ChildHistory < ApplicationRecord
 		            .includes(:child)
 		            .includes(:dairy)
 		            .order(dairy_id: 'desc', id: 'desc')
-		            .pluck(:'dairy.date', :full_name_f, :sex_code, :history_code, :total_count, :total_m_count, :total_f_count, :"child_histories.id")
+		            .pluck(:'dairies.date', :full_name_f, :sex_code, :history_code, :total_count, :total_m_count, :total_f_count, :"child_histories.id")
 	end
 
 	def self.get_jb_ch(class_room_id, dairy_id)

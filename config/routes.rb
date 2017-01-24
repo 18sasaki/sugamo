@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'child_histories/', to: 'child_histories#index'
   get 'child_histories/show'
 
+
   get 'class_room_histories/index'
   get  'manages/', to: 'manages#index'
   post 'manages/dairy_create'
@@ -12,11 +13,12 @@ Rails.application.routes.draw do
 
   # root :to => 'absent_children#index'
   root to: 'dairies#show'
-  get '/:date', to: 'dairies#show'
 
   resources :children
   resources :absent_children
   resources :class_rooms
   resources :codes
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get '/:date', to: 'dairies#show'
 end
