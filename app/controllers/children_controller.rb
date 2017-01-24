@@ -62,7 +62,7 @@ class ChildrenController < ApplicationController
       if @child.update(child_params)
         # child_history作る（作らないかもしれない）
         if change_flg
-          dairy_id = Dairy.find(date: decrypt_change_date(params[:child_history])).id
+          dairy_id = Dairy.find_by(date: decrypt_change_date(params[:child_history])).id
           create_child_history(params[:child_history][:history_code], dairy_id)
         end
 
