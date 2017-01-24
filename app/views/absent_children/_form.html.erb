@@ -23,7 +23,12 @@
 
   <div class="field">
     園児<br />
-    <%= f.select :child_id, @children_list, :selected => absent_child.child_id, :prompt => '選択してください' %>
+    <% if @children_list %>
+      <%= f.select :child_id, @children_list, :selected => absent_child.child_id, :prompt => '選択してください' %>
+    <% else %>
+      <%= hidden_field_tag 'absent_child[child_id]', params[:child_id] %>
+      <%= @child_name %>
+    <% end %>
   </div>
 
   <div class="field" style="display:inline-flex">

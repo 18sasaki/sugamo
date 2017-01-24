@@ -14,7 +14,11 @@ class AbsentChildrenController < ApplicationController
   def new
     @page_title = "欠席情報登録"
     @absent_child = AbsentChild.new
-    @children_list = Child.get_list
+    if params[:child_id]
+      @child_name = Child.find(params[:child_id]).full_name_f
+    else
+      @children_list = Child.get_list
+    end
   end
 
   def edit

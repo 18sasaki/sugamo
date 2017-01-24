@@ -68,6 +68,8 @@ jQuery(function($){
   </tr>
 </table>
 
+<%= link_to '欠席登録する', new_absent_child_path(child_id: @child.id), {type: "button", class: "btn btn-primary"} %>
+
 <% if @all_absent_data.present? %>
   <button id='ab_button' type="button" class="btn btn-default">欠席一覧見る</button>
   <div id='absent_data'>
