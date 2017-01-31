@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121082103) do
+ActiveRecord::Schema.define(version: 20170128065535) do
 
   create_table "absent_children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "dairy_id",                    null: false
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(version: 20170121082103) do
     t.integer  "sus_count",     default: 0, null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "m_auth_count",  default: 0
+    t.integer  "f_auth_count",  default: 0
+    t.integer  "auth_count",    default: 0
+    t.integer  "m_stop_count",  default: 0
+    t.integer  "f_stop_count",  default: 0
+    t.integer  "stop_count",    default: 0
   end
 
   create_table "class_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

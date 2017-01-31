@@ -5,8 +5,13 @@ module ApplicationHelper
   end
 
   def class_room_link_span(class_room_id, option = {})
+    option.merge!(style: "background-color:#{Constants::CR_HASH[class_room_id][:color]};")
+    class_room_link_block('span', class_room_id, option)
+  end
+
+  def class_room_span(class_room_id, name, option = {})
   	option.merge!(style: "background-color:#{Constants::CR_HASH[class_room_id][:color]};")
-  	class_room_link_block('span', class_room_id, option)
+  	content_tag('span', name, option)
   end
 
   def class_room_link_block(tag, class_room_id, option = {})

@@ -37,22 +37,22 @@
     <![endif]-->
   </head>
   <body>
-
-    <nav class="navbar-default navbar-fixed-top"　style='margin-bottom:0;'>
-      <div class="container">
-        <span class="navbar-brand"
-              style="color:<%= @page_title_color || '#000000' %>;background-color:<%= @page_title_bg_color %>;">
-          <%= @page_title %>
-        </span>
-        <ul class="nav navbar-nav">
-          <li><%= link_to "・欠席情報", "/absent_children"  %></li>
-          <li><%= link_to "・園児一覧", "/children"  %></li>
-          <li><%= link_to "・クラス", "/class_rooms"  %></li>
-          <li><%= link_to "・管理画面", "/manages"  %></li>
-        </ul>
-      </div>
-    </nav>
-
+    <% unless params[:popup] %>
+      <nav class="navbar-default navbar-fixed-top"　style='margin-bottom:0;'>
+        <div class="container">
+          <span class="navbar-brand"
+                style="color:<%= @page_title_color || '#000000' %>;background-color:<%= @page_title_bg_color %>;">
+            <%= @page_title %>
+          </span>
+          <ul class="nav navbar-nav">
+            <li><%= link_to "・欠席情報", "/absent_children"  %></li>
+            <li><%= link_to "・園児一覧", "/children"  %></li>
+            <li><%= link_to "・クラス", "/class_rooms"  %></li>
+            <li><%= link_to "・管理画面", "/manages"  %></li>
+          </ul>
+        </div>
+      </nav>
+    <% end %>
     <div class="container">
       <br />
       <%= bootstrap_flash %>

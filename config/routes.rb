@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get  'class_room_attendances/confirm'
+  post 'class_room_attendances/create'
+
   get  'dairies/', to: 'dairies#index'
   post 'dairies/bulk_update'
 

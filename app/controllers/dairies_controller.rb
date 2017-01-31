@@ -11,8 +11,13 @@ class DairiesController < ApplicationController
     rescue
       @target_date = Date.today
     end
+    @dairy_id = Dairy.find_by(date: @target_date).id
     @today = date_view(@target_date)
     @page_title = "#{@today}"
+
+    @class_room_attendances = ClassRoomAttendance.where(dairy_id: @dairy_id).each_with_object({}) do | cr_att, ret |
+      ret[cr_att.class_room_id] = cr_att
+    end
 
     @absent_children = AbsentChild.get_by_date(@target_date)
   end

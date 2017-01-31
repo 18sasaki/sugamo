@@ -1,39 +1,133 @@
+
+<script type="text/javascript">
+jQuery(function($){
+  // toggleメソッド
+  function rollover(id){
+    // var contents = $('#detail_'+id).contents
+    $('#class_'+id).balloon('test');
+  }
+
+  <% Constants::CR_HASH.each do |id, hash| %>
+    $('#class_<%=id%>').balloon({html: true, offsetY: -200, contents: $('#detail_<%=id%>').html()});
+  <% end %>
+});
+</script>
+
+
+
+<table>
+  <tr>
+    <% Constants::CR_HASH.each do |id, hash| %>
+      <%= class_room_link_td(id, width: '65', align: 'center', colspan: '2') %>
+    <% end %>
+  </tr>
+  <tr>
+    <% Constants::CR_HASH.each do |id, hash| %>
+      <% if cr_att = @class_room_attendances[id] %>
+        <td align='right'>
+          出席<br />休み
+        </td>
+        <td id='class_<%=id%>' align='right'>
+          <%= cr_att.pre_count %><br /><%= cr_att.count - cr_att.pre_count %>
+<!--           <span id='detail_<%=id%>' style='display:none'>
+            欠席<%= cr_att.abs_count %>(男<%= cr_att.m_abs_count %>女<%= cr_att.f_abs_count %>)<br />
+            休園<%= cr_att.sus_count %>(男<%= cr_att.m_sus_count %>女<%= cr_att.f_sus_count %>)<br />
+            停止<%= cr_att.stop_count %>(男<%= cr_att.m_stop_count %>女<%= cr_att.f_stop_count %>)<br />
+            公欠<%= cr_att.auth_count %>(男<%= cr_att.m_auth_count %>女<%= cr_att.f_auth_count %>)
+          </span> -->
+          <table id='detail_<%=id%>' style='display:none'>
+            <tr>
+              <td></td>
+              <td>男</td>
+              <td>女</td>
+              <td>計</td>
+            </tr>
+            <tr>
+              <td>出席</td>
+              <td><%= cr_att.m_pre_count %></td>
+              <td><%= cr_att.f_pre_count %></td>
+              <td><%= cr_att.pre_count %></td>
+            </tr>
+            <tr>
+              <td>欠席</td>
+              <td><%= cr_att.m_abs_count %></td>
+              <td><%= cr_att.f_abs_count %></td>
+              <td><%= cr_att.abs_count %></td>
+            </tr>
+            <tr>
+              <td>休園</td>
+              <td><%= cr_att.m_sus_count %></td>
+              <td><%= cr_att.f_sus_count %></td>
+              <td><%= cr_att.sus_count %></td>
+            </tr>
+            <tr>
+              <td>停止</td>
+              <td><%= cr_att.m_stop_count %></td>
+              <td><%= cr_att.f_stop_count %></td>
+              <td><%= cr_att.stop_count %></td>
+            </tr>
+            <tr>
+              <td>公欠</td>
+              <td><%= cr_att.m_auth_count %></td>
+              <td><%= cr_att.f_auth_count %></td>
+              <td><%= cr_att.auth_count %></td>
+            </tr>
+            <tr><td colspan=4><hr style='margin:0;'></td></tr>
+            <tr>
+              <td>合計</td>
+              <td><%= cr_att.m_count %></td>
+              <td><%= cr_att.f_count %></td>
+              <td><%= cr_att.count %></td>
+            </tr>
+          </table>
+        </td>
+      <% else %>
+        <td colspan=2>
+              <%= link_to('確認する',
+                          "/class_room_attendances/confirm?dairy_id=#{@dairy_id}&class_room_id=#{id}&popup=true",
+                          :onclick=>"window.open(this.href, 'pop', 'height=400, width=800');return false;") %>
+        </td>
+      <% end %>
+    <% end %>
+  </tr>
+</table>
+
 <h3>
   <%= link_to('<<', "/#{@target_date - 1}") %>
   <%= @today %>
   <%= link_to('>>', "/#{@target_date + 1}") %>
 </h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>クラス</th>
-      <th>名前</th>
-      <th></th>
-      <th>理由</th>
-      <th>理由（詳細）</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @absent_children.each do |absent_child| %>
+<% if @absent_children.present? %>
+  <table>
+    <thead>
       <tr>
-        <%= class_room_link_td(absent_child.class_room_id) %>
-        <td>
-          <%= link_to absent_child.child, style: "text-decoration: none;" do %>
-            <%= absent_child.child.full_name_f %>
-          <% end %>
-        </td>
-        <td>　　<%= absent_view_name(absent_child.absent_code) %></td>
-        <td><%= reason_view_name(absent_child.reason_code) %></td>
-        <td><%= absent_child.reason_text %></td>
-        <td><%= link_to 'Edit', edit_absent_child_path(absent_child, date: @target_date) %></td>
+        <th>クラス</th>
+        <th>名前</th>
+        <th></th>
+        <th>理由</th>
+        <th>理由（詳細）</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @absent_children.each do |absent_child| %>
+        <tr>
+          <%= class_room_link_td(absent_child.class_room_id) %>
+          <td>
+            <%= link_to absent_child.child, style: "text-decoration: none;" do %>
+              <%= absent_child.child.full_name_f %>
+            <% end %>
+          </td>
+          <td>　　<%= absent_view_name(absent_child.absent_code) %></td>
+          <td><%= reason_view_name(absent_child.reason_code) %></td>
+          <td><%= absent_child.reason_text %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <br>
 
-<%= link_to '欠席者を登録する', new_absent_child_path(date: @target_date), {type: "button", class: "btn btn-primary"} %>
+<%= link_to '欠席情報を登録する', new_absent_child_path(date: @target_date), {type: "button", class: "btn btn-primary"} %>

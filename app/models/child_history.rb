@@ -71,10 +71,6 @@ class ChildHistory < ApplicationRecord
 		            .first
 	end
 
-	def self.get_count_hash(class_room_id, target_date)
-		get_jb_ch(class_room_id, target_date)
-	end
-
 	private
 	def self.change_count_hash(target_ch, change_type, sex_code)
 		m_count = target_ch.total_m_count

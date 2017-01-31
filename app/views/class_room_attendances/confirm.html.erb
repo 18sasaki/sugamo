@@ -1,0 +1,111 @@
+
+<script type="text/javascript">
+jQuery(function($){
+  function create_cratt(){
+    $.ajax({
+      url: "create",
+      type: "POST",
+      data: <%= @cr_att_hash.to_json.html_safe %>,
+      dataType: "html",
+      async: false
+    })
+    .then(
+      function(data) {alert("確定しました！");},
+      function(data) {alert("error");}
+    );
+  }
+
+  // ボタン押したときの挙動
+  $("#confirm").on('click', function(){
+    create_cratt();
+    window.opener.location.reload();
+    window.open('about:blank','_self').close();
+  });
+});
+</script>
+
+<h3>
+  <%= class_room_span(@class_room.id, @class_room.name) %>ぐみ
+  <%= @target_date %>
+</h3>
+
+<% if @absent_children.present? %>
+	<table frame='box'>
+	  <thead>
+	    <tr>
+	      <th>名前</th>
+	      <th></th>
+	      <th>理由</th>
+	      <th>理由（詳細）</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @absent_children.each do |absent_child| %>
+	      <tr>
+	        <td>
+	          <%= link_to absent_child.child, style: "text-decoration: none;" do %>
+	            <%= absent_child.child.full_name_f %>
+	          <% end %>
+	        </td>
+	        <td>　　<%= absent_view_name(absent_child.absent_code) %></td>
+	        <td><%= reason_view_name(absent_child.reason_code) %></td>
+	        <td><%= absent_child.reason_text %></td>
+          <td><%= link_to 'Edit', edit_absent_child_path(absent_child, date: @target_date) %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
+
+<%= link_to '欠席情報を登録する', new_absent_child_path(date: @target_date), {type: "button", class: "btn btn-primary"} %>
+<br /><br />
+
+<table>
+	<tr>
+		<td></td>
+		<td>男</td>
+		<td>女</td>
+		<td>計</td>
+	</tr>
+	<tr>
+		<td>出席</td>
+		<td><%= @cr_att_hash['m_pre_count'] %></td>
+		<td><%= @cr_att_hash['f_pre_count'] %></td>
+		<td><%= @cr_att_hash['pre_count'] %></td>
+	</tr>
+	<tr>
+		<td>欠席</td>
+		<td><%= @cr_att_hash['m_abs_count'] %></td>
+		<td><%= @cr_att_hash['f_abs_count'] %></td>
+		<td><%= @cr_att_hash['abs_count'] %></td>
+	</tr>
+	<tr>
+		<td>休園</td>
+		<td><%= @cr_att_hash['m_sus_count'] %></td>
+		<td><%= @cr_att_hash['f_sus_count'] %></td>
+		<td><%= @cr_att_hash['sus_count'] %></td>
+	</tr>
+	<tr>
+		<td>停止</td>
+		<td><%= @cr_att_hash['m_stop_count'] %></td>
+		<td><%= @cr_att_hash['f_stop_count'] %></td>
+		<td><%= @cr_att_hash['stop_count'] %></td>
+	</tr>
+	<tr>
+		<td>公欠</td>
+		<td><%= @cr_att_hash['m_auth_count'] %></td>
+		<td><%= @cr_att_hash['f_auth_count'] %></td>
+		<td><%= @cr_att_hash['auth_count'] %></td>
+	</tr>
+	<tr><td colspan=4><hr style='margin:0;border-top:1px solid #000;' color='#000'></td></tr>
+	<tr>
+		<td>合計</td>
+		<td><%= @cr_att_hash['m_count'] %></td>
+		<td><%= @cr_att_hash['f_count'] %></td>
+		<td><%= @cr_att_hash['count'] %></td>
+	</tr>
+</table>
+
+<input id='confirm' type="button" value='確定する!' class="btn btn-primary">
