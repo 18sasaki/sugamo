@@ -26,7 +26,7 @@ jQuery(function($){
 
 <h3>
   <%= class_room_span(@class_room.id, @class_room.name) %>ぐみ
-  <%= @target_date %>
+  <%= @view_date %>
 </h3>
 
 <% if @absent_children.present? %>
@@ -52,14 +52,14 @@ jQuery(function($){
 	        <td>　　<%= absent_view_name(absent_child.absent_code) %></td>
 	        <td><%= reason_view_name(absent_child.reason_code) %></td>
 	        <td><%= absent_child.reason_text %></td>
-          <td><%= link_to 'Edit', edit_absent_child_path(absent_child, date: @target_date) %></td>
+          <td><%= link_to 'Edit', edit_absent_child_path(absent_child, date: @target_date, popup: 'true') %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>
 	</table>
 <% end %>
 
-<%= link_to '欠席情報を登録する', new_absent_child_path(date: @target_date), {type: "button", class: "btn btn-primary"} %>
+<%= link_to '欠席情報を登録する', new_absent_child_path(date: @target_date, class_room_id: params[:class_room_id], popup: 'true', back_to: request.fullpath), {type: "button", class: "btn btn-primary"} %>
 <br /><br />
 
 <table>

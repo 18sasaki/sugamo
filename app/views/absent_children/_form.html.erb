@@ -49,6 +49,7 @@
 
   <div class="actions">
     <% action_str = (action_name == 'new' ? '登録' : '変更') %>
+    <%= hidden_field_tag 'back_to', params[:back_to] %>
     <%= f.submit(action_str, class: 'btn btn-success') %>
     <%= back_button_ww(action_str) %>
   </div>

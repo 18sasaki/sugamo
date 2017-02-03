@@ -16,6 +16,8 @@ class AbsentChildrenController < ApplicationController
     @absent_child = AbsentChild.new
     if params[:child_id]
       @child_name = Child.find(params[:child_id]).full_name_f
+    elsif params[:class_room_id]
+      @children_list = Child.get_list(class_room_id: params[:class_room_id])
     else
       @children_list = Child.get_list
     end
@@ -37,8 +39,8 @@ class AbsentChildrenController < ApplicationController
 
     respond_to do |format|
       if not_duplicate?(absent_child_params) && @absent_child.save
-        format.html { redirect_to absent_children_path(date: @target_date), notice: '登録に成功しました' }
-        format.json { render :index, status: :ok }
+        format.html { redirect_to params[:back_to] || dairies_path(date: @target_date), notice: '登録に成功しました' }
+        format.json { render "/#{@target_date}", status: :ok }
       else
         @page_title = "欠席情報登録"
         @children_list = Child.get_list
@@ -52,7 +54,7 @@ class AbsentChildrenController < ApplicationController
   def update
     respond_to do |format|
       if @absent_child.update(set_absent_child_params)
-        format.html { redirect_to absent_children_path(date: @target_date), notice: '編集に成功しました' }
+        format.html { redirect_to params[:back_to] || absent_children_path(date: @target_date), notice: '編集に成功しました' }
         format.json { render :index, status: :ok }
       else
         @page_title = "欠席情報編集（#{date_view(@absent_child.dairy.date)}　#{@absent_child.child.full_name_f}）"

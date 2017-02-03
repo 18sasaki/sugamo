@@ -13,79 +13,73 @@ jQuery(function($){
 });
 </script>
 
-
-
 <table>
   <tr>
     <% Constants::CR_HASH.each do |id, hash| %>
-      <%= class_room_link_td(id, width: '65', align: 'center', colspan: '2') %>
+      <%= class_room_link_td(id, width: '65', align: 'center') %>
     <% end %>
   </tr>
   <tr>
     <% Constants::CR_HASH.each do |id, hash| %>
       <% if cr_att = @class_room_attendances[id] %>
-        <td align='right'>
-          出席<br />休み
-        </td>
-        <td id='class_<%=id%>' align='right'>
-          <%= cr_att.pre_count %><br /><%= cr_att.count - cr_att.pre_count %>
-<!--           <span id='detail_<%=id%>' style='display:none'>
-            欠席<%= cr_att.abs_count %>(男<%= cr_att.m_abs_count %>女<%= cr_att.f_abs_count %>)<br />
-            休園<%= cr_att.sus_count %>(男<%= cr_att.m_sus_count %>女<%= cr_att.f_sus_count %>)<br />
-            停止<%= cr_att.stop_count %>(男<%= cr_att.m_stop_count %>女<%= cr_att.f_stop_count %>)<br />
-            公欠<%= cr_att.auth_count %>(男<%= cr_att.m_auth_count %>女<%= cr_att.f_auth_count %>)
-          </span> -->
-          <table id='detail_<%=id%>' style='display:none'>
-            <tr>
-              <td></td>
-              <td>男</td>
-              <td>女</td>
-              <td>計</td>
-            </tr>
-            <tr>
-              <td>出席</td>
-              <td><%= cr_att.m_pre_count %></td>
-              <td><%= cr_att.f_pre_count %></td>
-              <td><%= cr_att.pre_count %></td>
-            </tr>
-            <tr>
-              <td>欠席</td>
-              <td><%= cr_att.m_abs_count %></td>
-              <td><%= cr_att.f_abs_count %></td>
-              <td><%= cr_att.abs_count %></td>
-            </tr>
-            <tr>
-              <td>休園</td>
-              <td><%= cr_att.m_sus_count %></td>
-              <td><%= cr_att.f_sus_count %></td>
-              <td><%= cr_att.sus_count %></td>
-            </tr>
-            <tr>
-              <td>停止</td>
-              <td><%= cr_att.m_stop_count %></td>
-              <td><%= cr_att.f_stop_count %></td>
-              <td><%= cr_att.stop_count %></td>
-            </tr>
-            <tr>
-              <td>公欠</td>
-              <td><%= cr_att.m_auth_count %></td>
-              <td><%= cr_att.f_auth_count %></td>
-              <td><%= cr_att.auth_count %></td>
-            </tr>
-            <tr><td colspan=4><hr style='margin:0;'></td></tr>
-            <tr>
-              <td>合計</td>
-              <td><%= cr_att.m_count %></td>
-              <td><%= cr_att.f_count %></td>
-              <td><%= cr_att.count %></td>
-            </tr>
-          </table>
+        <td id='class_<%=id%>'>
+          <div style="display:inline-flex">
+            出席<br />休み
+          </div>
+          <div style="display:inline-flex">
+            <%= cr_att.pre_count %><br /><%= cr_att.count - cr_att.pre_count %>
+            <table id='detail_<%=id%>' style='display:none'>
+              <tr>
+                <td></td>
+                <td>男</td>
+                <td>女</td>
+                <td>計</td>
+              </tr>
+              <tr>
+                <td>出席</td>
+                <td><%= cr_att.m_pre_count %></td>
+                <td><%= cr_att.f_pre_count %></td>
+                <td><%= cr_att.pre_count %></td>
+              </tr>
+              <tr>
+                <td>欠席</td>
+                <td><%= cr_att.m_abs_count %></td>
+                <td><%= cr_att.f_abs_count %></td>
+                <td><%= cr_att.abs_count %></td>
+              </tr>
+              <tr>
+                <td>休園</td>
+                <td><%= cr_att.m_sus_count %></td>
+                <td><%= cr_att.f_sus_count %></td>
+                <td><%= cr_att.sus_count %></td>
+              </tr>
+              <tr>
+                <td>停止</td>
+                <td><%= cr_att.m_stop_count %></td>
+                <td><%= cr_att.f_stop_count %></td>
+                <td><%= cr_att.stop_count %></td>
+              </tr>
+              <tr>
+                <td>公欠</td>
+                <td><%= cr_att.m_auth_count %></td>
+                <td><%= cr_att.f_auth_count %></td>
+                <td><%= cr_att.auth_count %></td>
+              </tr>
+              <tr><td colspan=4><hr style='margin:0;'></td></tr>
+              <tr>
+                <td>合計</td>
+                <td><%= cr_att.m_count %></td>
+                <td><%= cr_att.f_count %></td>
+                <td><%= cr_att.count %></td>
+              </tr>
+            </table>
+          </div>
         </td>
       <% else %>
-        <td colspan=2>
-              <%= link_to('確認する',
-                          "/class_room_attendances/confirm?dairy_id=#{@dairy_id}&class_room_id=#{id}&popup=true",
-                          :onclick=>"window.open(this.href, 'pop', 'height=400, width=800');return false;") %>
+        <td>
+          <%= link_to('確認する',
+                      "/class_room_attendances/confirm?dairy_id=#{@dairy_id}&class_room_id=#{id}&popup=true",
+                      :onclick=>"window.open(this.href, 'pop', 'height=400, width=800');return false;") %>
         </td>
       <% end %>
     <% end %>

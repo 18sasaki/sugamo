@@ -1,8 +1,9 @@
 class ClassRoomAttendancesController < ApplicationController
   def confirm
-  	@class_room = ClassRoom.find(params[:class_room_id])
-  	@target_date = date_view(Dairy.find(params[:dairy_id]).date)
-  	@page_title = "#{@today}"
+  	@class_room  = ClassRoom.find(params[:class_room_id])
+    @target_date = Dairy.find(params[:dairy_id]).date
+  	@view_date   = date_view(@target_date)
+  	@page_title  = "#{@today}"
 
     @cr_att_hash = ClassRoomAttendance.new(dairy_id: params[:dairy_id], class_room_id: params[:class_room_id]).attributes
 
