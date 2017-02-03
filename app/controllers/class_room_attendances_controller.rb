@@ -86,9 +86,3 @@ class ClassRoomAttendancesController < ApplicationController
   	ClassRoomAttendance.new(pp).save
   end
 end
-
-
-
-
-
-

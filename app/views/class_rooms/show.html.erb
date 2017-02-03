@@ -21,7 +21,7 @@ jQuery(function($){
 
 <h3>
   <%= @count_str %>
-  <button id='ch_button' type="button" class="btn btn-default">履歴見る</button>
+  <% if @child_history_data.present? %><button id='ch_button' type="button" class="btn btn-default">履歴見る</button><% end %>
 </h3>
 
 <div id='ch_list'>
@@ -67,3 +67,36 @@ jQuery(function($){
     <% end %>
   </tbody>
 </table>
+
+<h3>本日（<%= date_view %>）の欠席情報</h3>
+<% if @absent_children.present? %>
+  <table frame='box'>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th></th>
+        <th>理由</th>
+        <th>理由（詳細）</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @absent_children.each do |absent_child| %>
+        <tr>
+          <td>
+            <%= link_to absent_child.child, style: "text-decoration: none;" do %>
+              <%= absent_child.child.full_name_f %>
+            <% end %>
+          </td>
+          <td>　　<%= absent_view_name(absent_child.absent_code) %></td>
+          <td><%= reason_view_name(absent_child.reason_code) %></td>
+          <td><%= absent_child.reason_text %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>登録なし！</h3>
+<% end %>
+
+<%= link_to '欠席情報を登録する', new_absent_child_path(date: @target_date, class_room_id: params[:id], back_to: request.fullpath), {type: "button", class: "btn btn-primary"} %>

@@ -2,11 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :date_view, :status_str, :sex_color, :toyeard, :date_to_ym
 
-  def date_view(datetime)
+  def date_view(datetime = Date.today)
     datetime.strftime("%y/%m/%d（#{Constants::DOW[datetime.wday]}）")
   end
 
-  def day_view(datetime)
+  def day_view(datetime = Date.today)
   	datetime.strftime('%d')
   end
 
@@ -32,5 +32,9 @@ class ApplicationController < ActionController::Base
 
   def date_to_ym(date)
     date.strftime('%Y%m')
+  end
+
+  def today_id
+    Dairy.find_by(date: Date.today).id
   end
 end

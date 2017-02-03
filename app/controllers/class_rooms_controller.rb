@@ -9,12 +9,17 @@ class ClassRoomsController < ApplicationController
     @page_title = @class_room.name
     @page_title_bg_color = Constants::CR_HASH[@class_room.id][:color]
 
-    @children = Child.where(class_room_id: params[:id]).order(sex_code: 'desc', full_name_f: 'asc')
+    @children = Child.where(class_room_id: params[:id])
+                     .order(sex_code: 'desc', full_name_f: 'asc')
 
     jb_ch = ChildHistory.get_jb_ch(params[:id], Date.today)
     @count_str = "#{jb_ch.total_count}人（ 男：#{jb_ch.total_m_count}人 女：#{jb_ch.total_f_count}人）"
 
     @child_history_data = ChildHistory.get_ch_data(params[:id])
+
+    @absent_children = AbsentChild.includes(:child)
+                                  .where(dairy_id: today_id, class_room_id: params[:id])
+                                  .order('children.sex_code desc', 'children.full_name_f asc')
 
     @children_absent_hash = AbsentChild.get_hash_by_class_rooms(params[:id])
   end

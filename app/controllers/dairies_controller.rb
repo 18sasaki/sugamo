@@ -6,11 +6,8 @@ class DairiesController < ApplicationController
   end
 
   def show # トップ画面
-    begin
-      @target_date = params[:date].to_date
-    rescue
-      @target_date = Date.today
-    end
+    @target_date = params[:date] ? params[:date].to_date : Date.today
+
     @dairy_id = Dairy.find_by(date: @target_date).id
     @today = date_view(@target_date)
     @page_title = "#{@today}"
