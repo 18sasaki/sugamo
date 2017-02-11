@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dairy_id: 1
+  child_id: 1
+  bus_stop_id: 1
+  reason_text: MyText
+  dcb_code: MyString
+  unuse_flg: 1
+  pick_up_no: 1
+  fare_code: MyString
+
+two:
+  dairy_id: 1
+  child_id: 1
+  bus_stop_id: 1
+  reason_text: MyText
+  dcb_code: MyString
+  unuse_flg: 1
+  pick_up_no: 1
+  fare_code: MyString

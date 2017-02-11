@@ -1,0 +1,1 @@
+json.array! @bus_courses, partial: 'bus_courses/bus_course', as: :bus_course

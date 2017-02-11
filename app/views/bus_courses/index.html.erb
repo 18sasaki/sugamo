@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bus Courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bus</th>
+      <th>Number</th>
+      <th>Color name</th>
+      <th>Color</th>
+      <th>1 departure time</th>
+      <th>1 arrival time</th>
+      <th>2 departure time</th>
+      <th>2 arrival time</th>
+      <th>3 departure time</th>
+      <th>3 arrival time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bus_courses.each do |bus_course| %>
+      <tr>
+        <td><%= bus_course.bus_id %></td>
+        <td><%= bus_course.number %></td>
+        <td><%= bus_course.color_name %></td>
+        <td><%= bus_course.color %></td>
+        <td><%= bus_course.1_departure_time %></td>
+        <td><%= bus_course.1_arrival_time %></td>
+        <td><%= bus_course.2_departure_time %></td>
+        <td><%= bus_course.2_arrival_time %></td>
+        <td><%= bus_course.3_departure_time %></td>
+        <td><%= bus_course.3_arrival_time %></td>
+        <td><%= link_to 'Show', bus_course %></td>
+        <td><%= link_to 'Edit', edit_bus_course_path(bus_course) %></td>
+        <td><%= link_to 'Destroy', bus_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bus Course', new_bus_course_path %>

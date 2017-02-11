@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dairy Child Bus Stops</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dairy</th>
+      <th>Child</th>
+      <th>Bus stop</th>
+      <th>Reason text</th>
+      <th>Dcb code</th>
+      <th>Unuse flg</th>
+      <th>Pick up no</th>
+      <th>Fare code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dairy_child_bus_stops.each do |dairy_child_bus_stop| %>
+      <tr>
+        <td><%= dairy_child_bus_stop.dairy_id %></td>
+        <td><%= dairy_child_bus_stop.child_id %></td>
+        <td><%= dairy_child_bus_stop.bus_stop_id %></td>
+        <td><%= dairy_child_bus_stop.reason_text %></td>
+        <td><%= dairy_child_bus_stop.dcb_code %></td>
+        <td><%= dairy_child_bus_stop.unuse_flg %></td>
+        <td><%= dairy_child_bus_stop.pick_up_no %></td>
+        <td><%= dairy_child_bus_stop.fare_code %></td>
+        <td><%= link_to 'Show', dairy_child_bus_stop %></td>
+        <td><%= link_to 'Edit', edit_dairy_child_bus_stop_path(dairy_child_bus_stop) %></td>
+        <td><%= link_to 'Destroy', dairy_child_bus_stop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dairy Child Bus Stop', new_dairy_child_bus_stop_path %>

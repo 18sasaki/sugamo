@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :dairy_child_bus_stops
+  resources :bus_courses
   get  'class_room_attendances/confirm'
   post 'class_room_attendances/create'
 

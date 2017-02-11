@@ -1,0 +1,2 @@
+class DairyChildBusStop < ApplicationRecord
+end

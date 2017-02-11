@@ -1,0 +1,1 @@
+json.partial! "dairy_child_bus_stops/dairy_child_bus_stop", dairy_child_bus_stop: @dairy_child_bus_stop

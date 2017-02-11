@@ -1,0 +1,57 @@
+<%= form_for(dairy_child_bus_stop) do |f| %>
+  <% if dairy_child_bus_stop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dairy_child_bus_stop.errors.count, "error") %> prohibited this dairy_child_bus_stop from being saved:</h2>
+
+      <ul>
+      <% dairy_child_bus_stop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :dairy_id %>
+    <%= f.number_field :dairy_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :child_id %>
+    <%= f.number_field :child_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bus_stop_id %>
+    <%= f.number_field :bus_stop_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reason_text %>
+    <%= f.text_area :reason_text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :dcb_code %>
+    <%= f.text_field :dcb_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unuse_flg %>
+    <%= f.number_field :unuse_flg %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pick_up_no %>
+    <%= f.number_field :pick_up_no %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fare_code %>
+    <%= f.text_field :fare_code %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

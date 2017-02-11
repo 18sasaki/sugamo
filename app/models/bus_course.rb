@@ -1,0 +1,2 @@
+class BusCourse < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+json.extract! dairy_child_bus_stop, :id, :dairy_id, :child_id, :bus_stop_id, :reason_text, :dcb_code, :unuse_flg, :pick_up_no, :fare_code, :created_at, :updated_at
+json.url dairy_child_bus_stop_url(dairy_child_bus_stop, format: :json)

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dairy:</strong>
+  <%= @dairy_child_bus_stop.dairy_id %>
+</p>
+
+<p>
+  <strong>Child:</strong>
+  <%= @dairy_child_bus_stop.child_id %>
+</p>
+
+<p>
+  <strong>Bus stop:</strong>
+  <%= @dairy_child_bus_stop.bus_stop_id %>
+</p>
+
+<p>
+  <strong>Reason text:</strong>
+  <%= @dairy_child_bus_stop.reason_text %>
+</p>
+
+<p>
+  <strong>Dcb code:</strong>
+  <%= @dairy_child_bus_stop.dcb_code %>
+</p>
+
+<p>
+  <strong>Unuse flg:</strong>
+  <%= @dairy_child_bus_stop.unuse_flg %>
+</p>
+
+<p>
+  <strong>Pick up no:</strong>
+  <%= @dairy_child_bus_stop.pick_up_no %>
+</p>
+
+<p>
+  <strong>Fare code:</strong>
+  <%= @dairy_child_bus_stop.fare_code %>
+</p>
+
+<%= link_to 'Edit', edit_dairy_child_bus_stop_path(@dairy_child_bus_stop) %> |
+<%= link_to 'Back', dairy_child_bus_stops_path %>

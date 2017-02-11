@@ -1,0 +1,2 @@
+module BusCoursesHelper
+end

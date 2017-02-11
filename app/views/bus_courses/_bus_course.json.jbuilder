@@ -1,0 +1,2 @@
+json.extract! bus_course, :id, :bus_id, :number, :color_name, :color, :1_departure_time, :1_arrival_time, :2_departure_time, :2_arrival_time, :3_departure_time, :3_arrival_time, :created_at, :updated_at
+json.url bus_course_url(bus_course, format: :json)

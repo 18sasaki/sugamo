@@ -1,0 +1,1 @@
+json.array! @dairy_child_bus_stops, partial: 'dairy_child_bus_stops/dairy_child_bus_stop', as: :dairy_child_bus_stop

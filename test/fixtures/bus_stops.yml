@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bun_course_id: 1
+  name: MyString
+  name_k: MyString
+  view_name: MyString
+  number: 1
+  1_arrival_time: 2017-02-11 16:57:50
+  2_arrival_time: 2017-02-11 16:57:50
+  3_arrival_time: 2017-02-11 16:57:50
+
+two:
+  bun_course_id: 1
+  name: MyString
+  name_k: MyString
+  view_name: MyString
+  number: 1
+  1_arrival_time: 2017-02-11 16:57:50
+  2_arrival_time: 2017-02-11 16:57:50
+  3_arrival_time: 2017-02-11 16:57:50

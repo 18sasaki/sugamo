@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170128065535) do
+ActiveRecord::Schema.define(version: 20170211081224) do
 
   create_table "absent_children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "dairy_id",                    null: false
@@ -21,6 +21,41 @@ ActiveRecord::Schema.define(version: 20170128065535) do
     t.text     "reason_text",   limit: 65535
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "bus_courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "bus_id",           null: false
+    t.integer  "number",           null: false
+    t.string   "color_name",       null: false
+    t.string   "color",            null: false
+    t.time     "a_departure_time"
+    t.time     "a_arrival_time"
+    t.time     "b_departure_time"
+    t.time     "b_arrival_time"
+    t.time     "c_departure_time"
+    t.time     "c_arrival_time"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "bus_stops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "bun_course_id",  null: false
+    t.string   "name",           null: false
+    t.string   "name_k"
+    t.string   "view_name"
+    t.integer  "number",         null: false
+    t.time     "a_arrival_time"
+    t.time     "b_arrival_time"
+    t.time     "c_arrival_time"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "buses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",       null: false
+    t.string   "view_name",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "child_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -36,18 +71,21 @@ ActiveRecord::Schema.define(version: 20170128065535) do
   end
 
   create_table "children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "unique_num",                            null: false
+    t.integer  "unique_num",                                 null: false
     t.integer  "class_room_id"
-    t.string   "post_number",                           null: false
-    t.string   "address",                               null: false
+    t.string   "post_number",                                null: false
+    t.string   "address",                                    null: false
     t.string   "l_phone_number"
     t.string   "c_phone_number"
-    t.string   "full_name",                             null: false
-    t.string   "full_name_f",                           null: false
-    t.string   "sex_code",                              null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "status_code",    default: "enrollment", null: false
+    t.string   "full_name",                                  null: false
+    t.string   "full_name_f",                                null: false
+    t.string   "sex_code",                                   null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "status_code",         default: "enrollment", null: false
+    t.integer  "main_bus_stop_id"
+    t.integer  "sub_bus_stop_id"
+    t.string   "irregular_judge_str"
   end
 
   create_table "class_room_attendances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -105,6 +143,19 @@ ActiveRecord::Schema.define(version: 20170128065535) do
     t.string   "dairy_code",   default: "undec", null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+  end
+
+  create_table "dairy_child_bus_stops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "dairy_id",                                          null: false
+    t.integer  "child_id",                                          null: false
+    t.integer  "bus_stop_id",                                       null: false
+    t.text     "reason_text", limit: 65535
+    t.string   "dcb_code",                                          null: false
+    t.integer  "unuse_flg"
+    t.integer  "pick_up_no",                                        null: false
+    t.string   "fare_code",                 default: "unnecessary"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
 end

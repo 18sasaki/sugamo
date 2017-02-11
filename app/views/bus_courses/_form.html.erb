@@ -1,0 +1,67 @@
+<%= form_for(bus_course) do |f| %>
+  <% if bus_course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bus_course.errors.count, "error") %> prohibited this bus_course from being saved:</h2>
+
+      <ul>
+      <% bus_course.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bus_id %>
+    <%= f.number_field :bus_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :number %>
+    <%= f.number_field :number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :color_name %>
+    <%= f.text_field :color_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :color %>
+    <%= f.text_field :color %>
+  </div>
+
+  <div class="field">
+    <%= f.label :1_departure_time %>
+    <%= f.time_select :1_departure_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :1_arrival_time %>
+    <%= f.time_select :1_arrival_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :2_departure_time %>
+    <%= f.time_select :2_departure_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :2_arrival_time %>
+    <%= f.time_select :2_arrival_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :3_departure_time %>
+    <%= f.time_select :3_departure_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :3_arrival_time %>
+    <%= f.time_select :3_arrival_time %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
