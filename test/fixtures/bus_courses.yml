@@ -5,21 +5,21 @@ one:
   number: 1
   color_name: MyString
   color: MyString
-  1_departure_time: 2017-02-11 16:57:08
-  1_arrival_time: 2017-02-11 16:57:08
-  2_departure_time: 2017-02-11 16:57:08
-  2_arrival_time: 2017-02-11 16:57:08
-  3_departure_time: 2017-02-11 16:57:08
-  3_arrival_time: 2017-02-11 16:57:08
+  a_departure_time: 2017-02-11 16:57:08
+  c_arrival_time: 2017-02-11 16:57:08
+  b_departure_time: 2017-02-11 16:57:08
+  b_arrival_time: 2017-02-11 16:57:08
+  c_departure_time: 2017-02-11 16:57:08
+  c_arrival_time: 2017-02-11 16:57:08
 
 two:
   bus_id: 1
   number: 1
   color_name: MyString
   color: MyString
-  1_departure_time: 2017-02-11 16:57:08
-  1_arrival_time: 2017-02-11 16:57:08
-  2_departure_time: 2017-02-11 16:57:08
-  2_arrival_time: 2017-02-11 16:57:08
-  3_departure_time: 2017-02-11 16:57:08
-  3_arrival_time: 2017-02-11 16:57:08
+  a_departure_time: 2017-02-11 16:57:08
+  c_arrival_time: 2017-02-11 16:57:08
+  b_departure_time: 2017-02-11 16:57:08
+  b_arrival_time: 2017-02-11 16:57:08
+  c_departure_time: 2017-02-11 16:57:08
+  c_arrival_time: 2017-02-11 16:57:08
