@@ -17,7 +17,7 @@ class BusCoursesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create bus_course" do
     assert_difference('BusCourse.count') do
-      post bus_courses_url, params: { bus_course: { c_arrival_time: @bus_course.c_arrival_time, a_departure_time: @bus_course.a_departure_time, b_arrival_time: @bus_course.b_arrival_time, b_departure_time: @bus_course.b_departure_time, c_arrival_time: @bus_course.c_arrival_time, c_departure_time: @bus_course.c_departure_time, bus_id: @bus_course.bus_id, color: @bus_course.color, color_name: @bus_course.color_name, number: @bus_course.number } }
+      post bus_courses_url, params: { bus_course: { a_arrival_time: @bus_course.a_arrival_time, a_departure_time: @bus_course.a_departure_time, b_arrival_time: @bus_course.b_arrival_time, b_departure_time: @bus_course.b_departure_time, c_arrival_time: @bus_course.c_arrival_time, c_departure_time: @bus_course.c_departure_time, bus_id: @bus_course.bus_id, color: @bus_course.color, color_name: @bus_course.color_name, number: @bus_course.number } }
     end
 
     assert_redirected_to bus_course_url(BusCourse.last)
@@ -34,7 +34,7 @@ class BusCoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update bus_course" do
-    patch bus_course_url(@bus_course), params: { bus_course: { c_arrival_time: @bus_course.c_arrival_time, a_departure_time: @bus_course.a_departure_time, b_arrival_time: @bus_course.b_arrival_time, b_departure_time: @bus_course.b_departure_time, c_arrival_time: @bus_course.c_arrival_time, c_departure_time: @bus_course.c_departure_time, bus_id: @bus_course.bus_id, color: @bus_course.color, color_name: @bus_course.color_name, number: @bus_course.number } }
+    patch bus_course_url(@bus_course), params: { bus_course: { a_arrival_time: @bus_course.a_arrival_time, a_departure_time: @bus_course.a_departure_time, b_arrival_time: @bus_course.b_arrival_time, b_departure_time: @bus_course.b_departure_time, c_arrival_time: @bus_course.c_arrival_time, c_departure_time: @bus_course.c_departure_time, bus_id: @bus_course.bus_id, color: @bus_course.color, color_name: @bus_course.color_name, number: @bus_course.number } }
     assert_redirected_to bus_course_url(@bus_course)
   end
 

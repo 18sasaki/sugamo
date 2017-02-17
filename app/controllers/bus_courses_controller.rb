@@ -69,6 +69,6 @@ class BusCoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bus_course_params
-      params.require(:bus_course).permit(:bus_id, :number, :color_name, :color, :a_departure_time, :c_arrival_time, :b_departure_time, :b_arrival_time, :c_departure_time, :c_arrival_time)
+      params.require(:bus_course).permit(:bus_id, :number, :color_name, :color, :a_departure_time, :a_arrival_time, :b_departure_time, :b_arrival_time, :c_departure_time, :c_arrival_time)
     end
 end

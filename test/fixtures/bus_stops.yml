@@ -6,7 +6,7 @@ one:
   name_k: MyString
   view_name: MyString
   number: 1
-  c_arrival_time: 2017-02-11 16:57:50
+  a_arrival_time: 2017-02-11 16:57:50
   b_arrival_time: 2017-02-11 16:57:50
   c_arrival_time: 2017-02-11 16:57:50
 
@@ -16,6 +16,6 @@ two:
   name_k: MyString
   view_name: MyString
   number: 1
-  c_arrival_time: 2017-02-11 16:57:50
+  a_arrival_time: 2017-02-11 16:57:50
   b_arrival_time: 2017-02-11 16:57:50
   c_arrival_time: 2017-02-11 16:57:50
