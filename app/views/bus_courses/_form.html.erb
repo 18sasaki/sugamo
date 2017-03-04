@@ -1,3 +1,32 @@
+<script type="text/javascript">
+jQuery(function($){
+  // B時 → C時を＋２
+  // B分 → C分に同じもの
+  $("#bus_course_b_departure_time_4i").change(function(){
+    auto_set("#bus_course_b_departure_time_4i");
+  });
+
+  $("#bus_course_b_departure_time_5i").change(function(){
+    auto_set("#bus_course_b_departure_time_5i");
+  });
+
+  $("#bus_course_b_arrival_time_4i").change(function(){
+    auto_set("#bus_course_b_arrival_time_4i");
+  });
+
+  $("#bus_course_b_arrival_time_5i").change(function(){
+    auto_set("#bus_course_b_arrival_time_5i");
+  });
+
+  function auto_set(base){
+    var base_num = $(base).prop("selectedIndex");
+    var h_or_m = base.match(/\d/);
+    var insert_num = h_or_m == '4' ? base_num + 2 : base_num;
+    $(base.replace( '_b_' , '_c_' )).prop("selectedIndex", insert_num);
+  }
+});
+</script>
+
 <%= form_for(bus_course) do |f| %>
   <% if bus_course.errors.any? %>
     <div id="error_explanation">
