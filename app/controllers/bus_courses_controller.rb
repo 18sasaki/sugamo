@@ -4,6 +4,7 @@ class BusCoursesController < ApplicationController
   # GET /bus_courses
   # GET /bus_courses.json
   def index
+    @page_title = "バスコース"
     @bus_courses = BusCourse.all
   end
 
@@ -14,11 +15,15 @@ class BusCoursesController < ApplicationController
 
   # GET /bus_courses/new
   def new
+    @page_title = "バスコース作成"
     @bus_course = BusCourse.new
+    @buses = Bus.all.pluck(:name, :id)
   end
 
   # GET /bus_courses/1/edit
   def edit
+    @page_title = "バスコース編集"
+    @buses = Bus.all.pluck(:name, :id)
   end
 
   # POST /bus_courses
@@ -28,8 +33,8 @@ class BusCoursesController < ApplicationController
 
     respond_to do |format|
       if @bus_course.save
-        format.html { redirect_to @bus_course, notice: 'Bus course was successfully created.' }
-        format.json { render :show, status: :created, location: @bus_course }
+        format.html { redirect_to bus_courses_path, notice: '登録に成功しました' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :new }
         format.json { render json: @bus_course.errors, status: :unprocessable_entity }
@@ -42,8 +47,8 @@ class BusCoursesController < ApplicationController
   def update
     respond_to do |format|
       if @bus_course.update(bus_course_params)
-        format.html { redirect_to @bus_course, notice: 'Bus course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bus_course }
+        format.html { redirect_to bus_courses_path, notice: '更新しました' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @bus_course.errors, status: :unprocessable_entity }

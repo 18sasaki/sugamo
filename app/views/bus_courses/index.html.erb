@@ -1,40 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Bus Courses</h1>
-
 <table>
   <thead>
     <tr>
-      <th>Bus</th>
-      <th>Number</th>
-      <th>Color name</th>
-      <th>Color</th>
-      <th>1 departure time</th>
-      <th>1 arrival time</th>
-      <th>2 departure time</th>
-      <th>2 arrival time</th>
-      <th>3 departure time</th>
-      <th>3 arrival time</th>
-      <th colspan="3"></th>
+      <th>バスコース</th>
+      <th>送り時刻　</th>
+      <th>迎え時刻<br/>(午前保育)</th>
+      <th>迎え時刻<br/>(平常保育)</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @bus_courses.each do |bus_course| %>
       <tr>
-        <td><%= bus_course.bus_id %></td>
-        <td><%= bus_course.number %></td>
-        <td><%= bus_course.color_name %></td>
-        <td><%= bus_course.color %></td>
-        <td><%= bus_course.a_departure_time %></td>
-        <td><%= bus_course.a_arrival_time %></td>
-        <td><%= bus_course.b_departure_time %></td>
-        <td><%= bus_course.b_arrival_time %></td>
-        <td><%= bus_course.c_departure_time %></td>
-        <td><%= bus_course.c_arrival_time %></td>
-        <td><%= link_to 'Show', bus_course %></td>
-        <td><%= link_to 'Edit', edit_bus_course_path(bus_course) %></td>
-        <td><%= link_to 'Destroy', bus_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style='background-color:#<%= bus_course.color %>;' rowspan=2>
+          <%= bus_course.bus.name %><%= bus_course.number %>コース
+        </td>
+        <td><%= bus_course.a_departure_time.to_s(:hhmm) %></td>
+        <td><%= bus_course.b_departure_time.to_s(:hhmm) %></td>
+        <td><%= bus_course.c_departure_time.to_s(:hhmm) %></td>
+        <td rowspan=2><%= link_to 'Edit', edit_bus_course_path(bus_course) %></td>
+      </tr>
+      <tr>
+        <td><%= bus_course.a_arrival_time.to_s(:hhmm) %></td>
+        <td><%= bus_course.b_arrival_time.to_s(:hhmm) %></td>
+        <td><%= bus_course.c_arrival_time.to_s(:hhmm) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -42,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Bus Course', new_bus_course_path %>
+<%= link_to 'バスコースを追加する', new_bus_course_path %>

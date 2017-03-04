@@ -41,56 +41,52 @@ jQuery(function($){
   <% end %>
 
   <div class="field">
-    <%= f.label :bus_id %>
-    <%= f.number_field :bus_id %>
+    <%= f.label :bus_id, 'バス' %>
+    <%= f.select :bus_id, @buses, {selected: bus_course.bus_id, prompt: '選択してください'} %>
+  </div>
+
+  <div class="field" style="display:inline-flex">
+    <%= f.radio_button :number, 1 %><%= f.label 'number_1', '１コース' %>
+    <%= f.radio_button :number, 2 %><%= f.label 'number_2', '２コース' %>
+    <%= f.radio_button :number, 3 %><%= f.label 'number_3', '３コース' %>
   </div>
 
   <div class="field">
-    <%= f.label :number %>
-    <%= f.number_field :number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :color_name %>
+    <%= f.label :color_name, '色名' %>
     <%= f.text_field :color_name %>
   </div>
 
   <div class="field">
-    <%= f.label :color %>
+    <%= f.label :color, 'RGB' %>
     <%= f.text_field :color %>
   </div>
 
-  <div class="field">
-    <%= f.label :a_departure_time %>
-    <%= f.time_select :a_departure_time %>
-  </div>
-
-  <div class="field">
-    <%= f.label :a_arrival_time %>
-    <%= f.time_select :a_arrival_time %>
-  </div>
-
-  <div class="field">
-    <%= f.label :b_departure_time %>
-    <%= f.time_select :b_departure_time %>
-  </div>
-
-  <div class="field">
-    <%= f.label :b_arrival_time %>
-    <%= f.time_select :b_arrival_time %>
-  </div>
-
-  <div class="field">
-    <%= f.label :c_departure_time %>
-    <%= f.time_select :c_departure_time %>
-  </div>
-
-  <div class="field">
-    <%= f.label :c_arrival_time %>
-    <%= f.time_select :c_arrival_time %>
-  </div>
+  <table>
+    <tr>
+      <td></td>
+      <td>出発時刻</td>
+      <td>到着時刻</td>
+    </tr>
+    <tr>
+      <td>迎え</td>
+      <td><%= f.time_select :a_departure_time %></td>
+      <td><%= f.time_select :a_arrival_time %></td>
+    </tr>
+    <tr>
+      <td>送り（午前保育）</td>
+      <td><%= f.time_select :b_departure_time %></td>
+      <td><%= f.time_select :b_arrival_time %></td>
+    </tr>
+    <tr>
+      <td>送り（平常保育）</td>
+      <td><%= f.time_select :c_departure_time %></td>
+      <td><%= f.time_select :c_arrival_time %></td>
+    </tr>
+  </table>
 
   <div class="actions">
-    <%= f.submit %>
+    <% action_str = (action_name == 'new' ? '登録' : '変更') %>
+    <%= f.submit(action_str, class: 'btn btn-success') %>
+    <%= back_button_ww(action_str) %>
   </div>
 <% end %>
