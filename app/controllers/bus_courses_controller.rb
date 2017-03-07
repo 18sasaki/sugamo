@@ -1,46 +1,29 @@
 class BusCoursesController < ApplicationController
   before_action :set_bus_course, only: [:show, :edit, :update, :destroy]
 
-  # GET /bus_courses
-  # GET /bus_courses.json
   def index
     @page_title = "バスコース"
     @bus_courses = BusCourse.all
   end
 
-  # GET /bus_courses/1
-  # GET /bus_courses/1.json
   def show
   end
 
-  # GET /bus_courses/new
   def new
     @page_title = "バスコース作成"
     @bus_course = BusCourse.new
     @buses = Bus.all.pluck(:name, :id)
-    # @bus_course.bus_stops.build
+    # デフォルトで10か所
     10.times { @bus_course.bus_stops.build }
   end
 
-  # GET /bus_courses/1/edit
   def edit
     @page_title = "バスコース編集"
     @buses = Bus.all.pluck(:name, :id)
-    # @bus_stops = BusStop.where(bus_course_id: @bus_course.id).order(:number)
   end
 
-  # POST /bus_courses
-  # POST /bus_courses.json
   def create
     @bus_course = BusCourse.new(bus_course_params)
-
-p "--------------------------"
-p params
-p "--------------------------"
-p bus_course_params
-p "--------------------------"
-
-    # binding.pry
 
     respond_to do |format|
       if @bus_course.save
@@ -53,8 +36,6 @@ p "--------------------------"
     end
   end
 
-  # PATCH/PUT /bus_courses/1
-  # PATCH/PUT /bus_courses/1.json
   def update
     respond_to do |format|
       if @bus_course.update(bus_course_params)
@@ -67,8 +48,6 @@ p "--------------------------"
     end
   end
 
-  # DELETE /bus_courses/1
-  # DELETE /bus_courses/1.json
   def destroy
     @bus_course.destroy
     respond_to do |format|
@@ -78,12 +57,10 @@ p "--------------------------"
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_bus_course
       @bus_course = BusCourse.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def bus_course_params
       params.require(:bus_course)
             .permit(:bus_id, 
