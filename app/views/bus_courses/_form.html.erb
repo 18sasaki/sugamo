@@ -42,25 +42,23 @@ jQuery(function($){
 
   <div class="field">
     <%= f.label :bus_id, 'バス' %>
-    <%= f.select :bus_id, @buses, {selected: bus_course.bus_id, prompt: '選択してください'} %>
+    <%= f.select :bus_id, @buses, {selected: bus_course.bus_id, prompt: '選択してください'}, disabled: edit_flg %>
   </div>
 
   <div class="field" style="display:inline-flex">
-    <%= f.radio_button :number, 1 %><%= f.label 'number_1', '１コース' %>
-    <%= f.radio_button :number, 2 %><%= f.label 'number_2', '２コース' %>
-    <%= f.radio_button :number, 3 %><%= f.label 'number_3', '３コース' %>
+    <%= f.radio_button :number, 1, disabled: edit_flg %><%= f.label 'number_1', '１コース' %>
+    <%= f.radio_button :number, 2, disabled: edit_flg %><%= f.label 'number_2', '２コース' %>
+    <%= f.radio_button :number, 3, disabled: edit_flg %><%= f.label 'number_3', '３コース' %>
   </div>
 
-  <div class="field">
-    <%= f.label :color_name, '色名' %>
-    <%= f.text_field :color_name %>
+  <%= f.label :color_name, '色' %>
+  <div class="field" style="display:inline-flex">
+    <%= f.text_field :color_name, size: '3', placeholder: '色名', disabled: edit_flg %>
+    （#<%= f.text_field :color,      size: '6', placeholder: 'RGB', disabled: edit_flg %>）
   </div>
 
-  <div class="field">
-    <%= f.label :color, 'RGB' %>
-    <%= f.text_field :color %>
-  </div>
-
+  <%= f.label :dummy, 'バス停と時刻' %>
+<% if false %>
   <table>
     <tr>
       <td></td>
@@ -83,9 +81,71 @@ jQuery(function($){
       <td><%= f.time_select :c_arrival_time %></td>
     </tr>
   </table>
+<% end %>
+
+  <table>
+    <tr>
+      <td></td>
+      <td>バス停</td>
+      <td>迎え</td>
+      <td>送り（午前）</td>
+      <td>送り（平常）</td>
+      <td><%= '削除' if edit_flg %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>麻の実幼稚園</td>
+      <td><%= f.time_select :a_departure_time %></td>
+      <td><%= f.time_select :b_departure_time %></td>
+      <td><%= f.time_select :c_departure_time %></td>
+    </tr>
+<% if false %>
+    <% 3.times do |i| %>
+      <tr>
+        <td></td>
+        <td><%= text_field  "bus_stops[#{i}]", 'name' %></td>
+        <td><%= time_select "bus_stops[#{i}]", 'a_arrival_time' %></td>
+        <td><%= time_select "bus_stops[#{i}]", 'b_arrival_time' %></td>
+        <td><%= time_select "bus_stops[#{i}]", 'c_arrival_time' %></td>
+      </tr>
+    <% end %>
+<% end %>
+
+    <%# @bus_stops.each do |bus_stop| %>
+    <%# 3.times do |i| %>
+      <%= f.fields_for :bus_stops do |bs| %>
+        <tr>
+          <td>
+            <% i = bs.index %>
+            <%#= i+1 %>
+            <%#= hidden_field_tag "bus_course[bus_stops_attributes][#{i}][number]", i+1 %>
+            <%= bs.number_field :number, style: 'width:35px;', value: i+1 %>
+          </td>
+          <td>
+            <%= bs.text_field :name,      size: '20' %><br />
+            <%= bs.text_field :name_k,    size: '10' %>
+            <%= bs.text_field :view_name, size: '5' %>
+          </td>
+          <td><%= bs.time_select :a_arrival_time %></td>
+          <td><%= bs.time_select :b_arrival_time %></td>
+          <td><%= bs.time_select :c_arrival_time %></td>
+          <td align='center'><%= bs.check_box :_destroy if edit_flg %></td>
+        </tr>
+      <% end %>
+    <%# end %>
+    <%# end %>
+
+    <tr>
+      <td></td>
+      <td>麻の実幼稚園</td>
+      <td><%= f.time_select :a_arrival_time %></td>
+      <td><%= f.time_select :b_arrival_time %></td>
+      <td><%= f.time_select :c_arrival_time %></td>
+    </tr>
+  </table>
 
   <div class="actions">
-    <% action_str = (action_name == 'new' ? '登録' : '変更') %>
+    <% action_str = (edit_flg ? '変更' : '登録') %>
     <%= f.submit(action_str, class: 'btn btn-success') %>
     <%= back_button_ww(action_str) %>
   </div>

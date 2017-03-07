@@ -13,12 +13,12 @@
     <% @bus_courses.each do |bus_course| %>
       <tr>
         <td style='background-color:#<%= bus_course.color %>;' rowspan=2>
-          <%= bus_course.bus.name %><%= bus_course.number %>コース
+          <%= bus_course.bus.name %><br/><%= bus_course.number %><%= bus_course.color_name %>コース
         </td>
         <td><%= bus_course.a_departure_time.to_s(:hhmm) %></td>
         <td><%= bus_course.b_departure_time.to_s(:hhmm) %></td>
         <td><%= bus_course.c_departure_time.to_s(:hhmm) %></td>
-        <td rowspan=2><%= link_to 'Edit', edit_bus_course_path(bus_course) %></td>
+        <td rowspan=2><%= link_to '編集', edit_bus_course_path(bus_course) %></td>
       </tr>
       <tr>
         <td><%= bus_course.a_arrival_time.to_s(:hhmm) %></td>

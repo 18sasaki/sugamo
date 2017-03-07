@@ -21,11 +21,14 @@ class ChildrenController < ApplicationController
     @page_title = "園児登録"
     @child = Child.new
     set_history_code_list(['inc', 'temp_inc'])
+    @bus_course_list_main = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
+    @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
   end
 
   def edit
     @page_title = "園児編集（#{@child.full_name_f}）"
     set_history_code_list(change_to_history_code_list(@child.status_code))
+    @bus_course_list = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
   end
 
   def create
@@ -83,7 +86,20 @@ class ChildrenController < ApplicationController
     end
 
     def child_params
-      params.require(:child).permit(:unique_num, :class_room_id, :post_number, :address, :l_phone_number, :c_phone_number, :full_name, :full_name_f, :sex_code, :status_code)
+      params.require(:child)
+            .permit(:unique_num, 
+                    :class_room_id, 
+                    :post_number, 
+                    :address, 
+                    :l_phone_number, 
+                    :c_phone_number, 
+                    :full_name, 
+                    :full_name_f, 
+                    :sex_code, 
+                    :status_code,
+                    :main_bus_stop_id,
+                    :sub_bus_stop_id,
+                    :irregular_judge_str)
     end
 
     def order_str(sort_params)

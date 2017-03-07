@@ -59,8 +59,21 @@
     携帯：<%= f.text_field :c_phone_number, size: 10 %>
   </div>
 
+  <%# if action_name == 'new' %>
+  <%# 登録時のみバスコース設定可能。編集は別画面。 %>
+    <div class="field">
+      <%= f.label :main_bus_stop_id, 'バス利用' %>
+      <%= f.select :main_bus_stop_id, @bus_course_list_main, {prompt: '選択してください'} %>
+    </div>
+
+    <div class="field">
+      <%= f.label :sub_bus_stop_id, 'バス利用（サブ）' %>
+      <%= f.select :sub_bus_stop_id, @bus_course_list_sub %>
+    </div>
+  <%# end %>
+
   <div class="actions">
-    <% action_str = (action_name == 'new' ? '登録' : '変更') %>
+    <% action_str = edit_flg ? '変更' : '登録' %>
     <%= f.submit(action_str, class: 'btn btn-success') %>
     <%= back_button_ww(action_str) %>
   </div>

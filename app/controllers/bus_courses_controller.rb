@@ -18,18 +18,29 @@ class BusCoursesController < ApplicationController
     @page_title = "バスコース作成"
     @bus_course = BusCourse.new
     @buses = Bus.all.pluck(:name, :id)
+    # @bus_course.bus_stops.build
+    10.times { @bus_course.bus_stops.build }
   end
 
   # GET /bus_courses/1/edit
   def edit
     @page_title = "バスコース編集"
     @buses = Bus.all.pluck(:name, :id)
+    # @bus_stops = BusStop.where(bus_course_id: @bus_course.id).order(:number)
   end
 
   # POST /bus_courses
   # POST /bus_courses.json
   def create
     @bus_course = BusCourse.new(bus_course_params)
+
+p "--------------------------"
+p params
+p "--------------------------"
+p bus_course_params
+p "--------------------------"
+
+    # binding.pry
 
     respond_to do |format|
       if @bus_course.save
@@ -74,6 +85,26 @@ class BusCoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bus_course_params
-      params.require(:bus_course).permit(:bus_id, :number, :color_name, :color, :a_departure_time, :a_arrival_time, :b_departure_time, :b_arrival_time, :c_departure_time, :c_arrival_time)
+      params.require(:bus_course)
+            .permit(:bus_id, 
+                    :number, 
+                    :color_name, 
+                    :color, 
+                    :a_departure_time, 
+                    :a_arrival_time, 
+                    :b_departure_time, 
+                    :b_arrival_time, 
+                    :c_departure_time, 
+                    :c_arrival_time,
+                    bus_stops_attributes: [:id,
+                                           :name,
+                                           :name_k,
+                                           :view_name,
+                                           :number,
+                                           :a_arrival_time, 
+                                           :b_arrival_time, 
+                                           :c_arrival_time,
+                                           :_destroy
+                                          ])
     end
 end

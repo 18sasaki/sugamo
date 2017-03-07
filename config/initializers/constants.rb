@@ -21,6 +21,13 @@ module Constants
     re << [val[:view_name], key]
   end
 
+  # [[1, うさぎ号１コース（水色）],...]
+  BUS_COURSE_LIST = BusCourse.includes(:bus)
+                             .pluck(:id, :name, :number, :color_name)
+                             .each_with_object([]) do |data, re|
+                               re << [ "#{data[1]}#{data[2]}コース（#{data[3]}）", data[0] ]
+                             end
+
   # JSで「未定」を「平常保育」に変更するために、平常保育のindexを持っておく。
   # TODO: 'full'決め打ちが少し気になる。check_string使う？
   ALL_CODES['dairy'].each_with_index do |(key, val), i|
