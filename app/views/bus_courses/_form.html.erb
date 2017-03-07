@@ -24,6 +24,26 @@ jQuery(function($){
     var insert_num = h_or_m == '4' ? base_num + 2 : base_num;
     $(base.replace( '_b_' , '_c_' )).prop("selectedIndex", insert_num);
   }
+
+<% ['a', 'b', 'c'].each do |abc| %>
+  $("#bus_course_<%= abc %>_departure_time_4i").change(function(){
+    auto_uniform("#bus_course_<%= abc %>_departure_time_4i", '<%= abc %>', 0);
+  });
+
+  <% 10.times do |i| %>
+    $("#bus_course_bus_stops_attributes_<%= i %>_a_arrival_time_4i").change(function(){
+      auto_uniform("#bus_course_bus_stops_attributes_<%= i %>_<%= abc %>_arrival_time_4i", '<%= abc %>', <%= i + 1 %>);
+    });
+  <% end %>
+<% end %>
+
+  function auto_uniform(base, abc, start_index){
+    var base_num = $(base).prop("selectedIndex");
+    for( index = start_index; 10 >= index; index++ ) {
+      $('#bus_course_bus_stops_attributes_' + index + '_' + abc + '_arrival_time_4i').prop("selectedIndex", base_num);
+    };
+    $("#bus_course_" + abc + "_arrival_time_4i").prop("selectedIndex", base_num);
+  }
 });
 </script>
 
