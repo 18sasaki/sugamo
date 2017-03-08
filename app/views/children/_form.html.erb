@@ -1,3 +1,19 @@
+<script type="text/javascript">
+jQuery(function($){
+  $('#bus_course_select').change(function(){
+    $.ajax({
+      type: 'GET',
+      url: '/children/bus_stops_select',
+      data: { bus_course_id: $(this).val() }
+    }).done(function(data){
+      $('#bus_stops_select').html(data)
+    })
+  });
+
+
+});
+</script>
+
 <%= form_for(child) do |f| %>
   <% if child.errors.any? %>
     <div id="error_explanation">
@@ -59,17 +75,13 @@
     携帯：<%= f.text_field :c_phone_number, size: 10 %>
   </div>
 
-  <%# 登録時のみバスコース設定可能。編集は別画面。 %>
-    <div class="field">
-      <%= f.label :main_bus_stop_id, 'バス利用' %>
-      <%= f.select :main_bus_stop_id, @bus_course_list_main, {prompt: '選択してください'} %>
-    </div>
+  <!-- バスコースのフォーム -->
+  <div class="field">
+    <%= label :bus_course_select, 'バス利用' %>
+    <%= select_tag :bus_course_select, options_for_select(@bus_course_list_main) %>
+  </div>
 
-    <div class="field">
-      <%= f.label :sub_bus_stop_id, 'バス利用（サブ）' %>
-      <%= f.select :sub_bus_stop_id, @bus_course_list_sub %>
-    </div>
-  <%# end %>
+  <%= render 'bus_stops_select', bus_stop_list: nil, active_flg: false %>
 
   <div class="actions">
     <% action_str = edit_flg ? '変更' : '登録' %>

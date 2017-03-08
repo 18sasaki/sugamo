@@ -1,0 +1,15 @@
+<div id='bus_stops_select'>
+	<% if bus_stop_list.present? %>
+	  <div class="field">
+	    <%= label  :main_bus_stop_id, 'メインのバス停' %>
+	    <%= select_tag 'child[main_bus_stop_id]', options_for_select(bus_stop_list) %>
+	  </div>
+
+	  <div class="field">
+	    <%= label  :sub_bus_stop_id, 'サブのバス停（あれば）' %>
+	    <%= select_tag 'child[sub_bus_stop_id]', options_for_select(bus_stop_list), include_blank: true %>
+	  </div>
+	<% else %>
+	  ...
+	<% end %>
+</div>

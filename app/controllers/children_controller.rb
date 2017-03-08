@@ -17,9 +17,9 @@ class ChildrenController < ApplicationController
     @all_absent_data = AbsentChild.get_by_child(params[:id])
 
     @mbs = @child.main_bus_stop
-    @main_bc = Constants::BUS_COURSE_HASH[@mbs.id]
+    @main_bc = Constants::BUS_COURSE_HASH[@mbs.bus_course_id]
     if @sbs = @child.sub_bus_stop
-      @sub_bc = Constants::BUS_COURSE_HASH[@sbs.id]
+      @sub_bc = Constants::BUS_COURSE_HASH[@sbs.bus_course_id]
     end
   end
 
@@ -28,14 +28,14 @@ class ChildrenController < ApplicationController
     @child = Child.new
     set_history_code_list(['inc', 'temp_inc'])
     @bus_course_list_main = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
-    @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
+    # @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
   end
 
   def edit
     @page_title = "園児編集（#{@child.full_name_f}）"
     set_history_code_list(change_to_history_code_list(@child.status_code))
     @bus_course_list_main = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
-    @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
+    # @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
   end
 
   def create
@@ -86,6 +86,18 @@ class ChildrenController < ApplicationController
       end
     end
   end
+
+  #Ajax用
+  def bus_stops_select
+    # ajax によるリクエストの場合のみ処理
+    if request.xhr?
+      if params[:bus_course_id]
+        bus_stop_list = BusStop.where(bus_course_id: params[:bus_course_id]).pluck(:name, :id)
+      end
+      render partial: '/children/bus_stops_select', locals: { bus_stop_list: bus_stop_list, active_flg: params[:bus_course_id].present? }
+    end
+  end
+
 
   private
     def set_child
