@@ -15,6 +15,12 @@ class ChildrenController < ApplicationController
     # {absent_code => count, ...}
 
     @all_absent_data = AbsentChild.get_by_child(params[:id])
+
+    @mbs = @child.main_bus_stop
+    @main_bc = Constants::BUS_COURSE_HASH[@mbs.id]
+    if @sbs = @child.sub_bus_stop
+      @sub_bc = Constants::BUS_COURSE_HASH[@sbs.id]
+    end
   end
 
   def new
@@ -28,7 +34,8 @@ class ChildrenController < ApplicationController
   def edit
     @page_title = "園児編集（#{@child.full_name_f}）"
     set_history_code_list(change_to_history_code_list(@child.status_code))
-    @bus_course_list = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
+    @bus_course_list_main = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
+    @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
   end
 
   def create

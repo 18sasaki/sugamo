@@ -1,12 +1,5 @@
-
 <script type="text/javascript">
 jQuery(function($){
-  // toggleメソッド
-  function rollover(id){
-    // var contents = $('#detail_'+id).contents
-    $('#class_'+id).balloon('test');
-  }
-
   <% Constants::CR_HASH.each do |id, hash| %>
     $('#class_<%=id%>').balloon({html: true, offsetY: -200, contents: $('#detail_<%=id%>').html()});
   <% end %>
