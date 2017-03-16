@@ -1,0 +1,29 @@
+<script type="text/javascript">
+jQuery(function($){
+  $('#sub_bus_course_select').change(function(){
+    $.ajax({
+      type: 'GET',
+      url: '/children/bus_stops_select_sub',
+      data: { bus_course_id: $(this).val() }
+    }).done(function(data){
+      $('#bus_stops_select_sub').html(data)
+    })
+  });
+});
+</script>
+
+<div id='bus_stops_select_main'>
+	<% if bus_stop_list.present? %>
+	  <div class="field">
+	    <%= label  :main_bus_stop_id, 'メインのバス停' %>
+	    <%= select_tag 'child[main_bus_stop_id]', options_for_select(bus_stop_list) %>
+	  </div>
+
+	  <div class="field">
+	    <%= label :sub_bus_course_select, 'サブのバス利用' %>
+	    <%= select_tag :sub_bus_course_select, options_for_select(bus_course_list_sub) %>
+	  </div>
+
+	  <%= render 'bus_stops_select_sub', bus_stop_list: nil, active_flg: false %>
+	<% end %>
+</div>

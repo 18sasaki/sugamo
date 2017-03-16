@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   # root :to => 'absent_children#index'
   root to: 'dairies#show'
 
-  get 'children/bus_stops_select', to: 'children#bus_stops_select'
+  get 'children/bus_stops_select_main', to: 'children#bus_stops_select_main'
+  get 'children/bus_stops_select_sub', to: 'children#bus_stops_select_sub'
   resources :children
 
   resources :absent_children

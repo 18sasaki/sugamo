@@ -1,16 +1,14 @@
 <script type="text/javascript">
 jQuery(function($){
-  $('#bus_course_select').change(function(){
+  $('#main_bus_course_select').change(function(){
     $.ajax({
       type: 'GET',
-      url: '/children/bus_stops_select',
+      url: '/children/bus_stops_select_main',
       data: { bus_course_id: $(this).val() }
     }).done(function(data){
-      $('#bus_stops_select').html(data)
+      $('#bus_stops_select_main').html(data)
     })
   });
-
-
 });
 </script>
 
@@ -77,11 +75,11 @@ jQuery(function($){
 
   <!-- バスコースのフォーム -->
   <div class="field">
-    <%= label :bus_course_select, 'バス利用' %>
-    <%= select_tag :bus_course_select, options_for_select(@bus_course_list_main) %>
+    <%= label :main_bus_course_select, 'バス利用' %>
+    <%= select_tag :main_bus_course_select, options_for_select(@bus_course_list_main) %>
   </div>
 
-  <%= render 'bus_stops_select', bus_stop_list: nil, active_flg: false %>
+  <%= render 'bus_stops_select_main', bus_stop_list: nil, active_flg: false %>
 
   <div class="actions">
     <% action_str = edit_flg ? '変更' : '登録' %>
