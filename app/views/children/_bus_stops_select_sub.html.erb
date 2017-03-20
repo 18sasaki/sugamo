@@ -2,7 +2,7 @@
 	<% if bus_stop_list.present? %>
 	  <div class="field">
 	    <%= label  :sub_bus_stop_id, 'サブのバス停（あれば）' %>
-	    <%= select_tag 'child[sub_bus_stop_id]', options_for_select(bus_stop_list), include_blank: true %>
+	    <%= select_tag 'child[sub_bus_stop_id]', options_for_select(bus_stop_list, @child.try(:sub_bus_stop_id)) %>
 	  </div>
 	<% end %>
 </div>

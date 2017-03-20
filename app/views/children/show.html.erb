@@ -22,9 +22,11 @@ jQuery(function($){
     $("#absent_data").toggle("",hide_show("#absent_data", "#ab_button", "欠席一覧"));
   });
 
-  $('#main_bus_course').balloon({contents: '<%= @mbs.name %>'});
-  <% if @sub_bc %>
-    $('#sub_bus_course' ).balloon({contents: '<%= @sbs.name %>'});
+  <% if @main_bc %>
+    $('#main_bus_course').balloon({contents: '<%= @mbs.name %>'});
+    <% if @sub_bc %>
+      $('#sub_bus_course' ).balloon({contents: '<%= @sbs.name %>'});
+    <% end %>
   <% end %>
 });
 </script>
@@ -32,9 +34,11 @@ jQuery(function($){
 <h3>
   <%= class_room_link_span(@child.class_room_id, {align: 'center'}) %>
   <%= @child.full_name %>
-  <span id='main_bus_course' style='background-color:#<%= @main_bc[:color] %>;'><%= @main_bc[:name] %></span>
-  <% if @sub_bc %>
-    <span id='sub_bus_course'  style='background-color:#<%= @sub_bc[:color]  %>;'><%= @sub_bc[:name]  %></span>
+  <% if @main_bc %>
+    <span id='main_bus_course' style='background-color:#<%= @main_bc[:color] %>;'><%= @main_bc[:name] %></span>
+    <% if @sub_bc %>
+      <span id='sub_bus_course'  style='background-color:#<%= @sub_bc[:color]  %>;'><%= @sub_bc[:name]  %></span>
+    <% end %>
   <% end %>
   <button id='pe_button' type="button" class="btn btn-default">詳細見る</button>
 </h3>

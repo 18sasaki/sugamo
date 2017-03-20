@@ -76,10 +76,10 @@ jQuery(function($){
   <!-- バスコースのフォーム -->
   <div class="field">
     <%= label :main_bus_course_select, 'バス利用' %>
-    <%= select_tag :main_bus_course_select, options_for_select(@bus_course_list_main) %>
+    <%= select_tag :main_bus_course_select, options_for_select(@bus_course_list_main, @main_bus_course_id) %>
   </div>
 
-  <%= render 'bus_stops_select_main', bus_stop_list: nil, active_flg: false %>
+  <%= render 'bus_stops_select_main', bus_stop_list: @main_bus_stop_list %>
 
   <div class="actions">
     <% action_str = edit_flg ? '変更' : '登録' %>

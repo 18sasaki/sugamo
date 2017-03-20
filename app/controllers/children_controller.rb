@@ -16,10 +16,11 @@ class ChildrenController < ApplicationController
 
     @all_absent_data = AbsentChild.get_by_child(params[:id])
 
-    @mbs = @child.main_bus_stop
-    @main_bc = Constants::BUS_COURSE_HASH[@mbs.bus_course_id]
-    if @sbs = @child.sub_bus_stop
-      @sub_bc = Constants::BUS_COURSE_HASH[@sbs.bus_course_id]
+    if @mbs = @child.main_bus_stop
+      @main_bc = Constants::BUS_COURSE_HASH[@mbs.bus_course_id]
+      if @sbs = @child.sub_bus_stop
+        @sub_bc = Constants::BUS_COURSE_HASH[@sbs.bus_course_id]
+      end
     end
   end
 
@@ -35,7 +36,18 @@ class ChildrenController < ApplicationController
     @page_title = "園児編集（#{@child.full_name_f}）"
     set_history_code_list(change_to_history_code_list(@child.status_code))
     @bus_course_list_main = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
-    # @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
+    @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
+p ">>>>>>>>>>>>>>>>>>>>>>> @child.main_bus_stop: #{@child.main_bus_stop_id}"
+p ">>>>>>>>>>>>>>>>>>>>>>> @child.sub_bus_stop: #{@child.sub_bus_stop_id}"
+
+    if @child.main_bus_stop
+      @main_bus_course_id = @child.main_bus_stop.bus_course_id
+      @main_bus_stop_list = BusStop.where(bus_course_id: @main_bus_course_id).pluck(:name, :id)
+    end
+    if @child.sub_bus_stop
+      @sub_bus_course_id = @child.sub_bus_stop.bus_course_id
+      @sub_bus_stop_list  = BusStop.where(bus_course_id: @sub_bus_course_id).pluck(:name, :id)
+    end
   end
 
   def create
@@ -69,7 +81,11 @@ class ChildrenController < ApplicationController
         params[:child][:status_code] = change_to_status_code(params[:child_history][:history_code])
       end
 
-      if @child.update(child_params)
+      # サブバス停のパラメータがない場合は、nilを明示的に入れないと修正できない
+      editable_child_params = child_params
+      editable_child_params[:sub_bus_stop_id] ||= nil
+
+      if @child.update(editable_child_params)
         # child_history作る（作らないかもしれない）
         if change_flg
           dairy_id = Dairy.find_by(date: decrypt_change_date(params[:child_history])).id
@@ -95,7 +111,7 @@ class ChildrenController < ApplicationController
         bus_stop_list = BusStop.where(bus_course_id: params[:bus_course_id]).pluck(:name, :id)
         bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
       end
-      render partial: '/children/bus_stops_select_main', locals: { bus_stop_list: bus_stop_list, bus_course_list_sub: bus_course_list_sub, active_flg: params[:bus_course_id].present? }
+      render partial: '/children/bus_stops_select_main', locals: { bus_stop_list: bus_stop_list, bus_course_list_sub: bus_course_list_sub }
     end
   end
 
@@ -105,7 +121,7 @@ class ChildrenController < ApplicationController
       if params[:bus_course_id]
         bus_stop_list = BusStop.where(bus_course_id: params[:bus_course_id]).pluck(:name, :id)
       end
-      render partial: '/children/bus_stops_select_sub', locals: { bus_stop_list: bus_stop_list, active_flg: params[:bus_course_id].present? }
+      render partial: '/children/bus_stops_select_sub', locals: { bus_stop_list: bus_stop_list }
     end
   end
 

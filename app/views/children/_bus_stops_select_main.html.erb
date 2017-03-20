@@ -15,15 +15,15 @@ jQuery(function($){
 <div id='bus_stops_select_main'>
 	<% if bus_stop_list.present? %>
 	  <div class="field">
-	    <%= label  :main_bus_stop_id, 'メインのバス停' %>
-	    <%= select_tag 'child[main_bus_stop_id]', options_for_select(bus_stop_list) %>
+	    <%= label :main_bus_stop_id, 'メインのバス停' %>
+	    <%= select_tag 'child[main_bus_stop_id]', options_for_select(bus_stop_list, @child.try(:main_bus_stop_id)) %>
 	  </div>
 
 	  <div class="field">
 	    <%= label :sub_bus_course_select, 'サブのバス利用' %>
-	    <%= select_tag :sub_bus_course_select, options_for_select(bus_course_list_sub) %>
+	    <%= select_tag :sub_bus_course_select, options_for_select((@bus_course_list_sub || bus_course_list_sub), @sub_bus_course_id) %>
 	  </div>
 
-	  <%= render 'bus_stops_select_sub', bus_stop_list: nil, active_flg: false %>
+	  <%= render 'bus_stops_select_sub', bus_stop_list: @sub_bus_stop_list %>
 	<% end %>
 </div>
