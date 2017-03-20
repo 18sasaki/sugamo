@@ -13,7 +13,9 @@
     <% @bus_courses.each do |bus_course| %>
       <tr>
         <td style='background-color:#<%= bus_course.color %>;' rowspan=2>
-          <%= bus_course.bus.name %><br/><%= bus_course.number %><%= bus_course.color_name %>コース
+          <%= link_to bus_course do %>
+            <%= bus_course.bus.name %><br/><%= bus_course.number %><%= bus_course.color_name %>コース
+          <% end %>
         </td>
         <td><%= bus_course.a_departure_time.to_s(:hhmm) %></td>
         <td><%= bus_course.b_departure_time.to_s(:hhmm) %></td>

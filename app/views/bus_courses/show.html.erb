@@ -1,54 +1,92 @@
-<p id="notice"><%= notice %></p>
+<script type="text/javascript">
+jQuery(function($){
+  // 最初に隠す
+  $('#children').hide();
 
-<p>
-  <strong>Bus:</strong>
-  <%= @bus_course.bus_id %>
-</p>
+  // ボタン押したときの挙動
+  $("#bs_button").on('click', function(){
+    if($('#schedule').css('display') != 'none'){
+      $('#schedule').hide();
+      $('#children').show();
+      $(this).html('時刻表に切り替え');
+    }else{
+      $('#schedule').show();
+      $('#children').hide();
+      $(this).html('園児リストに切り替え');
+    }
+  });
+});
+</script>
 
-<p>
-  <strong>Number:</strong>
-  <%= @bus_course.number %>
-</p>
+<button id='bs_button' type="button" class="btn btn-default">園児リストに切り替え</button>
+<div id='schedule'>
+  <table class='table'>
+    <tr>
+      <td>バス停</td>
+      <td>迎え</td>
+      <td>送り（午前）</td>
+      <td>送り（平常）</td>
+    </tr>
 
-<p>
-  <strong>Color name:</strong>
-  <%= @bus_course.color_name %>
-</p>
+    <tr>
+      <td>麻の実幼稚園</td>
+      <td><%= @bus_course.a_departure_time.to_s(:hhmm) %></td>
+      <td><%= @bus_course.b_departure_time.to_s(:hhmm) %></td>
+      <td><%= @bus_course.c_departure_time.to_s(:hhmm) %></td>
+    </tr>
 
-<p>
-  <strong>Color:</strong>
-  <%= @bus_course.color %>
-</p>
+    <% @bus_stop_list.each do |bus_stop| %>
+      <tr>
+        <td><%= bus_stop.name %></td>
+        <td><%= bus_stop.a_arrival_time.to_s(:hhmm) %></td>
+        <td><%= bus_stop.b_arrival_time.to_s(:hhmm) %></td>
+        <td><%= bus_stop.c_arrival_time.to_s(:hhmm) %></td>
+      </tr>
+    <% end %>
 
-<p>
-  <strong>1 departure time:</strong>
-  <%= @bus_course.a_departure_time %>
-</p>
+    <tr>
+      <td>麻の実幼稚園</td>
+      <td><%= @bus_course.a_arrival_time.to_s(:hhmm) %></td>
+      <td><%= @bus_course.b_arrival_time.to_s(:hhmm) %></td>
+      <td><%= @bus_course.c_arrival_time.to_s(:hhmm) %></td>
+    </tr>
+  </table>
+</div>
 
-<p>
-  <strong>1 arrival time:</strong>
-  <%= @bus_course.a_arrival_time %>
-</p>
+<div id='children'>
+  <table class='table'>
+    <tr>
+      <td>バス停</td>
+      <td>メイン</td>
+      <td>サブ</td>
+    </tr>
 
-<p>
-  <strong>2 departure time:</strong>
-  <%= @bus_course.b_departure_time %>
-</p>
+    <tr>
+      <td>麻の実幼稚園</td>
+      <td colspan = 2></td>
+    </tr>
 
-<p>
-  <strong>2 arrival time:</strong>
-  <%= @bus_course.b_arrival_time %>
-</p>
+    <% @bus_stop_list.each do |bus_stop| %>
+      <tr>
+        <td><%= bus_stop.name %></td>
+        <td>
+          <% (@main_used_children_hash[bus_stop.id] || []).each do |child| %>
+            <%= link_to child.full_name_f, child %><br/>
+          <% end %>
+        </td>
+        <td>
+          <% (@sub_used_children_hash[bus_stop.id] || []).each do |child| %>
+            <%= link_to child.full_name_f, child %><br/>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
 
-<p>
-  <strong>3 departure time:</strong>
-  <%= @bus_course.c_departure_time %>
-</p>
+    <tr>
+      <td>麻の実幼稚園</td>
+      <td colspan = 2></td>
+    </tr>
+  </table>
+</div>
 
-<p>
-  <strong>3 arrival time:</strong>
-  <%= @bus_course.c_arrival_time %>
-</p>
-
-<%= link_to 'Edit', edit_bus_course_path(@bus_course) %> |
-<%= link_to 'Back', bus_courses_path %>
+<%= back_button %>

@@ -7,6 +7,20 @@ class BusCoursesController < ApplicationController
   end
 
   def show
+    @page_title = "#{@bus_course.bus.name}#{@bus_course.number}#{@bus_course.color_name}コース"
+    @page_title_bg_color = "##{@bus_course.color}"
+
+    @bus_stop_list = BusStop.where(bus_course_id: params[:id])
+    @main_used_children_hash = Child.includes(:main_bus_stop)
+                                    .where('bus_stops.bus_course_id': params[:id])
+                                    .each_with_object({}) do |child, re|
+                                      (re[child.main_bus_stop_id] ||= []) << child
+                                    end
+    @sub_used_children_hash = Child.includes(:sub_bus_stop)
+                                   .where('bus_stops.bus_course_id': params[:id])
+                                   .each_with_object({}) do |child, re|
+                                     (re[child.sub_bus_stop_id] ||= []) << child
+                                   end
   end
 
   def new
