@@ -34,6 +34,7 @@ class BusCoursesController < ApplicationController
   def edit
     @page_title = "バスコース編集"
     @buses = Bus.all.pluck(:name, :id)
+    (10 - @bus_course.bus_stops.count).times { @bus_course.bus_stops.build }
   end
 
   def create
