@@ -12,14 +12,16 @@ class BusCoursesController < ApplicationController
 
     @bus_stop_list = BusStop.where(bus_course_id: params[:id])
     @main_used_children_hash = Child.includes(:main_bus_stop)
+                                    .includes(:class_room)
                                     .where('bus_stops.bus_course_id': params[:id])
                                     .each_with_object({}) do |child, re|
-                                      (re[child.main_bus_stop_id] ||= []) << child
+                                      (re[child.main_bus_stop_id] ||= []) << [child, child.class_room.short_name]
                                     end
     @sub_used_children_hash = Child.includes(:sub_bus_stop)
+                                   .includes(:class_room)
                                    .where('bus_stops.bus_course_id': params[:id])
                                    .each_with_object({}) do |child, re|
-                                     (re[child.sub_bus_stop_id] ||= []) << child
+                                     (re[child.sub_bus_stop_id] ||= []) << [child, child.class_room.short_name]
                                    end
   end
 

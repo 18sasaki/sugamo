@@ -70,13 +70,13 @@ jQuery(function($){
       <tr>
         <td><%= bus_stop.name %></td>
         <td>
-          <% (@main_used_children_hash[bus_stop.id] || []).each do |child| %>
-            <%= link_to child.full_name_f, child %><br/>
+          <% (@main_used_children_hash[bus_stop.id] || []).each do |child_set| %>
+            <%= link_to child_set[0].full_name_f, child_set[0] %>（<%= child_set[1] %>）<br/>
           <% end %>
         </td>
         <td>
-          <% (@sub_used_children_hash[bus_stop.id] || []).each do |child| %>
-            <%= link_to child.full_name_f, child %><br/>
+          <% (@sub_used_children_hash[bus_stop.id] || []).each do |child_set| %>
+            <%= link_to child_set[0].full_name_f, child_set[0] %>（<%= child_set[1] %>）<br/>
           <% end %>
         </td>
       </tr>
