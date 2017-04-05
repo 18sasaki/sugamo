@@ -123,6 +123,21 @@ class ChildrenController < ApplicationController
     end
   end
 
+  def class_room_children
+    # ajax によるリクエストの場合のみ処理
+    if request.xhr?
+  p ">>>>>>>>>>>>>>>#{params[:class_room_id]}"
+      if params[:class_room_id].present?
+  p ">>>>>>>>>>>>>>>#{params[:class_room_id]}"
+        # children_list = Child.where(class_room_id: params[:class_room_id]).pluck(:full_name_f, :id)
+        children_list = Child.get_list(class_room_id: params[:class_room_id])
+      else
+  p ">>>>>>>>>>>>>>>!!!"
+        children_list = Child.get_list
+      end
+      render partial: '/children/child_select', locals: { children_list: children_list }
+    end
+  end
 
   private
     def set_child

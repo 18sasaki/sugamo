@@ -1,3 +1,17 @@
+<script type="text/javascript">
+jQuery(function($){
+  $('#class_room_select').change(function(){
+    $.ajax({
+      type: 'GET',
+      url: '/children/class_room_children',
+      data: { class_room_id: $(this).val() }
+    }).done(function(data){
+      $('#child_select').html(data)
+    })
+  });
+});
+</script>
+
 <%= form_for(absent_child) do |f| %>
   <% if absent_child.errors.any? %>
     <div id="error_explanation">
@@ -22,12 +36,27 @@
   </div>
 
   <div class="field">
-    園児<br />
-    <% if @children_list %>
-      <%= f.select :child_id, @children_list, :selected => absent_child.child_id, :prompt => '選択してください' %>
+    クラス<br />
+    <%# 編集時、またはクラスから来た場合は固定 %>
+    <% if edit_flg %>
+      <%= class_room_span(@absent_child.child.class_room_id) %>
+    <% elsif params[:class_room_id] %>
+      <%= class_room_span(params[:class_room_id].to_i) %>
     <% else %>
+      <%= select_tag :class_room_select, options_for_select(Constants::CR_LIST), prompt: '全園児' %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    園児<br />
+    <% if edit_flg %>
       <%= hidden_field_tag 'absent_child[child_id]', params[:child_id] %>
       <%= @child_name %>
+    <% else %>
+      <div id='child_select'>
+        <%= render '/children/child_select', children_list: @children_list %>
+            <%#= f.select :child_id, @children_list, :selected => absent_child.child_id, :prompt => '選択してください' %>
+      </div>
     <% end %>
   </div>
 

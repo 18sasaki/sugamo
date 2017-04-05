@@ -1,0 +1,3 @@
+<div id='child_select'>
+  <%= select_tag 'absent_child[child_id]', options_for_select(children_list, @absent_child.try(:child_id)) %>
+</div>

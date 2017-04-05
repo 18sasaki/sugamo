@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   get 'children/bus_stops_select_main', to: 'children#bus_stops_select_main'
   get 'children/bus_stops_select_sub', to: 'children#bus_stops_select_sub'
+  get 'children/class_room_children', to: 'children#class_room_children'
   resources :children
 
   resources :absent_children

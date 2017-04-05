@@ -25,7 +25,8 @@ class AbsentChildrenController < ApplicationController
 
   def edit
     @page_title = "欠席情報編集（#{date_view(@absent_child.dairy.date)}　#{@absent_child.child.full_name_f}）"
-    @children_list = Child.get_list
+    @child_name = Child.find(@absent_child.child_id).full_name_f
+    # @children_list = Child.get_list
     # target_date = date_view(@absent_child.dairy.date)
     # target_name = @absent_child.child.full_name_f
     # target_class_room = @absent_child.class_room.short_name
