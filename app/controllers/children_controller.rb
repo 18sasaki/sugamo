@@ -18,9 +18,9 @@ class ChildrenController < ApplicationController
 
     if @mbs = @child.main_bus_stop
       @main_bc = Constants::BUS_COURSE_HASH[@mbs.bus_course_id]
-      if @sbs = @child.sub_bus_stop
-        @sub_bc = Constants::BUS_COURSE_HASH[@sbs.bus_course_id]
-      end
+    end
+    if @sbs = @child.sub_bus_stop
+      @sub_bc = Constants::BUS_COURSE_HASH[@sbs.bus_course_id]
     end
   end
 
@@ -29,7 +29,7 @@ class ChildrenController < ApplicationController
     @child = Child.new
     set_history_code_list(['inc', 'temp_inc'])
     @bus_course_list_main = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
-    # @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
+    @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
   end
 
   def edit
@@ -37,8 +37,6 @@ class ChildrenController < ApplicationController
     set_history_code_list(change_to_history_code_list(@child.status_code))
     @bus_course_list_main = [['徒歩通園', nil]] + Constants::BUS_COURSE_LIST
     @bus_course_list_sub = [['なし', nil]] + Constants::BUS_COURSE_LIST
-p ">>>>>>>>>>>>>>>>>>>>>>> @child.main_bus_stop: #{@child.main_bus_stop_id}"
-p ">>>>>>>>>>>>>>>>>>>>>>> @child.sub_bus_stop: #{@child.sub_bus_stop_id}"
 
     if @child.main_bus_stop
       @main_bus_course_id = @child.main_bus_stop.bus_course_id

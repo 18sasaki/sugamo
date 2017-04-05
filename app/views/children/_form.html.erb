@@ -9,6 +9,16 @@ jQuery(function($){
       $('#bus_stops_select_main').html(data)
     })
   });
+
+  $('#sub_bus_course_select').change(function(){
+    $.ajax({
+      type: 'GET',
+      url: '/children/bus_stops_select_sub',
+      data: { bus_course_id: $(this).val() }
+    }).done(function(data){
+      $('#bus_stops_select_sub').html(data)
+    })
+  });
 });
 </script>
 
@@ -80,6 +90,13 @@ jQuery(function($){
   </div>
 
   <%= render 'bus_stops_select_main', bus_stop_list: @main_bus_stop_list %>
+
+  <div class="field">
+    <%= label :sub_bus_course_select, 'サブのバス利用' %>
+    <%= select_tag :sub_bus_course_select, options_for_select(@bus_course_list_sub, @sub_bus_course_id) %>
+  </div>
+
+  <%= render 'bus_stops_select_sub', bus_stop_list: @sub_bus_stop_list %>
 
   <div class="actions">
     <% action_str = edit_flg ? '変更' : '登録' %>

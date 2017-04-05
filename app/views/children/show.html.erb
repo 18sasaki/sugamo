@@ -24,9 +24,9 @@ jQuery(function($){
 
   <% if @main_bc %>
     $('#main_bus_course').balloon({contents: '<%= @mbs.name %>'});
-    <% if @sub_bc %>
-      $('#sub_bus_course' ).balloon({contents: '<%= @sbs.name %>'});
-    <% end %>
+  <% end %>
+  <% if @sub_bc %>
+    $('#sub_bus_course' ).balloon({contents: '<%= @sbs.name %>'});
   <% end %>
 });
 </script>
@@ -36,10 +36,14 @@ jQuery(function($){
   <%= @child.full_name %>
   <% if @main_bc %>
     <span id='main_bus_course' style='background-color:#<%= @main_bc[:color] %>;'><%= @main_bc[:name] %></span>
-    <% if @sub_bc %>
-      <span id='sub_bus_course'  style='background-color:#<%= @sub_bc[:color]  %>;'><%= @sub_bc[:name]  %></span>
-    <% end %>
+  <% else %>
+    <span style='background-color:#999999;'>徒歩</span>
   <% end %>
+
+  <% if @sub_bc %>
+    <span id='sub_bus_course'  style='background-color:#<%= @sub_bc[:color]  %>;'><%= @sub_bc[:name]  %></span>
+  <% end %>
+
   <button id='pe_button' type="button" class="btn btn-default">詳細見る</button>
 </h3>
 
