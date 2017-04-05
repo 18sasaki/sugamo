@@ -18,7 +18,7 @@ class Dairy < ApplicationRecord
 			att_flg = one_day.wday.between?(1, 5)
 			Dairy.new(date:         one_day,
 				        dow:          Constants::DOW[one_day.wday],
-				        att_shou_flg: att_flg ? 1 : 0,
+				        att_syou_flg: att_flg ? 1 : 0,
 				        att_chuu_flg: att_flg ? 1 : 0,
 				        att_chou_flg: att_flg ? 1 : 0,
 				        dairy_code:   att_flg ? 'undec' : 'holiday').save
