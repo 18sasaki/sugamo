@@ -143,19 +143,22 @@ class ChildrenController < ApplicationController
                     :status_code,
                     :main_bus_stop_id,
                     :sub_bus_stop_id,
-                    :irregular_judge_str)
+                    :irregular_judge_str,
+                    :birthday)
     end
 
     def order_str(sort_params)
       case sort_params
-        when 'name'         then 'full_name_f'
-        when 'name desc'    then 'full_name_f desc'
-        when 'class'        then 'class_room_id, full_name_f'
-        when 'class desc'   then 'class_room_id desc, full_name_f'
-        when 'status'       then 'status_code, full_name_f'
-        when 'status desc'  then 'status_code desc, full_name_f'
-        when 'address'      then 'address, full_name_f'
-        when 'address desc' then 'address desc, full_name_f'
+        when 'name'          then 'full_name_f'
+        when 'name desc'     then 'full_name_f desc'
+        when 'class'         then 'class_room_id, full_name_f'
+        when 'class desc'    then 'class_room_id desc, full_name_f'
+        when 'status'        then 'status_code, full_name_f'
+        when 'status desc'   then 'status_code desc, full_name_f'
+        when 'address'       then 'address, full_name_f'
+        when 'address desc'  then 'address desc, full_name_f'
+        when 'birthday'      then 'birthday, full_name_f'
+        when 'birthday desc' then 'birthday desc, full_name_f'
         else                   'full_name_f'
       end# << ', sex_code desc'
     end

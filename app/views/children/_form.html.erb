@@ -83,6 +83,15 @@ jQuery(function($){
     携帯：<%= f.text_field :c_phone_number, size: 10 %>
   </div>
 
+  <div class="field">
+    <%= f.label :birthday, '誕生日' %>
+    <%= f.date_select :birthday, { start_year: 2010, 
+                                   use_month_numbers: true, 
+                                   date_separator: '/',
+                                   include_blank: true,
+                                   default: nil } %>
+  </div>
+
   <!-- バスコースのフォーム -->
   <div class="field">
     <%= label :main_bus_course_select, 'バス利用' %>

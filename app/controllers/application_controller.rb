@@ -1,9 +1,25 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :date_view, :status_str, :sex_color, :toyeard, :date_to_ym
+  helper_method :date_view, :birthday_view, :birthday_view_with_y, :status_str, :sex_color, :toyeard, :date_to_ym
 
   def date_view(datetime = Date.today)
     datetime.strftime("%y/%m/%d（#{Constants::DOW[datetime.wday]}）")
+  end
+
+  def birthday_view(birthday, y_flg = false)
+    if birthday
+      if y_flg
+        birthday.strftime("%Y/%m/%d")
+      else
+        birthday.strftime("%m/%d")
+      end
+    else
+      '未設定'
+    end
+  end
+
+  def birthday_view_with_y(birthday)
+    birthday_view(birthday, true)
   end
 
   def day_view(datetime = Date.today)
