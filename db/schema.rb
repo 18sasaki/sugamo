@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405072347) do
+ActiveRecord::Schema.define(version: 20170409064737) do
 
   create_table "absent_children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "dairy_id",                    null: false
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20170405072347) do
     t.string   "sub_teacher_name"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "yeard",            null: false
   end
 
   create_table "codes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

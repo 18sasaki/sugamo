@@ -34,13 +34,14 @@ class ApplicationController < ActionController::Base
   	sex_code == 'female' ? '#ff0000' : '#000000'
   end
 
-  # TODO: 毎回計算しててイケてない。year_id導入で直るとうれしい。
-  def toyeard
-    today = Date.today
-    year = today.year
-    # 1/1～3/31の間なら、年度は１年前
-    today.between?('0101'.to_date, '0331'.to_date) ? year - 1 : year
-  end
+  # Constantsに入れてみた
+  # # TODO: 毎回計算しててイケてない。year_id導入で直るとうれしい。
+  # def toyeard
+  #   today = Date.today
+  #   year = today.year
+  #   # 1/1～3/31の間なら、年度は１年前
+  #   today.between?('0101'.to_date, '0331'.to_date) ? year - 1 : year
+  # end
 
   def ym_to_date(ym)
     "#{ym}01".to_date

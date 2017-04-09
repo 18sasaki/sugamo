@@ -1,9 +1,24 @@
 module Constants
+  #toyeard
+  today = Date.today
+  year = today.year
+  # 1/1～3/31の間なら、年度は１年前
+  TOYEARD = today.between?('0101'.to_date, '0331'.to_date) ? year - 1 : year
+  
   # ClassRoom
   all_crass_rooms = ClassRoom.all
+  CR_ALL_HASH = {}
+  CR_ALL_LIST = []
+  all_crass_rooms.each do |cr|
+    CR_ALL_HASH[cr.id] = { name: cr.name, color: cr.color }
+    CR_ALL_LIST << [cr.name, cr.id]
+  end
+
+  # ClassRoom
+  toyeard_crass_rooms = ClassRoom.where(yeard: TOYEARD)
   CR_HASH = {}
   CR_LIST = []
-  all_crass_rooms.each do |cr|
+  toyeard_crass_rooms.each do |cr|
     CR_HASH[cr.id] = { name: cr.name, color: cr.color }
     CR_LIST << [cr.name, cr.id]
   end
