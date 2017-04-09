@@ -1,9 +1,11 @@
 module Constants
-  #toyeard
-  today = Date.today
-  year = today.year
-  # 1/1～3/31の間なら、年度は１年前
-  TOYEARD = today.between?('0101'.to_date, '0331'.to_date) ? year - 1 : year
+  # #toyeard
+  # today = Date.today
+  # year = today.year
+  # # 1/1～3/31の間なら、年度は１年前
+  # TOYEARD = today.between?('0101'.to_date, '0331'.to_date) ? year - 1 : year
+  # sugamoの段階では、ここで決め打ちしてしまう
+  TOYEARD = 2016
   
   # ClassRoom
   all_crass_rooms = ClassRoom.all
