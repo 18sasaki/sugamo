@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409064737) do
+ActiveRecord::Schema.define(version: 20170409085225) do
 
   create_table "absent_children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "dairy_id",                    null: false
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 20170409064737) do
     t.integer  "number",           null: false
     t.string   "color_name",       null: false
     t.string   "color",            null: false
-    t.time     "a_departure_time"
-    t.time     "a_arrival_time"
-    t.time     "b_departure_time"
-    t.time     "b_arrival_time"
-    t.time     "c_departure_time"
-    t.time     "c_arrival_time"
+    t.string   "a_departure_time"
+    t.string   "a_arrival_time"
+    t.string   "b_departure_time"
+    t.string   "b_arrival_time"
+    t.string   "c_departure_time"
+    t.string   "c_arrival_time"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 20170409064737) do
     t.string   "name_k"
     t.string   "view_name"
     t.integer  "number",         null: false
-    t.time     "a_arrival_time"
-    t.time     "b_arrival_time"
-    t.time     "c_arrival_time"
+    t.string   "a_arrival_time"
+    t.string   "b_arrival_time"
+    t.string   "c_arrival_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

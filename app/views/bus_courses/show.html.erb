@@ -30,25 +30,25 @@ jQuery(function($){
 
     <tr>
       <td>麻の実幼稚園</td>
-      <td><%= @bus_course.a_departure_time.to_s(:hhmm) %></td>
-      <td><%= @bus_course.b_departure_time.to_s(:hhmm) %></td>
-      <td><%= @bus_course.c_departure_time.to_s(:hhmm) %></td>
+      <td><%= hhmm_view(@bus_course.a_departure_time) %></td>
+      <td><%= hhmm_view(@bus_course.b_departure_time) %></td>
+      <td><%= hhmm_view(@bus_course.c_departure_time) %></td>
     </tr>
 
     <% @bus_stop_list.each do |bus_stop| %>
       <tr>
         <td><%= bus_stop.name %></td>
-        <td><%= bus_stop.a_arrival_time.to_s(:hhmm) %></td>
-        <td><%= bus_stop.b_arrival_time.to_s(:hhmm) %></td>
-        <td><%= bus_stop.c_arrival_time.to_s(:hhmm) %></td>
+        <td><%= hhmm_view(bus_stop.a_arrival_time) %></td>
+        <td><%= hhmm_view(bus_stop.b_arrival_time) %></td>
+        <td><%= hhmm_view(bus_stop.c_arrival_time) %></td>
       </tr>
     <% end %>
 
     <tr>
       <td>麻の実幼稚園</td>
-      <td><%= @bus_course.a_arrival_time.to_s(:hhmm) %></td>
-      <td><%= @bus_course.b_arrival_time.to_s(:hhmm) %></td>
-      <td><%= @bus_course.c_arrival_time.to_s(:hhmm) %></td>
+      <td><%= hhmm_view(@bus_course.a_arrival_time) %></td>
+      <td><%= hhmm_view(@bus_course.b_arrival_time) %></td>
+      <td><%= hhmm_view(@bus_course.c_arrival_time) %></td>
     </tr>
   </table>
 </div>

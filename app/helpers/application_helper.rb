@@ -53,4 +53,8 @@ module ApplicationHelper
     when 'closed' then 'closed'
     end
   end
+
+  def hhmm_view(tod)
+    tod.strftime("%H:%M")
+  end
 end
